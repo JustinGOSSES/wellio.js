@@ -13,6 +13,7 @@ I wanted to build a reactive style (something like <a href="http://ncase.me/joy/
 #### LAS -> JSON
 ```var lasjson = function las2json(onelas)```
 will give you something like this:
+``` 
 var lasjson = {
 			"VERSION INFORMATION":{
 				"VERS":{"MNEM":"","UNIT":"","DATA":"","DESCRIPTION OF MNEMONIC 1":"","DESCRIPTION OF MNEMONIC 2":""},
@@ -41,3 +42,4 @@ var lasjson = {
 					"Curve_NAME_ONE" :[1,2,3,4,5,6,7,8,9,10,11],
 				}
 		}
+```
