@@ -121,9 +121,11 @@ SUFT.C        0                    : SUFT         - SURFACE TEMPERATURE
 ```
 
 ## Where To Get Open-Source Well Logs in .LAS format?
-Report for Athabasca Oil Sands Data McMurray/Wabiskaw Oil Sands Deposit <a href="http://ags.aer.ca/document/OFR/OFR_1994_14.PDF">http://ags.aer.ca/document/OFR/OFR_1994_14.PDF</a>
+I've included a few in the assets folder of this repo from the electronic data file below. Thanks Canada, or specifically Alberta.
 
 Electronic data (including well logs, tops, etc.) for Athabasca Oil Sands Data McMurray/Wabiskaw Oil Sands Deposit <a href="http://ags.aer.ca/publications/SPE_006.html">http://ags.aer.ca/publications/SPE_006.html Data is also in the repo folder: SPE_006_originalData</a>
+
+Report for Athabasca Oil Sands Data McMurray/Wabiskaw Oil Sands Deposit <a href="http://ags.aer.ca/document/OFR/OFR_1994_14.PDF">http://ags.aer.ca/document/OFR/OFR_1994_14.PDF</a>
 
 ## Does this load my well logs to your server? 
 Nope, it only loads to your browser's memory and then your browser forgets it when you close the tab.
