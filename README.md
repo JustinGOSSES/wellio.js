@@ -13,9 +13,9 @@ Specifically, I needed more features and the methods I were using to come up wit
 
 Additionally, using JavaScript opens up the possibility of simple widgets that could be run in the browser without needing to install a program on users' computers and the possibility of open-source well log software without needing to know a computer language to do things. 
 
-I'm imagining a reactive style well-log feature creation widget, something like <a href="http://ncase.me/joy/">joy.js</a>,  that would include cross-filtering across multiple figures like in <a href="https://dc-js.github.io/dc.js/">dc.js</a>, while also leveraging numpy-style array math, like in <a href="https://deeplearnjs.org/">deeplearn.js</a>. The resulting engineered features  could be leveraged in machine-learning, either via entirely-JavaScript-based ML or python-based ML done in a notebook running JavaScript only for data visualization. 
+I'm imagining a reactive style well-log feature creation widget, something like <a href="http://ncase.me/joy/">joy.js</a>,  that would include cross-filtering across multiple figures like in <a href="https://dc-js.github.io/dc.js/">dc.js</a>, while also leveraging numpy-style array math, like in <a href="https://deeplearnjs.org/">deeplearn.js</a>. The resulting engineered features  could be leveraged in machine-learning, either via entirely-JavaScript-based ML or python-based ML done in a notebook calling JavaScript only for data visualization. 
 
-*Long story short, wanted to do everything from load to manipulation to visualization in JavaScript, hence needed a way to load las files and work with them in JavaScript.*
+*Long story short, I want to build a fast reactive well-log feature engineering widget, hence I needed a way to load las files and work with them in JavaScript.*
 
 # Example
 #### LAS -> JSON
