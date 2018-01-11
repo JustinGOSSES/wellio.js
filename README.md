@@ -119,3 +119,14 @@ SUFT.C        0                    : SUFT         - SURFACE TEMPERATURE
   392.750    0.316    0.458   78.479  260.143    3.088
   393.000    0.299    0.429   72.249  256.370    3.338
 ```
+
+## Where To Get Open-Source Well Logs in .LAS format?
+Report for Athabasca Oil Sands Data McMurray/Wabiskaw Oil Sands Deposit <a href="http://ags.aer.ca/document/OFR/OFR_1994_14.PDF">http://ags.aer.ca/document/OFR/OFR_1994_14.PDF</a>
+
+Electronic data (including well logs, tops, etc.) for Athabasca Oil Sands Data McMurray/Wabiskaw Oil Sands Deposit <a href="http://ags.aer.ca/publications/SPE_006.html">http://ags.aer.ca/publications/SPE_006.html Data is also in the repo folder: SPE_006_originalData</a>
+
+## Does this load my well logs to your server? 
+Nope, it only loads to your browser's memory and then your browser forgets it when you close the tab.
+
+## What are the files other than wellio.js
+Things for the demo. Specifically, opening up index.html in a browser should let you experiment. <a href="https://github.com/agile-geoscience/g3">G3.js</a> is used to draw a plot of a GR log. You can see what the LAS converted to JSON looks like using your browser's console window. 
