@@ -3,10 +3,10 @@
 
 [THIS IS VERY NEW AND IN PROGRESS]
 
-# Purpose
+## Purpose
  There currently isn't any .las -> JSON parser that I was able to find. There is <a href="https://lasio.readthedocs.io/en/latest/">lasio</a> and <a href="https://github.com/agile-geoscience/welly">welly</a> for python, but nothing to ingest las files in JavaScript. Wellio.js is an attempt to fill that gap, so I can build other stuff. This script will have two functions. The first function converts a .las file into a json format file. They second function (not yet written) will do the inverse. Once you have well data as JSON, many other JavaScript-based things as possible. I'll try to keep those other things separate, except as demos for Wellio.
 
-# Why Bother, Geologists Use Python
+### Why Bother, Geologists Use Python
 While trying to build a machine-learning approach to mimic specific geologist's stratigraphic surface picking, I concluded I was limited by the number and quality of my input features. 
 
 Specifically, I needed more features and the methods I were using to come up with effective ones were too slow. I found trying to do well log feature creation in Jupyter notebooks using only Python to be too linear and time intensive involving re-writing or re-running too much code in between seeing the results. JavaScript has more interactive and reactive data visualization libraries, so that is driving tool choice and the need to load las files into json for work with JavaScript. For clarity, I'm using the term reactive in the <a href="https://vimeo.com/36579366">Bret Victor</a> sense, not the <a href="https://reactjs.org/">react.js</a> sense. 
@@ -17,7 +17,7 @@ I'm imagining a reactive style well-log feature creation widget, something like 
 
 *Long story short, I want to build a fast reactive well-log feature engineering widget, hence I needed a way to load las files and work with them in JavaScript.*
 
-# Example
+## Example
 #### LAS -> JSON
 ```var lasjson = function las2json(onelas)```
 will give you something like this:
