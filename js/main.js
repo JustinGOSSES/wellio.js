@@ -1,5 +1,6 @@
 
-var all_files = []
+var all_files = [];
+var temp_json = {};
 
 // Check for the various File API support.
 if (window.File && window.FileReader && window.FileList && window.Blob) {
@@ -11,6 +12,13 @@ if (window.File && window.FileReader && window.FileList && window.Blob) {
 
 function removeTextLAS(){
   fileContentsDiv = document.getElementById("fileContents");
+  while (fileContentsDiv.hasChildNodes()) {
+    fileContentsDiv.removeChild(fileContentsDiv.lastChild);
+  }
+}
+
+function remove_DOM_children(div_name){
+  fileContentsDiv = document.getElementById('log_plot_div');
   while (fileContentsDiv.hasChildNodes()) {
     fileContentsDiv.removeChild(fileContentsDiv.lastChild);
   }
@@ -132,10 +140,16 @@ function splitLastString(){
   var wrap_line = version_info_array[2];
 
 
-  las2json(all_files[0])
+  var single_well_json = las2json(all_files[0]);
+  console.log('single_well_json = ',single_well_json)
+  console.log('single_well_json["CURVES"]["GR"] = ',single_well_json["CURVES"]["GR"])
+
+  temp_json = single_well_json
+
+  
 }
 
-
-
-
+function draw_gr(){
+    makePlot(temp_json["CURVES"]["GR"],".log_plot_div",1600,200,[0,300],[0,temp_json["CURVES"]["GR"].length])
+}
 

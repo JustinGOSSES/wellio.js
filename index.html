@@ -12,8 +12,20 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
 		
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+
+		 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/styles/default.min.css"> 
+		  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/highlight.min.js"></script> 
+ 			<script>hljs.initHighlightingOnLoad();</script> 
+ 			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"> 
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.js"></script>
+		<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script> -->
+
+		<script src="./js/g3.js"></script>
+		<script src="./js/call_plots.js"></script>
 		<script src="./js/main.js"></script>
 		<script src="./js/wellio.js"></script>
+		
 	
 		<style>
 		  .thumb {
@@ -26,21 +38,41 @@
 	</head>
 	<body>			
 		<div>
-			<h1>Upload LAS files</h1>
-			<p>Click the button to browse for local LAS files on your machine</p>
+			<h1>Test Page For Wellio.js</h1>
+			<h1>Uploads LAS files and turns them into json files, then displays GR curve.</h1>
+			<p>Click the button to browse for local LAS files on your machine, then load into memory.</p>
 			<input type="file" id="files" name="files[]" multiple />
 			<output id="list"></output>
 			<button onclick="readInFilesFunction()">Load Into Browswer Memory</button>
 		</div>
 		<div>
+			<p>OPTIONAL: display .las files as text</p>
 			<button onclick="displayFileFunction()">display .las files as text</button>
 		</div>
 		<div>
 			<button onclick="removeTextLAS()">remove text of .las files</button>
 		</div>
 		<div>
-			<button onclick="splitLastString()">test split of .las files</button>
+			<p>Needed before steps below: Turn LAS INTO JSON</p>
+			<button onclick="splitLastString()">convert</button>
+		</div>
+		<div>
+			<p>Show GR Well Curve</p>
+			<button onclick='draw_gr()'>draw</button>
+		</div>
+		<!-- <div>
+			<p>Show GR Well Curve</p>
+			
+		</div> -->
+		<div>
+			<p>Remove all curves</p>
+			<button onclick="remove_DOM_children()")>remove</button>
 		</div>
 		<div id="fileContents"></div>
+		<div class="plot_holder" style="float:left;">
+    		<div id="log_plot_div" class="log_plot_div box"></div>
+    		<div class="log_plot_div2 box"></div>
+    	</div>
+    </div>
 	</body>
 </html>
