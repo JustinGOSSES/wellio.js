@@ -15,7 +15,7 @@ Additionally, using JavaScript opens up the possibility of simple widgets that c
 
 I'm imagining a reactive style well-log feature creation widget, something like <a href="http://ncase.me/joy/">joy.js</a>,  that would include cross-filtering across multiple figures like in <a href="https://dc-js.github.io/dc.js/">dc.js</a>, while also leveraging numpy-style array math, like in <a href="https://deeplearnjs.org/">deeplearn.js</a>. The resulting engineered features  could be leveraged in machine-learning, either via entirely-JavaScript-based ML or python-based ML done in a notebook running JavaScript only for data visualization. 
 
-*Long story short, wanted to do everything from load to manipulation to visualization in JavaScript.*
+*Long story short, wanted to do everything from load to manipulation to visualization in JavaScript, hence needed a way to load las files and work with them in JavaScript.*
 
 # Example
 #### LAS -> JSON
