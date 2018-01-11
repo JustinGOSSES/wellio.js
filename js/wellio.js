@@ -1,3 +1,4 @@
+//// Function that takes a single LAS text file representing a single well and returns an object variable ready to be written to JSON format.
 function las2json(onelas){
 	//// var lasjson establishes a blank json for holding las 2.0 data.
 	var lasjson = {
@@ -146,4 +147,21 @@ function las2json(onelas){
 	}
 	console.log(" test: lasjson",lasjson);
 	return(lasjson)
+}
+
+
+//// Function that takes a single json representing a single well and writes a paper LAS 2.0 file.
+function json2las(oneJSON){
+	//// nothing written yet
+	return LAS
+}
+
+//// Function that takes LAS 2.0 text variable, a directory string, and a filename string and writes the LAS to an actual file in the given directory.
+function writeLAS(LAS_TEXT,DIR,FILENAME){
+	//// nothing written yet
+}
+
+//// Function that takes JSON variable, a directory string, and a filename string and writes the JSON to an actual JSON file in the given directory.
+function writeJSON(JSON_STR,DIR,FILENAME){
+	//// nothing written yet
 }
