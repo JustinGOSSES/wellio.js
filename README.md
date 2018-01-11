@@ -7,5 +7,107 @@
  There currently isn't any .las parser that I was able to find. This fills that gap. This script will have two functions. Both only take a single las at a time. The first function converts a  .las file into a json format file. They second function (not yet written) will do the inverse.
 
 # Why
-I wanted to build a reactive style (something like <a href="http://ncase.me/joy/">joy.js</a> ) well-log feature creation widget that would include cross-filtering like in <a href="https://dc-js.github.io/dc.js/">dc.js</a> across multiple figures with an easy exploration playground that leverages numpy style array math for use in machine-learning, like <a href="https://deeplearnjs.org/">deeplearn.js</a>. I found Python notebooks to be too linear and time intensive involving re-writing or re-running too much code. These types of things are often built in JavaScript. Hence, the need to read las files into json and back again, hence, wellio.js.
+I wanted to build a reactive style (something like <a href="http://ncase.me/joy/">joy.js</a> ) well-log feature creation widget that would include cross-filtering like in <a href="https://dc-js.github.io/dc.js/">dc.js</a> across multiple figures with an easy exploration playground that leverages numpy style array math for use in machine-learning, like <a href="https://deeplearnjs.org/">deeplearn.js</a>. I found Python notebooks to be too linear and time intensive involving re-writing or re-running too much code. The types of things above are all built in JavaScript, so I needed las in json. Hence,  wellio.js.
 
+# Example
+#### LAS -> JSON
+```var lasjson = function las2json(onelas)```
+will give you something like this:
+``` 
+var lasjson = {
+			"VERSION INFORMATION":{
+				"VERS":{"MNEM":"","UNIT":"","DATA":"","DESCRIPTION OF MNEMONIC 1":"","DESCRIPTION OF MNEMONIC 2":""},
+				"WRAP":{"MNEM":"","UNIT":"","DATA":"","DESCRIPTION OF MNEMONIC 1":"","DESCRIPTION OF MNEMONIC 2":""}
+			}
+			,
+			"WELL INFORMATION BLOCK":[{
+					"GENERATED":"",
+					"MNEM_0":{"MNEM":"","UNIT":"","DATA":"","DESCRIPTION OF MNEMONIC 1":"","DESCRIPTION OF MNEMONIC 2":""},
+					"MNEM_1":{"MNEM":"","UNIT":"","DATA":"","DESCRIPTION OF MNEMONIC 1":"","DESCRIPTION OF MNEMONIC 2":""},
+					"MNEM_2":{"MNEM":"","UNIT":"","DATA":"","DESCRIPTION OF MNEMONIC 1":"","DESCRIPTION OF MNEMONIC 2":""}
+				}]
+			,
+			"CURVE INFORMATION BLOCK":[{
+					"MNEM_0":{"MNEM":"","UNIT":"","ERCB CURVE CODE":"","CURVE DESCRIPTION 1":"","CURVE DESCRIPTION 2":""}, 
+					"MNEM_0":{"MNEM":"","UNIT":"","ERCB CURVE CODE":"","CURVE DESCRIPTION 1":"","CURVE DESCRIPTION 2":""},
+				}]		
+			,
+			"PARAMETER INFORMATION":{
+					"MNEM_0":{"MNEM":"","UNIT":"","DATA":"","DESCRIPTION OF MNEMONIC 1":"","DESCRIPTION OF MNEMONIC 2":""}, 
+					"MNEM_1":{"MNEM":"","UNIT":"","DATA":"","DESCRIPTION OF MNEMONIC 1":"","DESCRIPTION OF MNEMONIC 2":""},
+				}
+			,
+			"CURVES":{
+					"Curve_NAME_ONE" :[1,2,3,4,5,6,7,8,9,10,11],
+					"Curve_NAME_ONE" :[1,2,3,4,5,6,7,8,9,10,11],
+				}
+		}
+```
+
+### Original las file example
+
+```
+~VERSION INFORMATION
+ VERS.                 2.0:   CWLS LOG ASCII STANDARD -VERSION 2.0
+ WRAP.                  NO:   ONE LINE PER DEPTH STEP
+~WELL INFORMATION BLOCK
+#MNEM.UNIT           DATA                    DESCRIPTION OF MNEMONIC
+#---------    -------------------            -------------------------------
+# Generated from Intellog Unique Number	CW_73_75/WELL/2722
+WELL.         CHEVRON MGSU 1 MITSUE 01-01    : Well_name    - WELL
+LOC .         00/01-01-073-05W5/0            : Location     - LOCATION
+UWI .         00/01-01-073-05W5/0            : Uwi          - UNIQUE WELL ID
+ENTR.         JAYE                           : Entered      - ENTERED BY
+SRVC.         SCHLUMBERGER                   : Scn          - SERVICE COMPANY
+DATE.         23 DEC 86                      : Date         - LOG DATE
+STRT.M        390                            : top_depth    - START DEPTH
+STOP.M        650                            : bot_depth    - STOP DEPTH
+STEP.M        0.25                           : increment    - STEP LENGTH
+ NULL. -999.2500:NULL Value
+~CURVE INFORMATION BLOCK
+#MNEM UNIT       ERCB CURVE CODE    CURVE DESCRIPTION
+#-----------   ------------------   ----------------------------------
+DEPT.M        00 001 00 00         : DEPTH        - DEPTH
+DPHI.V/V      00 890 00 00         : PHID         - DENSITY POROSITY (SANDSTONE)
+NPHI.V/V      00 330 00 00         : PHIN         - NEUTRON POROSITY (SANDSTONE)
+GR  .API      00 310 00 00         : GR           - GAMMA RAY
+CALI.MM       00 280 01 00         : CAL          - CALIPER
+ILD .OHMM     00 120 00 00         : RESD         - DEEP RESISTIVITY (DIL)
+~PARAMETER INFORMATION
+#MNEM.UNIT           DATA             DESCRIPTION OF MNEMONIC
+#---------         -----------     ------------------------------
+GL  .M        583.3                : gl           - GROUND LEVEL ELEVATION
+EREF.M        589                  : kb           - ELEVATION OF DEPTH REFERENCE
+DATM.M        583.3                : datum        - DATUM ELEVATION
+TDD .M        733.4                : tdd          - TOTAL DEPTH DRILLER
+RUN .         ONE                  : Run          - RUN NUMBER
+ENG .         SIMMONS              : Engineer     - RECORDING ENGINEER
+WIT .         SANK                 : Witness      - WITNESSED BY
+BASE.         S.L.                 : Branch       - HOME BASE OF LOGGING UNIT
+MUD .         GEL CHEM             : Mud_type     - MUD TYPE
+MATR.         SANDSTONE            : Logunit      - NEUTRON MATRIX
+TMAX.C        41                   : BHT          - MAXIMUM RECORDED TEMPERATURE
+BHTD.M        733.8                : BHTDEP       - MAXIMUM RECORDED TEMPERATURE
+RMT .C        17                   : MDTP         - TEMPERATURE OF MUD
+MUDD.KG/M     1100                 : MWT          - MUD DENSITY
+NEUT.         1                    : NEUTRON      - NEUTRON TYPE
+RESI.         0                    : RESIST       - RESISTIVITY TYPE
+RM  .OHMM     2.62                 : RM           - RESISTIVITY OF MUD
+RMC .OHMM     0                    : RMC          - RESISTIVITY OF MUD CAKE
+RMF .OHMM     1.02                 : RMF          - RESISTIVITY OF MUD FILTRATE
+SUFT.C        0                    : SUFT         - SURFACE TEMPERATURE
+~A  DEPTH     PHID     PHIN       GR      CAL     RESD
+  390.000    0.199    0.457   82.478  238.379    2.923
+  390.250    0.208    0.456   86.413  238.331    2.925
+  390.500    0.246    0.452   90.229  238.069    2.917
+  390.750    0.266    0.475   90.944  238.752    2.898
+  391.000    0.287    0.484   88.866  239.724    2.890
+  391.250    0.288    0.474   82.638  241.951    2.844
+  391.500    0.241    0.461   83.345  244.478    2.748
+  391.750    0.215    0.471   88.403  247.116    2.725
+  392.000    0.190    0.448   91.038  250.475    2.748
+  392.250    0.219    0.478   89.579  254.764    2.845
+  392.500    0.269    0.552   84.092  258.019    2.939
+  392.750    0.316    0.458   78.479  260.143    3.088
+  393.000    0.299    0.429   72.249  256.370    3.338
+```
