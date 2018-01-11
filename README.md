@@ -132,3 +132,7 @@ Nope, it only loads to your browser's memory and then your browser forgets it wh
 
 ## What are the files other than wellio.js
 Things for the demo. Specifically, opening up index.html in a browser should let you experiment. <a href="https://github.com/agile-geoscience/g3">G3.js</a> is used to draw a plot of a GR log. You can see what the LAS converted to JSON looks like using your browser's console window. 
+
+## Can I see the demo without any LAS files on my local computer and without cloning this repo?
+Yes, go to <href="https://raw.githubusercontent.com/JustinGOSSES/wellio.js/master/assets/00-01-01-073-05W5-0.LAS">this</a> file. You should see the text of a LAS file in your browser window. Click save as and save as a LAS file to your local computer. Now, open the demo page running on github <a href="https://justingosses.github.io/wellio.js/">here</a>.
+
