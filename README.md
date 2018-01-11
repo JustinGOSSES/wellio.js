@@ -3,11 +3,19 @@
 
 [THIS IS VERY NEW AND IN PROGRESS]
 
-# Direct Purpose
- There currently isn't any .las parser that I was able to find. This fills that gap. This script will have two functions. Both only take a single las at a time. The first function converts a  .las file into a json format file. They second function (not yet written) will do the inverse.
+# Purpose
+ There currently isn't any .las -> JSON parser that I was able to find. There is <a href="https://lasio.readthedocs.io/en/latest/">lasio</a> and <a href="https://github.com/agile-geoscience/welly">welly</a> for python, but nothing to ingest las files in JavaScript. Wellio.js is an attempt to fill that gap, so I can build other stuff. This script will have two functions. The first function converts a .las file into a json format file. They second function (not yet written) will do the inverse. Once you have well data as JSON, many other JavaScript-based things as possible. I'll try to keep those other things separate, except as demos for Wellio.
 
-# Why
-I wanted to build a reactive style (something like <a href="http://ncase.me/joy/">joy.js</a> ) well-log feature creation widget that would include cross-filtering like in <a href="https://dc-js.github.io/dc.js/">dc.js</a> across multiple figures with an easy exploration playground that leverages numpy style array math for use in machine-learning, like <a href="https://deeplearnjs.org/">deeplearn.js</a>. I found Python notebooks to be too linear and time intensive involving re-writing or re-running too much code. The types of things above are all built in JavaScript, so I needed las in json. Hence,  wellio.js.
+# Why Bother, Geologists Use Python
+While trying to build a machine-learning approach to mimic specific geologist's stratigraphic surface picking, I concluded I was limited by the number and quality of my input features. 
+
+Specifically, I needed more features and the methods I were using to come up with effective ones were too slow. I found trying to do well log feature creation in Jupyter notebooks using only Python to be too linear and time intensive involving re-writing or re-running too much code in between seeing the results. JavaScript has more interactive and reactive data visualization libraries, so that is driving tool choice and the need to load las files into json for work with JavaScript. 
+
+Additionally, using JavaScript opens up the possibility of simple widgets that could be run in the browser without needing to install a program on users' computers. 
+
+I'm imagining a reactive style well-log feature creation widget, something like <a href="http://ncase.me/joy/">joy.js</a>,  that would include cross-filtering across multiple figures like in <a href="https://dc-js.github.io/dc.js/">dc.js</a>, while also leveraging numpy-style array math, like in <a href="https://deeplearnjs.org/">deeplearn.js</a>. The resulting engineered features  could be leveraged in machine-learning, either via entirely-JavaScript-based ML or python-based ML done in a notebook running JavaScript only for data visualization. 
+
+*Long story short, wanted to do everything from load to manipulation to visualization in JavaScript.*
 
 # Example
 #### LAS -> JSON
