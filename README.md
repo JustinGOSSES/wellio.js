@@ -3,10 +3,10 @@
 
 [THIS IS VERY NEW AND IN PROGRESS]
 
-# Direct Purpose
+# Purpose
  There currently isn't any .las -> JSON parser that I was able to find. There is <a href="https://lasio.readthedocs.io/en/latest/">lasio</a> and <a href="https://github.com/agile-geoscience/welly">welly</a> for python, but nothing to ingest las files in JavaScript. Wellio.js is an attempt to fill that gap, so I can build other stuff. This script will have two functions. The first function converts a .las file into a json format file. They second function (not yet written) will do the inverse. Once you have well data as JSON, many other JavaScript-based things as possible. I'll try to keep those other things separate, except as demos for Wellio.
 
-# Why
+# Why Bother, Geologists Use Python
 I wanted to build a reactive style well-log feature creation widget, something like <a href="http://ncase.me/joy/">joy.js</a>,  that would include cross-filtering across multiple figures like in <a href="https://dc-js.github.io/dc.js/">dc.js</a>, while also leveraging numpy-style array math, like in <a href="https://deeplearnjs.org/">deeplearn.js</a>, in order to feed the resulting engineered featuresinto machine-learning, either in JavaScript ML or python ML in a notebook running JavaScript for data visualization. I found trying to do well log feature creation in Jupyter notebooks using only Python to be too linear and time intensive involving re-writing or re-running too much code. JavaScript has more interactive and reactive data visualization libraries, so that is driving tool choice.   
 
 # Example
