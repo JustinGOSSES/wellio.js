@@ -9,7 +9,7 @@
 # Why Bother, Geologists Use Python
 While trying to build a machine-learning approach to mimic specific geologist's stratigraphic surface picking, I concluded I was limited by the number and quality of my input features. 
 
-Specifically, I needed more features and the methods I were using to come up with effective ones were too slow. I found trying to do well log feature creation in Jupyter notebooks using only Python to be too linear and time intensive involving re-writing or re-running too much code in between seeing the results. JavaScript has more interactive and reactive data visualization libraries, so that is driving tool choice and the need to load las files into json for work with JavaScript. 
+Specifically, I needed more features and the methods I were using to come up with effective ones were too slow. I found trying to do well log feature creation in Jupyter notebooks using only Python to be too linear and time intensive involving re-writing or re-running too much code in between seeing the results. JavaScript has more interactive and reactive data visualization libraries, so that is driving tool choice and the need to load las files into json for work with JavaScript. For clarity, I'm using the term reactive in the <a href="https://vimeo.com/36579366">Bret Victor</a> sense, not the <a href="https://reactjs.org/">react.js</a> sense. 
 
 Additionally, using JavaScript opens up the possibility of simple widgets that could be run in the browser without needing to install a program on users' computers. 
 
