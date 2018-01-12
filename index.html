@@ -53,8 +53,9 @@
 			<button onclick="removeTextLAS()">remove text of .las files</button>
 		</div>
 		<div class="step">
-			<p><b>Second</b>: convert .las text into JSON - <i>Needed for steps below to work</i></p>
+			<p><b>Second</b>: convert .las text into JSON - <i>Needed for steps below to work</i>. If you selected more than one las, the first will be used.</p>
 			<button onclick="splitLastString()">convert</button>
+			<i><p id="which_well">no well selection</p></i>
 		</div>
 		<div class="step">
 			<p>Well curve buttons for the selected well will appear below this line after the conversion to JSON step</p>

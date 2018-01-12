@@ -137,12 +137,7 @@ function splitLastString(){
   version_OBJ["DESCRIPTION OF MNEMONIC 2"] = version_info_array[1].split(":")[1].split("-")[1].replace("\r","");
   console.log("version_OBJ :",version_OBJ);
   
-
-
-
-
   var wrap_line = version_info_array[2];
-
 
   var single_well_json = las2json(all_files[0]);
   console.log('single_well_json = ',single_well_json)
@@ -151,6 +146,11 @@ function splitLastString(){
   temp_json = single_well_json
 
   addCurveOptionButtons()
+
+  
+  document.getElementById("which_well").innerHTML = "UWI = "+temp_json["WELL INFORMATION BLOCK"]["UWI"]["DATA"];
+  /// +temp_json["WELL INFORMATION BLOCK"]["UWI"]["DATA"]
+  // document.getElementById("demo").innerHTML = "Paragraph changed!";
 }
 
 function draw_gr(curve){
