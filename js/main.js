@@ -18,7 +18,10 @@ function removeTextLAS(){
 }
 
 function remove_DOM_children(div_name){
-  fileContentsDiv = document.getElementById('log_plot_div');
+  if(!div_name){
+    div_name = 'log_plot_div'
+  }
+  fileContentsDiv = document.getElementById(div_name);
   while (fileContentsDiv.hasChildNodes()) {
     fileContentsDiv.removeChild(fileContentsDiv.lastChild);
   }
@@ -94,6 +97,7 @@ function removeSubStr(string,substring){
 
 
 function splitLastString(){
+  remove_DOM_children("curveButtons_holder")
   var las = all_files[0];
   var split1 = las.split("~");
   console.log("split1 [0] = ",split1[0]);
@@ -146,10 +150,31 @@ function splitLastString(){
 
   temp_json = single_well_json
 
-  
+  addCurveOptionButtons()
 }
 
-function draw_gr(){
-    makePlot(temp_json["CURVES"]["GR"],".log_plot_div",1600,200,[0,300],[0,temp_json["CURVES"]["GR"].length])
+function draw_gr(curve){
+    if(!curve){
+      var curve = "GR"
+    }
+    makePlot(temp_json["CURVES"][curve],".log_plot_div",1600,200,[0,300],[0,temp_json["CURVES"][curve].length])
 }
 
+
+function addCurveOptionButtons(){
+  /// curveButtons_holder
+  var div_id = "curveButtons_holder"
+  var curves_available = Object.keys(temp_json["CURVES"])
+  console.log("curves_available = ",curves_available)
+  for(each_curve in curves_available){
+    addSingleCurveButton(div_id,curves_available[each_curve])
+  }
+}
+
+function addSingleCurveButton(div_id,curve_name){
+          var node = document.createElement("button");
+          node.setAttribute('onclick','draw_curve("'+String(curve_name)+'")')                 // Create a <li> node
+          var textnode = document.createTextNode(curve_name);         // Create a text node
+          node.appendChild(textnode);                              // Append the text to <li>
+          document.getElementById(div_id).appendChild(node);  
+}

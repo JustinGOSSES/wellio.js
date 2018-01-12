@@ -21,6 +21,8 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.js"></script>
 		<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script> -->
 
+		<link rel="stylesheet" href="./css/main.css"> 
+
 		<script src="./js/g3.js"></script>
 		<script src="./js/call_plots.js"></script>
 		<script src="./js/main.js"></script>
@@ -38,38 +40,38 @@
 	</head>
 	<body>			
 		<div>
-			<h1>Test Page For Wellio.js</h1>
-			<h1>Uploads LAS files and turns them into json files, then displays GR curve.</h1>
-			<p>Click the button to browse for local LAS files on your machine, then load into memory.</p>
+			<h1>Demo Page For Wellio.js</h1>
+			<h3>Uploads LAS files using a file loader, turns them into json files using wellio.js, and displays logs using g3.js.</h3>
+			<p><b>First</b>: click the button to browse for local LAS files on your machine, then load into memory.</p>
 			<input type="file" id="files" name="files[]" multiple />
 			<output id="list"></output>
 			<button onclick="readInFilesFunction()">Load Into Browswer Memory</button>
 		</div>
-		<div>
-			<p>OPTIONAL: display .las files as text</p>
+		<div class="step">
+			<p><i>Optional</i> display of .las files as text</p>
 			<button onclick="displayFileFunction()">display .las files as text</button>
-		</div>
-		<div>
 			<button onclick="removeTextLAS()">remove text of .las files</button>
 		</div>
-		<div>
-			<p>Needed before steps below: Turn LAS INTO JSON</p>
+		<div class="step">
+			<p><b>Second</b>: convert .las text into JSON - <i>Needed for steps below to work</i></p>
 			<button onclick="splitLastString()">convert</button>
 		</div>
-		<div>
-			<p>Show GR Well Curve</p>
-			<button onclick='draw_gr()'>draw</button>
+		<div class="step">
+			<p>Well curve buttons for the selected well will appear below this line after the conversion to JSON step</p>
+			<!-- <button onclick='addCurveOptionButtons()'>show curve options</button> -->
+			<div id="curveButtons_holder"></div>
 		</div>
 		<!-- <div>
 			<p>Show GR Well Curve</p>
-			
+			<button onclick='draw_gr()'>draw</button>
 		</div> -->
+		
 		<div>
 			<p>Remove all curves</p>
 			<button onclick="remove_DOM_children()")>remove</button>
 		</div>
 		<div id="fileContents"></div>
-		<div class="plot_holder" style="float:left;">
+		<div class="plot_holder">
     		<div id="log_plot_div" class="log_plot_div box"></div>
     		<div class="log_plot_div2 box"></div>
     	</div>

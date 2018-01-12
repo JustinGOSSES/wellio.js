@@ -1,15 +1,11 @@
-function makePlot(single_curve,div,height,width,domain_x,domain_y){
-	// var a = single_curve
-	// if(!div){div = "<body>"};
-	// if(!height){height = 1600};
-	// if(!width){width = 200};
-	// if(!domain_x){domain_x = [0,300]};
-	// if(!domain_y){domain_y =[0,single_curve.data.length]};
-	// var b2=g3.plot(div).height(".log_plot_div").width(width).xDomain(domain_x).yDomain(domain_y).draw();
-	// g3.log(b2,a.data).draw()
-	// console.log('2 single_curve = ',single_curve)
-
-	var b2=g3.plot("#log_plot_div").height(600).width(200).xDomain([0,300]).yDomain([0,single_curve.length]).draw();
+function makePlot(single_curve,div,height,width,domain_x,domain_y,curve_name){
+	var b2=g3.plot("#log_plot_div").height(height).width(width).xDomain(domain_x).yDomain([0,single_curve.length]).xTitle(curve_name).draw()
 	g3.log(b2,single_curve).draw()
+
 }
 
+function draw_curve(curve,div){
+	if(!div){div = "#log_plot_div"}
+	var domain_x = [Math.min.apply(null, temp_json["CURVES"][curve]),Math.max.apply(null, temp_json["CURVES"][curve])]
+    makePlot(temp_json["CURVES"][curve],".log_plot_div",600,250,domain_x,[0,temp_json["CURVES"][curve].length],curve)
+}

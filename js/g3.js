@@ -1053,13 +1053,15 @@ plot.prototype.setTitles = function(){
     if(this._xTickFormat === ""){
       var margin = -10;
     } else {
-      var margin = -30;
+    	//// JUSTIN HAD TO CHANGE THE MARGIN IN THIS ELSE TO -17 TO SEE TITLE! It was -30
+      var margin = -17;
     }
     this._svg.append("text")
       .attr("x", (this._width) / 2)
       .attr("y", margin)
       .style("text-anchor", "middle")
-      .style("font-size", 12)
+      .style("font-size", 14)
+      .attr('style', 'display:block')
       .text(this._xTitle);
   }
 

@@ -123,6 +123,8 @@ function las2json(onelas){
 	var curve_names_array_holder = [];
 	if(curve_str_array[0][0] === "A"){
 		curve_names_array = curve_str_array[0].split(" ")
+		var last_curv_name_position = curve_names_array.length - 1;
+		curve_names_array[last_curv_name_position] = curve_names_array[last_curv_name_position].replace("\r","")
 		console.log("0 curve_names_array = ",curve_names_array)
 		curve_names_array = curve_names_array.slice(1,curve_names_array.length);
 		for(i = 0; i < curve_names_array.length; i++){
