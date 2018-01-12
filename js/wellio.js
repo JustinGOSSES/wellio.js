@@ -16,12 +16,12 @@ function las2json(onelas){
 			,
 			"CURVE INFORMATION BLOCK":[{
 					"MNEM_0":{"MNEM":"","UNIT":"","ERCB CURVE CODE":"","CURVE DESCRIPTION 1":"","CURVE DESCRIPTION 2":""}, 
-					"MNEM_0":{"MNEM":"","UNIT":"","ERCB CURVE CODE":"","CURVE DESCRIPTION 1":"","CURVE DESCRIPTION 2":""},
+					"MNEM_0":{"MNEM":"","UNIT":"","ERCB CURVE CODE":"","CURVE DESCRIPTION 1":"","CURVE DESCRIPTION 2":""}
 				}]		
 			,
 			"PARAMETER INFORMATION":{
 					"MNEM_0":{"MNEM":"","UNIT":"","DATA":"","DESCRIPTION OF MNEMONIC 1":"","DESCRIPTION OF MNEMONIC 2":""}, 
-					"MNEM_1":{"MNEM":"","UNIT":"","DATA":"","DESCRIPTION OF MNEMONIC 1":"","DESCRIPTION OF MNEMONIC 2":""},
+					"MNEM_1":{"MNEM":"","UNIT":"","DATA":"","DESCRIPTION OF MNEMONIC 1":"","DESCRIPTION OF MNEMONIC 2":""}
 				}
 			,
 			"CURVES":{
@@ -140,6 +140,8 @@ function las2json(onelas){
 	for(j = 1; j < curve_str_array.length-1; j++){
 		var curve_data_line_array = curve_str_array[j].split(" ");
 		var counter_of_curve_names = 0;
+		var last_curv_data_line_position = curve_data_line_array.length - 1;
+		curve_data_line_array[last_curv_data_line_position] = curve_data_line_array[last_curv_data_line_position].replace("\r","")
 		for(k = 0; k < curve_data_line_array.length; k++){
 			if(curve_data_line_array[k] !== ""){				
 				lasjson["CURVES"][curve_names_array_holder[counter_of_curve_names]].push(curve_data_line_array[k])

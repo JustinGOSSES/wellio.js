@@ -13,13 +13,15 @@
 		
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
 
-		 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/styles/default.min.css"> 
+		<!--  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/styles/default.min.css"> 
 		  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/highlight.min.js"></script> 
  			<script>hljs.initHighlightingOnLoad();</script> 
- 			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"> 
+ 			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">  -->
 
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.js"></script>
 		<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script> -->
+
+		<script src="./js/vkbeautify.js"></script>
 
 		<link rel="stylesheet" href="./css/main.css"> 
 
@@ -69,13 +71,20 @@
 		
 		<div>
 			<p>Remove all curves</p>
-			<button onclick="remove_DOM_children()")>remove</button>
+			<button onclick="remove_DOM_children()">remove</button>
 		</div>
 		<div id="fileContents"></div>
 		<div class="plot_holder">
     		<div id="log_plot_div" class="log_plot_div box"></div>
     		<div class="log_plot_div2 box"></div>
     	</div>
+    </div>
+</br>
+	<div style="float:left"></div>
+	</br>
+    <div style="float:left;width:100%">
+    	<button onclick="print_well()">Print well in wellio.js JSON format</button>
+    	<p id="json_print"></p>
     </div>
 	</body>
 </html>
