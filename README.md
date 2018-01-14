@@ -29,7 +29,7 @@ Additional to the wellio.js file, there are a variety of files running the demo 
 <a href="https://github.com/agile-geoscience/g3">G3.js</a> is used to draw a plot of the well log curves. It leverages <a href="https://github.com/d3">d3.js</a>.
 
 <a href="https://github.com/vkiryukhin/vkBeautify">VKbeautify.js</a> is a script for adding spaces and such to JSON to make them prettier when printed.
-<a href="https://github.com/google/code-prettify"><run_prettify.js</a> does something similar but is focused on making it print nicely into HTML DOM elements. 
+<a href="https://github.com/google/code-prettify">run_prettify.js</a> does something similar but is focused on making it print nicely into HTML DOM elements. 
 
 ## Where To Get Open-Source Well Logs in .LAS format?
 You can use the file upload button to load into your browsers memory any LAS files from your local computer. I've also included a few well logs in the /assets/ folder of this repo from the electronic data file below. 
