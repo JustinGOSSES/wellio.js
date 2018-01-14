@@ -155,31 +155,36 @@ function splitLastString(){
 }
 
 function print_well(){
-  var text_of_json = vkbeautify.json(temp_json);
-  var json_string = ""
-  var array_of_blocks_in_las = ["WELL INFORMATION BLOCK","VERSION INFORMATION","CURVE INFORMATION BLOCK","PARAMETER INFORMATION"];
-  for (each_block in array_of_blocks_in_las){
-    json_string = json_string.concat(array_of_blocks_in_las[each_block]+": [")
-    var counter = 0
-    for(each_item in temp_json[array_of_blocks_in_las[each_block]]){
-      counter += 1
-      json_string = json_string.concat(JSON.stringify(temp_json[array_of_blocks_in_las[each_block]][each_item]));
-      // json_string = json_string.concat(", ")
-      console.log("temp_json[array_of_blocks_in_las[each_block]] == ",temp_json[array_of_blocks_in_las[each_block]])
-      console.log("Object.keys(temp_json[array_of_blocks_in_las[each_block]]).length",Object.keys(temp_json[array_of_blocks_in_las[each_block]]).length)
-      console.log("each_item",each_item)
-      if (counter < Object.keys(temp_json[array_of_blocks_in_las[each_block]]).length){
-        json_string = json_string.concat(", ")
-      }
+  // var text_of_json = vkbeautify.json(temp_json);
+  // var json_string = ""
+  // var array_of_blocks_in_las = ["WELL INFORMATION BLOCK","VERSION INFORMATION","CURVE INFORMATION BLOCK","PARAMETER INFORMATION"];
+  // for (each_block in array_of_blocks_in_las){
+  //   json_string = json_string.concat(array_of_blocks_in_las[each_block]+": [")
+  //   var counter = 0
+  //   for(each_item in temp_json[array_of_blocks_in_las[each_block]]){
+  //     counter += 1
+  //     json_string = json_string.concat(JSON.stringify(temp_json[array_of_blocks_in_las[each_block]][each_item]));
+  //     // json_string = json_string.concat(", ")
+  //     console.log("temp_json[array_of_blocks_in_las[each_block]] == ",temp_json[array_of_blocks_in_las[each_block]])
+  //     console.log("Object.keys(temp_json[array_of_blocks_in_las[each_block]]).length",Object.keys(temp_json[array_of_blocks_in_las[each_block]]).length)
+  //     console.log("each_item",each_item)
+  //     if (counter < Object.keys(temp_json[array_of_blocks_in_las[each_block]]).length){
+  //       json_string = json_string.concat(", ")
+  //     }
       
-    }
-    json_string = json_string.concat(" ], ")
-  }
-  json_string = json_string.concat(JSON.stringify(temp_json["CURVES"]))
+  //   }
+  //   json_string = json_string.concat(" ], ")
+  // }
+  // json_string = json_string.concat(JSON.stringify(temp_json["CURVES"]))
   // var text_of_json_well_info = vkbeautify.json(json_string,4);
   // document.getElementById("json_print").innerHTML = text_of_json_well_info;
-  document.getElementById("json_print").innerHTML = json_string;
-  console.log('json_string = ',json_string)
+  // document.getElementById("json_print").innerHTML = json_string;
+  // document.getElementById("json_print").innerHTML = JSON.stringify(temp_json);
+  document.getElementById("well_json_prettyprint").innerHTML = vkbeautify.json(JSON.stringify(temp_json),1);
+  // console.log('json_string = ',json_string)
+  // console.log('temp_json = ',temp_json)
+  console.log('JSON.stringify(temp_json) = ',vkbeautify.json(JSON.stringify(temp_json),4))
+  //document.getElementById("json_print").innerHTML = vkbeautify.json(JSON.stringify(temp_json),4);
 }
 
 function draw_gr(curve){

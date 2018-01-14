@@ -31,10 +31,10 @@ function las2json(onelas){
 		}
 	//// Some objects in the json above, like the obj in the "Curves" array will be emptyed on firt load. 
 	//// They were only partially populated above to make following along easier
-	lasjson["VERSION INFORMATION"] = [];
-	lasjson["WELL INFORMATION BLOCK"] = [];
-	lasjson["CURVE INFORMATION BLOCK"] = [];
-	lasjson["PARAMETER INFORMATION"] = [];
+	lasjson["VERSION INFORMATION"] = {};
+	lasjson["WELL INFORMATION BLOCK"] = {};
+	lasjson["CURVE INFORMATION BLOCK"] = {};
+	lasjson["PARAMETER INFORMATION"] = {};
 	lasjson["CURVES"] = {};
 	//// The number of the objects 'of the type below' added to the json vary by well, so these will be building blocks.
 	var ver_info_obj = {"MNEM":"","UNIT":"","DATA":"","DESCRIPTION OF MNEMONIC 1":"","DESCRIPTION OF MNEMONIC 2":""};
