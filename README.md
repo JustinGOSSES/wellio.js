@@ -4,13 +4,20 @@
 [THIS IS VERY NEW AND IN PROGRESS]
 
 ## Purpose
- There currently isn't any .las -> JSON parser that I was able to find. There is <a href="https://lasio.readthedocs.io/en/latest/">lasio</a> and <a href="https://github.com/agile-geoscience/welly">welly</a> for python, but nothing to ingest las files in JavaScript. Wellio.js is an attempt to fill that gap, so I can build other stuff. This script will have two functions. The first function converts a .las file into a json format file. They second function (not yet written) will do the inverse. Once you have well data as JSON, many other JavaScript-based things as possible. I'll try to keep those other things separate, except as demos for Wellio.
+ There currently isn't any .las -> JSON parser that I was able to find. There is <a href="https://lasio.readthedocs.io/en/latest/">lasio</a> and <a href="https://github.com/agile-geoscience/welly">welly</a> for python, but nothing to ingest las files in JavaScript. Wellio.js is an attempt to fill that gap, so I can build other stuff. Once you have well data as JSON, many other JavaScript-based things as possible. I'll try to keep those other things separate, except as demos for Wellio.
 
 ## Does this upload my well logs to your server? 
 Nope, it only loads to your browser's memory and then your browser forgets it when you close the tab.
 
 ## Can I see the demo right now?
-Yes, go to <a href="https://raw.githubusercontent.com/JustinGOSSES/wellio.js/master/assets/00-01-01-073-05W5-0.LAS">this</a> file. The link will take you to a raw version of a LAS file for well UWI 00-01-01-073-05W5-0. You should see the text of a LAS file in your browser window. Save as a LAS file to your local computer. Now, open the demo page running on github <a href="https://justingosses.github.io/wellio.js/">here</a>. Click the button to load the open a file loader and load the LAS file you just saved to your computer.
+Yes, open the demo page running on github <a href="https://justingosses.github.io/wellio.js/">here</a>. Click the button to  open a file loader. You can either use a LAS files already part of the webpage or you can load a local LAS file from your computer. 
+
+If you don't have any local LAS files, you can quickly get one by going to <a href="https://raw.githubusercontent.com/JustinGOSSES/wellio.js/master/assets/00-01-01-073-05W5-0.LAS">this</a> link and saving the results to a ".las" file using your browser. That is a raw las file for well UWI 00-01-01-073-05W5-0.
+
+## Code Organization Summary
+
+
+This script will have two functions. The first function converts a .las file into a json format file. They second function (not yet written) will do the inverse. 
 
 ## What are the files other than wellio.js
 Things for the demo. Specifically, opening up index.html in a browser should let you experiment. <a href="https://github.com/agile-geoscience/g3">G3.js</a> is used to draw a plot of a GR log. You can see what the LAS converted to JSON looks like using your browser's console window. 
