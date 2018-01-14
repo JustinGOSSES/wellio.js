@@ -51,8 +51,6 @@ I'm imagining a reactive style well-log feature creation widget, something like 
 
 ## Example
 
-```
-
 ### Original las file example
 
 ```
@@ -121,8 +119,6 @@ SUFT.C        0                    : SUFT         - SURFACE TEMPERATURE
   393.000    0.299    0.429   72.249  256.370    3.338
 ```
 
-
-
 #### LAS -> JSON
 ```var lasjson = function las2json(onelas)```
 will give you something like this:
@@ -155,6 +151,5 @@ var lasjson = {
 					"Curve_NAME_ONE" :[1,2,3,4,5,6,7,8,9,10,11],
 				}
 		}
-
-
+```
 
