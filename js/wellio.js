@@ -168,18 +168,6 @@ function json2las(oneJSON){
 	return LAS
 }
 
-//// Function that takes LAS 2.0 text variable, a directory string, and a filename string and writes the LAS to an actual file in the given directory.
-function writeLAS(LAS_TEXT,DIR,FILENAME){
-	//// nothing written yet, but will download a las formated text string with ".las" ending
-}
-
-//// Function that takes JSON variable, a directory string, and a filename string and writes the JSON to an actual JSON file in the given directory.
-function writeJSON(JSON_STR,DIR,FILENAME){
-	//// nothing written yet
-	//// for now use the function "download"
-	//// eventually user https://github.com/jimmywarting/StreamSaver.js & https://github.com/eligrey/FileSaver.js
-	//// for larger or multiple files with coverage on both new and old browsers
-}
 
 //// Function that takes a filename string and a string (you might have to stringify a json object) 
 //// and writes into an actual JSON file to be downloaded into your browsers specified download folder.
