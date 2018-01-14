@@ -12,7 +12,7 @@ Nope, it only loads to your browser's memory and then your browser forgets it wh
 ## Can I see the demo right now?
 Yes, open the demo page running on github <a href="https://justingosses.github.io/wellio.js/">here</a>. Click one of the big blue buttons up top to  open a file loader. You can either use a LAS files already part of the webpage or you can load a local LAS file from your computer. 
 
-If you don't have any local LAS files, you can quickly get one by going to <a href="https://raw.githubusercontent.com/JustinGOSSES/wellio.js/master/assets/00-01-01-073-05W5-0.LAS">this</a> link and saving the results to a ".las" file using your browser. That is a raw las file for well UWI 00-01-01-073-05W5-0.
+If you want to test the 'load local file' feature and don't have any local LAS files, you can quickly get one by going to <a href="https://raw.githubusercontent.com/JustinGOSSES/wellio.js/master/assets/00-01-01-073-05W5-0.LAS">this</a> link and saving the results to a ".las" file using your browser. That is a raw las file for well UWI 00-01-01-073-05W5-0.
 
 ## Code Organization Summary
 This repo contains code for the demo page</a>, which leverages the wellio.js JavaScript file in the js folder. 
