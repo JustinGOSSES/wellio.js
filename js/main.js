@@ -212,3 +212,24 @@ function addSingleCurveButton(div_id,curve_name){
           node.appendChild(textnode);                              // Append the text to <li>
           document.getElementById(div_id).appendChild(node);  
 }
+
+
+function download(filename, text) {
+  var element = document.createElement('a');
+  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+  element.setAttribute('download', filename);
+
+  element.style.display = 'none';
+  document.body.appendChild(element);
+
+  element.click();
+
+  document.body.removeChild(element);
+}
+
+
+function download_test(){
+  console.log("download_test() ","in")
+  download('test_well.json', JSON.stringify(temp_json));
+}
+
