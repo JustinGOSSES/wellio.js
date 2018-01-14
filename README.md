@@ -50,38 +50,7 @@ I'm imagining a reactive style well-log feature creation widget, something like 
 *Long story short, I want to build a fast reactive well-log feature engineering widget, hence I needed a way to load las files and work with them in JavaScript.*
 
 ## Example
-#### LAS -> JSON
-```var lasjson = function las2json(onelas)```
-will give you something like this:
-``` 
-var lasjson = {
-			"VERSION INFORMATION":{
-				"VERS":{"MNEM":"","UNIT":"","DATA":"","DESCRIPTION OF MNEMONIC 1":"","DESCRIPTION OF MNEMONIC 2":""},
-				"WRAP":{"MNEM":"","UNIT":"","DATA":"","DESCRIPTION OF MNEMONIC 1":"","DESCRIPTION OF MNEMONIC 2":""}
-			}
-			,
-			"WELL INFORMATION BLOCK":[{
-					"GENERATED":"",
-					"MNEM_0":{"MNEM":"","UNIT":"","DATA":"","DESCRIPTION OF MNEMONIC 1":"","DESCRIPTION OF MNEMONIC 2":""},
-					"MNEM_1":{"MNEM":"","UNIT":"","DATA":"","DESCRIPTION OF MNEMONIC 1":"","DESCRIPTION OF MNEMONIC 2":""},
-					"MNEM_2":{"MNEM":"","UNIT":"","DATA":"","DESCRIPTION OF MNEMONIC 1":"","DESCRIPTION OF MNEMONIC 2":""}
-				}]
-			,
-			"CURVE INFORMATION BLOCK":[{
-					"MNEM_0":{"MNEM":"","UNIT":"","ERCB CURVE CODE":"","CURVE DESCRIPTION 1":"","CURVE DESCRIPTION 2":""}, 
-					"MNEM_0":{"MNEM":"","UNIT":"","ERCB CURVE CODE":"","CURVE DESCRIPTION 1":"","CURVE DESCRIPTION 2":""},
-				}]		
-			,
-			"PARAMETER INFORMATION":{
-					"MNEM_0":{"MNEM":"","UNIT":"","DATA":"","DESCRIPTION OF MNEMONIC 1":"","DESCRIPTION OF MNEMONIC 2":""}, 
-					"MNEM_1":{"MNEM":"","UNIT":"","DATA":"","DESCRIPTION OF MNEMONIC 1":"","DESCRIPTION OF MNEMONIC 2":""},
-				}
-			,
-			"CURVES":{
-					"Curve_NAME_ONE" :[1,2,3,4,5,6,7,8,9,10,11],
-					"Curve_NAME_ONE" :[1,2,3,4,5,6,7,8,9,10,11],
-				}
-		}
+
 ```
 
 ### Original las file example
@@ -154,7 +123,38 @@ SUFT.C        0                    : SUFT         - SURFACE TEMPERATURE
 
 
 
-
+#### LAS -> JSON
+```var lasjson = function las2json(onelas)```
+will give you something like this:
+``` 
+var lasjson = {
+			"VERSION INFORMATION":{
+				"VERS":{"MNEM":"","UNIT":"","DATA":"","DESCRIPTION OF MNEMONIC 1":"","DESCRIPTION OF MNEMONIC 2":""},
+				"WRAP":{"MNEM":"","UNIT":"","DATA":"","DESCRIPTION OF MNEMONIC 1":"","DESCRIPTION OF MNEMONIC 2":""}
+			}
+			,
+			"WELL INFORMATION BLOCK":[{
+					"GENERATED":"",
+					"MNEM_0":{"MNEM":"","UNIT":"","DATA":"","DESCRIPTION OF MNEMONIC 1":"","DESCRIPTION OF MNEMONIC 2":""},
+					"MNEM_1":{"MNEM":"","UNIT":"","DATA":"","DESCRIPTION OF MNEMONIC 1":"","DESCRIPTION OF MNEMONIC 2":""},
+					"MNEM_2":{"MNEM":"","UNIT":"","DATA":"","DESCRIPTION OF MNEMONIC 1":"","DESCRIPTION OF MNEMONIC 2":""}
+				}]
+			,
+			"CURVE INFORMATION BLOCK":[{
+					"MNEM_0":{"MNEM":"","UNIT":"","ERCB CURVE CODE":"","CURVE DESCRIPTION 1":"","CURVE DESCRIPTION 2":""}, 
+					"MNEM_0":{"MNEM":"","UNIT":"","ERCB CURVE CODE":"","CURVE DESCRIPTION 1":"","CURVE DESCRIPTION 2":""},
+				}]		
+			,
+			"PARAMETER INFORMATION":{
+					"MNEM_0":{"MNEM":"","UNIT":"","DATA":"","DESCRIPTION OF MNEMONIC 1":"","DESCRIPTION OF MNEMONIC 2":""}, 
+					"MNEM_1":{"MNEM":"","UNIT":"","DATA":"","DESCRIPTION OF MNEMONIC 1":"","DESCRIPTION OF MNEMONIC 2":""},
+				}
+			,
+			"CURVES":{
+					"Curve_NAME_ONE" :[1,2,3,4,5,6,7,8,9,10,11],
+					"Curve_NAME_ONE" :[1,2,3,4,5,6,7,8,9,10,11],
+				}
+		}
 
 
 
