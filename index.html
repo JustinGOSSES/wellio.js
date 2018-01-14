@@ -10,7 +10,9 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
 
 		<!-- USED TO HELP LOAD FILES -->
-		<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" crossorigin="anonymous"></script>
+		<!-- switched to non-slim version so I could use ajax to load las files without person clicking. -->
+		<!-- <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script> -->
 
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
 			
@@ -42,37 +44,31 @@
 	<body>			
 		<div>
 			<h1>Barebones Demo Page for Wellio.js</h1>
-			<h4>Uploads local LAS files using a file loader, turns them into json using wellio.js, and displays logs using g3.js.</h4>
 		</div>
 		<div class="step">
-			<p><b>First</b>: use the 'browse' button to select LAS files on your computer.</p>
-			<!-- <label class="btn btn-default" for="files">
-				<input type="file" id="files" name="files[]" multiple/>
-			</label> -->
-			
+			<h4>Upload local LAS files using a file loader & turn them into json using wellio.js.</h4>
+		</div>
+		<div class="step">
+			<p><b>First</b>: use either of these buttons to load a LAS files.</p>
 			<div style="position:relative;">
         		<a class='btn btn-primary' href='javascript:;'>
-            	Choose File...
-            	<input type="file" id="files" name="files[]" multiple style='position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;' name="file_source" size="40"  onchange='$("#upload-file-info").html($(this).val());'>
+            	from your computer
+            	<input type="file" id="files" name="files[]" multiple style='position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;' name="file_source" size="40"  onchange='$("#upload-file-info").html($(this).val());readInFilesFunction()'>
         		</a>
         		&nbsp;
         		<span class='label label-info' id="upload-file-info"></span>
+        		<button onclick="readInLASFromASSETS()" class='btn btn-primary'>from Assets folder of this webpage</button><span class='label label-info' id="upload-success"></span>
 			</div>
-
-
 			<output id="list"></output>
-			<p><b>Second</b>: click 'load' button to load LAS file(s) into browser memory.</p>
-			<button onclick="readInFilesFunction()" class='btn btn-primary'>Load Into Browswer Memory</button>
-
 		</div>
 		
 		<div class="step">
-			<p><b>Third</b>: convert .las text into JSON. If you selected more than one las, the first will be used.</p>
-			<button onclick="splitLastString()"" class='btn btn-primary'>convert</button>
+			<p><b>Second</b>: convert .las text into JSON. If you selected more than one las, the first will be used.</p>
+			<button onclick="convert_and_startHelpers()" class='btn btn-primary'>convert</button>
 			<i><p id="which_well">no well selection</p></i>
 		</div>
 		<div class="step">
-			<h3>Display Results as original text (A), converted JSON (B), or visual curves (C)</h3>
+			<h4>Display Results as original text (A), converted JSON (B), or visual curves using g3.js (C)</h4>
 		</div>
 		<div class="step">
 			<span>
@@ -128,5 +124,6 @@
 		<h3>Download well as JSON file</h3>
 		<button id="download_button" onclick="download_test()" class='btn btn-secondary'>download</button>
 	</div>
-	</body>
+</br>
+</body>
 </html>

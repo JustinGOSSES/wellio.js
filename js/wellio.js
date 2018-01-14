@@ -1,23 +1,23 @@
-//// Function that takes a single LAS text file representing a single well and returns an object variable ready to be written to JSON format.
+//// Function that takes a single LAS text file representing a single well and returns an object variable in JSON format for that well.
 function las2json(onelas){
-	//// var lasjson establishes a blank json for holding las 2.0 data.
+	//// var lasjson establishes a blank json for holding las 2.0 data. It will look like the example below:
 	var lasjson = {
 			"VERSION INFORMATION":{
 				"VERS":{"MNEM":"","UNIT":"","DATA":"","DESCRIPTION OF MNEMONIC 1":"","DESCRIPTION OF MNEMONIC 2":""},
 				"WRAP":{"MNEM":"","UNIT":"","DATA":"","DESCRIPTION OF MNEMONIC 1":"","DESCRIPTION OF MNEMONIC 2":""}
 			}
 			,
-			"WELL INFORMATION BLOCK":[{
+			"WELL INFORMATION BLOCK":{
 					"GENERATED":"",
 					"MNEM_0":{"MNEM":"","UNIT":"","DATA":"","DESCRIPTION OF MNEMONIC 1":"","DESCRIPTION OF MNEMONIC 2":""},
 					"MNEM_1":{"MNEM":"","UNIT":"","DATA":"","DESCRIPTION OF MNEMONIC 1":"","DESCRIPTION OF MNEMONIC 2":""},
 					"MNEM_2":{"MNEM":"","UNIT":"","DATA":"","DESCRIPTION OF MNEMONIC 1":"","DESCRIPTION OF MNEMONIC 2":""}
-				}]
+				}
 			,
-			"CURVE INFORMATION BLOCK":[{
+			"CURVE INFORMATION BLOCK":{
 					"MNEM_0":{"MNEM":"","UNIT":"","ERCB CURVE CODE":"","CURVE DESCRIPTION 1":"","CURVE DESCRIPTION 2":""}, 
 					"MNEM_0":{"MNEM":"","UNIT":"","ERCB CURVE CODE":"","CURVE DESCRIPTION 1":"","CURVE DESCRIPTION 2":""}
-				}]		
+				}	
 			,
 			"PARAMETER INFORMATION":{
 					"MNEM_0":{"MNEM":"","UNIT":"","DATA":"","DESCRIPTION OF MNEMONIC 1":"","DESCRIPTION OF MNEMONIC 2":""}, 
@@ -29,31 +29,37 @@ function las2json(onelas){
 					"Curve_NAME_ONE" :[1,2,3,4,5,6,7,8,9,10,11],
 				}
 		}
-	//// Some objects in the json above, like the obj in the "Curves" array will be emptyed on firt load. 
-	//// They were only partially populated above to make following along easier
+	//// Some objects in the json were partially populated in the example above to make understanding the format easier.
+	//// We'll empty them as a first step 
 	lasjson["VERSION INFORMATION"] = {};
 	lasjson["WELL INFORMATION BLOCK"] = {};
 	lasjson["CURVE INFORMATION BLOCK"] = {};
 	lasjson["PARAMETER INFORMATION"] = {};
 	lasjson["CURVES"] = {};
-	//// The number of the objects 'of the type below' added to the json vary by well, so these will be building blocks.
+	//// Within the "blocks" ["CURVE INFORMATION BLOCK","PARAMETER INFORMATION", etc.] there are other objects with repeating keys.
+	//// The variables below will be the building blocks for each of those objects {}. They are initially populated with empty strings as the values.
 	var ver_info_obj = {"MNEM":"","UNIT":"","DATA":"","DESCRIPTION OF MNEMONIC 1":"","DESCRIPTION OF MNEMONIC 2":""};
 	var well_info_obj = {"MNEM":"","UNIT":"","DATA":"","DESCRIPTION OF MNEMONIC 1":"","DESCRIPTION OF MNEMONIC 2":""};
 	var curve_info_obj = {"MNEM":"","UNIT":"","ERCB CURVE CODE":"","CURVE DESCRIPTION 1":"","CURVE DESCRIPTION 2":""};
 	var param_info_obj = {"MNEM":"","UNIT":"","DATA":"","DESCRIPTION OF MNEMONIC 1":"","DESCRIPTION OF MNEMONIC 2":""};
-	//// The file is read as a txt file. It will first be split into seperate strings based on "~"
+	//// The las file is read as a txt file. It will first be split into seperate strings based on "~" character which occurs at the top of each "block"
 	var split1 = onelas.split("~");
 	var vers_str = split1[1];
 	var well_info_str = split1[2];
 	var curve_info_str = split1[3];
 	var param_info_str = split1[4];
 	var curve_str = split1[5];
-	//// Working with version block first by splitting it by newline and taking items of array 1 and 2 for vers and wrap
+	//// Working with version block first by splitting it by newline and places each item into an array
+	//// and taking items of array 1 and 2 for vers and wrap
 	var vers_line = vers_str.split("\n")[1];
 	var wrap_line = vers_str.split("\n")[2];
+	//// As version information, well information, and parameter information blocks contain objects with the same keys, we can process them using a loop.
 	//// function to process objects for ver_info_obj, well_inf_obj, and param_info_obj
+	//// The splitLineofType1() function takes as argument the prototypical object building block and the array of strings for that block
 	function splitLineofType1(ver_info_obj,arrayString){
+		//// splits string (should be a single line from the LAS text) by ":", takes the first item of the resulting array, and then replaces any " " with "".
 		var vers_line_1half = arrayString.split(":")[0].replace(" ","");
+		//// splits the previous string variable by "." into an array of strings.
 		var vers_line_1half_array = vers_line_1half.split(".")
 		ver_info_obj["MNEM"] = vers_line_1half_array[0]
 		var unit_and_data = vers_line_1half_array.slice(1,vers_line_1half_array.length);
@@ -82,6 +88,7 @@ function las2json(onelas){
 	lasjson["VERSION INFORMATION"]["WRAP"] = splitLineofType1(Object.assign({}, ver_info_obj),wrap_line);
 	lasjson["VERSION INFORMATION"]["VERS"] = splitLineofType1(Object.assign({}, ver_info_obj),vers_line);
 	//// Working with PARAMETER INFORMATION block second by splitting it by newline into an array and taking items after 0,1,2 or [3:]
+	//// This basically just skips some lines with titles and such
 	var param_line_array = param_info_str.split("\n").slice(3,);
 	for(i = 0; i < param_line_array.length; i++){
 		//// create one object for parameter line
@@ -157,15 +164,32 @@ function las2json(onelas){
 //// Function that takes a single json representing a single well and writes a paper LAS 2.0 file.
 function json2las(oneJSON){
 	//// nothing written yet
+	//// needs to be in accordance with -> official definitions : http://www.cwls.org/wp-content/uploads/2017/02/Las2_Update_Feb2017.pdf
 	return LAS
 }
 
 //// Function that takes LAS 2.0 text variable, a directory string, and a filename string and writes the LAS to an actual file in the given directory.
 function writeLAS(LAS_TEXT,DIR,FILENAME){
-	//// nothing written yet
+	//// nothing written yet, but will download a las formated text string with ".las" ending
 }
 
 //// Function that takes JSON variable, a directory string, and a filename string and writes the JSON to an actual JSON file in the given directory.
 function writeJSON(JSON_STR,DIR,FILENAME){
 	//// nothing written yet
+	//// for now use the function "download"
+	//// eventually user https://github.com/jimmywarting/StreamSaver.js & https://github.com/eligrey/FileSaver.js
+	//// for larger or multiple files with coverage on both new and old browsers
 }
+
+//// Function that takes a filename string and a string (you might have to stringify a json object) 
+//// and writes into an actual JSON file to be downloaded into your browsers specified download folder.
+function download(filename, text) {
+  var element = document.createElement('a');
+  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+  element.setAttribute('download', filename);
+  element.style.display = 'none';
+  document.body.appendChild(element);
+  element.click();
+  document.body.removeChild(element);
+}
+

@@ -1,6 +1,13 @@
+///////////////////////  global objects placeholders   ////////////////////////  
+//// ... maybe not good programming practice but quick to do for simple demo.
 
-var all_files = [];
+//// var all_files is a holder for the las files uploaded into the browser
+var all_files = [""];
+//// var temp_json is the single well las file converted to json object format
 var temp_json = {};
+
+////////////////////////  HELPER FUNCTIONS  //////////////////////// 
+
 
 // Check for the various File API support.
 if (window.File && window.FileReader && window.FileList && window.Blob) {
@@ -9,7 +16,7 @@ if (window.File && window.FileReader && window.FileList && window.Blob) {
   alert('The File APIs are not fully supported in this browser.');
 }
 
-
+//// helper function that removes the text depiction of the las file. 
 function removeTextLAS(){
   fileContentsDiv = document.getElementById("fileContents");
   while (fileContentsDiv.hasChildNodes()) {
@@ -17,6 +24,7 @@ function removeTextLAS(){
   }
 }
 
+//// helper function that removes the children of the given DOM element. 
 function remove_DOM_children(div_name){
   if(!div_name){
     div_name = 'log_plot_div'
@@ -27,55 +35,48 @@ function remove_DOM_children(div_name){
   }
 }
 
-function displayFileFunction(){
-  var files = document.getElementById("files").files
-  if (files) {
-    for (var i = 0, file; file = files[i]; i++) {
-      var reader = new FileReader();
-      reader.readAsText(file, "UTF-8");
-      reader.onload = function (evt) {
-          fileContentsDiv = document.getElementById("fileContents")
-          var para = document.createElement("P")
-          var t = document.createTextNode(evt.target.result);      // Create a text node
-          para.appendChild(t); 
-          fileContentsDiv.appendChild(para); 
-      }
-      reader.onerror = function (evt) {
-          document.getElementById("fileContents").innerHTML = "error reading file";
-      }
-    }  
-  }
+//// helper function that removes the inner html of the given DOM element, like the "test" from <p>test</p>
+function removeInnerHTML(div_id){
+  document.getElementById(div_id).innerHTML = ""
 }
 
-function writeDataToVar(files){
-  if (files) {
-    for (var i = 0, file; file = files[i]; i++) {
-      var reader = new FileReader();
-      reader.readAsText(file, "UTF-8");
-      reader.onload = function (evt) {
-          console.log("why wont 'this run")
-          console.log("all_files = ",evt.target.result)
-          fileContentsDiv = document.getElementById("fileContents")
-          var para = document.createElement("P")
-          var t = document.createTextNode(evt.target.result);      // Create a text node
-          para.appendChild(t); 
-          fileContentsDiv.appendChild(para); 
-          console.log("t ",t)
-      }
-      reader.onerror = function (evt) {
-          document.getElementById("fileContents").innerHTML = "error reading file";
-      }
-    }
-  }
-
+//// helper function that take a string and a substring of that string and replaces the substring with "" or nothing if it finds the substring.
+function removeSubStr(string,substring){
+  return string.replace(substring,"")
 }
 
+////////////////////////  LOADING FUNCTIONS  //////////////////////// 
 
+
+
+//// Reads in an example LAS files from webpage assets instead of local computer
+function readInLASFromASSETS(){
+  //all_files = ["./assets/00-01-01-073-05W5-0.LAS"];
+  //// removes all status spans for uploads
+  removeInnerHTML("upload-file-info");
+  removeInnerHTML("upload-success");
+  $.ajax({
+            url : "./assets/00-01-01-073-05W5-0.LAS",
+            dataType: "text",
+            success : function (data) {
+              all_files = [data,""]
+              document.getElementById("upload-success").innerHTML = "upload success";
+              console.log("successfully loaded ./assets/00-01-01-073-05W5-0.LAS")
+            },
+            error : function (XMLHttpRequest, textStatus, errorThrown) {
+              document.getElementById("upload-success").innerHTML = "upload failure";
+              console.log("error in function readInLASFromASSETS() : ",textStatus, errorThrown)
+            } 
+        });
+}
+
+//// function for "Load into browser memeory" button
 function readInFilesFunction(){
-  console.log("got into readInFilesFunction");
+  //// removes all status spans for uploads
+  removeInnerHTML("upload-file-info");
+  removeInnerHTML("upload-success");
   var files = document.getElementById("files").files;
-  console.log("files = ",files);
-  if (files) {
+  if (files && files.length !== 0) {
     all_files = []
     for (var i = 0, file; file = files[i]; i++) {
       var reader = new FileReader();
@@ -87,114 +88,83 @@ function readInFilesFunction(){
           document.getElementById("fileContents").innerHTML = "error reading file";
       }
     }
+  uploadStatusSpan = document.getElementById("upload-file-info").innerHTML = "upload success";
   }
-  console.log("all_files = ",all_files)
+  else{
+    uploadStatusSpan = document.getElementById("upload-file-info").innerHTML = "  "+"upload failure";
+  }
+  //console.log("all_files = ",all_files)
 }
 
-function removeSubStr(string,substring){
-  return string.replace(substring,"")
-}
 
 
-function splitLastString(){
+
+//// Function that calls several other functions involved with converting a new well from las to json 
+//// updating the global variables as needed, and changing some new DOM elements to reflect the new well data.
+//// It calls the las2json(onelas) function found in wellio.js JavaScript file.
+function convert_and_startHelpers(){
+  //// removes the buttons for the well curves from the previous well if they exist
   remove_DOM_children("curveButtons_holder")
-  var las = all_files[0];
-  var split1 = las.split("~");
-  console.log("split1 [0] = ",split1[0]);
-  console.log("split1 [1] = ",split1[1]);
-  console.log("split1 [2] = ",split1[2]);
-  console.log("split1 [3] = ",split1[3]);
-  console.log("split1 [4] = ",split1[4]);
-  console.log("split1 [5] = ",split1[5]);
-  var split2_arr = split1[2].split("#");
-  console.log("split2_arr[0] = ",split2_arr[0]);
-  console.log("split2_arr[1] = ",split2_arr[1]);
-  console.log("split2_arr[2] = ",split2_arr[2]);
-  console.log("split2_arr[3] = ",split2_arr[3]);
-  console.log("split2_arr[3].length() = ",split2_arr[3].length);
-  var split2_arr3_newlines = split2_arr[3].split("\n");
-  console.log("split2_arr3_newlines = ",split2_arr3_newlines);
-  var split2_arr3_newlines_try = split2_arr3_newlines[2].split(".");
-  console.log("split2_arr3_newlines_try  = ",split2_arr3_newlines_try );
-  console.log(" =============  version info attempts ==========");
-  var version_info = split1[1];
-  var version_info_array = version_info.split("\n");
-  console.log("version info :version_info_array :",version_info_array);
-  var vers_line = version_info_array[1];
-  var vers_line_1half = vers_line.split(":")[0].replace(" ","");
-  var vers_line_1half_ver = vers_line_1half.split(".")[0];
-  var version_OBJ = {"MNEM":"","UNIT":"","DATA":"","DESCRIPTION OF MNEMONIC 1":"","DESCRIPTION OF MNEMONIC 2":""};
-  // version_OBJ["MNEM"] = "VER";
-  version_OBJ["MNEM"] = vers_line_1half.split(".")[0];
-  var hasdfa  = vers_line_1half.split(".");
-  console.log("hasdfa = ",hasdfa);
-  console.log("hasdfa length = ",hasdfa.length);
-  console.log("hasdfa 0 onwoards = ",hasdfa.slice(1,hasdfa.length));
-  // var hasdfa_2 = hasdfa[0:4].replace(" ","");
-  // version_OBJ["UNIT"] = hasdfa_2;
-  // version_OBJ["DATA"] = vers_line_1half.split(".")[1][4:].replace(" ","");
-  version_OBJ["DESCRIPTION OF MNEMONIC 1"] = version_info_array[1].split(":")[1].split("-")[0].replace("  ","");
-  version_OBJ["DESCRIPTION OF MNEMONIC 2"] = version_info_array[1].split(":")[1].split("-")[1].replace("\r","");
-  console.log("version_OBJ :",version_OBJ);
-  
-  var wrap_line = version_info_array[2];
-
+  //// calls the function that takes a single LAS text file representing a single well and returns an object variable in JSON format for that well.
   var single_well_json = las2json(all_files[0]);
-  console.log('single_well_json = ',single_well_json)
-  console.log('single_well_json["CURVES"]["GR"] = ',single_well_json["CURVES"]["GR"])
-
+  // console.log('single_well_json = ',single_well_json)
+  //// replaces the global variable temp_json with the new well json var single_well_json
   temp_json = single_well_json
-
+  //// function that looks at temp_json object, finds what curves are present in that well, and makes buttons to draw them using g3.js
   addCurveOptionButtons()
-
-  
+  //// adds inner html to p for the UWI name of the well in questino that was just loaded and converted
   document.getElementById("which_well").innerHTML = "UWI = "+temp_json["WELL INFORMATION BLOCK"]["UWI"]["DATA"];
-  /// +temp_json["WELL INFORMATION BLOCK"]["UWI"]["DATA"]
-  // document.getElementById("demo").innerHTML = "Paragraph changed!";
-
 }
 
-function print_well(){
-  // var text_of_json = vkbeautify.json(temp_json);
-  // var json_string = ""
-  // var array_of_blocks_in_las = ["WELL INFORMATION BLOCK","VERSION INFORMATION","CURVE INFORMATION BLOCK","PARAMETER INFORMATION"];
-  // for (each_block in array_of_blocks_in_las){
-  //   json_string = json_string.concat(array_of_blocks_in_las[each_block]+": [")
-  //   var counter = 0
-  //   for(each_item in temp_json[array_of_blocks_in_las[each_block]]){
-  //     counter += 1
-  //     json_string = json_string.concat(JSON.stringify(temp_json[array_of_blocks_in_las[each_block]][each_item]));
-  //     // json_string = json_string.concat(", ")
-  //     console.log("temp_json[array_of_blocks_in_las[each_block]] == ",temp_json[array_of_blocks_in_las[each_block]])
-  //     console.log("Object.keys(temp_json[array_of_blocks_in_las[each_block]]).length",Object.keys(temp_json[array_of_blocks_in_las[each_block]]).length)
-  //     console.log("each_item",each_item)
-  //     if (counter < Object.keys(temp_json[array_of_blocks_in_las[each_block]]).length){
-  //       json_string = json_string.concat(", ")
-  //     }
-      
-  //   }
-  //   json_string = json_string.concat(" ], ")
-  // }
-  // json_string = json_string.concat(JSON.stringify(temp_json["CURVES"]))
-  // var text_of_json_well_info = vkbeautify.json(json_string,4);
-  // document.getElementById("json_print").innerHTML = text_of_json_well_info;
-  // document.getElementById("json_print").innerHTML = json_string;
-  // document.getElementById("json_print").innerHTML = JSON.stringify(temp_json);
-  document.getElementById("well_json_prettyprint").innerHTML = vkbeautify.json(JSON.stringify(temp_json),1);
-  // console.log('json_string = ',json_string)
-  // console.log('temp_json = ',temp_json)
-  console.log('JSON.stringify(temp_json) = ',vkbeautify.json(JSON.stringify(temp_json),4))
-  //document.getElementById("json_print").innerHTML = vkbeautify.json(JSON.stringify(temp_json),4);
-}
 
-function draw_gr(curve){
-    if(!curve){
-      var curve = "GR"
+////////////////////////  DISPLAY FUNCTIONS  //////////////////////// 
+
+
+//// This takes the well files uploaded as las files, treats all of them as text files and prints ALL OF THEM to the DOM.
+//// this is different than the json conversion, which at this points only converts and keeps the first well!
+function displayFileFunction(){
+  var upload_success_span_txt = document.getElementById("upload-success").innerHTML
+  //// goes into this part of loop if wepbage las is used
+  if(upload_success_span_txt === "upload success"){
+      fileContentsDiv = document.getElementById("fileContents")
+      var para = document.createElement("P")
+      var t = document.createTextNode(all_files[0]);
+      para.appendChild(t); 
+      fileContentsDiv.appendChild(para); 
+  }
+  //// goes here if las from user's local computer is used
+  else{
+    var files = document.getElementById("files").files
+    if (files) {
+      for (var i = 0, file; file = files[i]; i++) {
+        var reader = new FileReader();
+        reader.readAsText(file, "UTF-8");
+        reader.onload = function (evt) {
+            fileContentsDiv = document.getElementById("fileContents")
+            var para = document.createElement("P")
+            var t = document.createTextNode(evt.target.result);      // Create a text node
+            para.appendChild(t); 
+            fileContentsDiv.appendChild(para); 
+        }
+        reader.onerror = function (evt) {
+            document.getElementById("fileContents").innerHTML = "error reading file";
+        }
+      }  
     }
-    makePlot(temp_json["CURVES"][curve],".log_plot_div",1600,200,[0,300],[0,temp_json["CURVES"][curve].length])
+  }
 }
 
 
+
+//// function that leverages vkbeuatify library to pretty print the stringified wellio json then puts it into a DOM element so it can be seen by the user
+function print_well(){
+  document.getElementById("well_json_prettyprint").innerHTML = vkbeautify.json(JSON.stringify(temp_json),1);
+  console.log('JSON.stringify(temp_json) = ',vkbeautify.json(JSON.stringify(temp_json),4))
+}
+
+//// function called by convert_and_startHelpers() that looks at the global temp_json object 
+//// and finds the curve names and adds them as buttons that when clicked draws those curves using g3.js.
+//// It calls addSingleCurveButton(div_id,curve_name) for each curve.
 function addCurveOptionButtons(){
   /// curveButtons_holder
   var div_id = "curveButtons_holder"
@@ -205,6 +175,7 @@ function addCurveOptionButtons(){
   }
 }
 
+//// function called by addCurveOptionButtons() adds Curves buttons that when clicked draws a curve plot using g3.js.
 function addSingleCurveButton(div_id,curve_name){
           var node = document.createElement("button");
           node.setAttribute('onclick','draw_curve("'+String(curve_name)+'")')                 // Create a <li> node
@@ -214,22 +185,11 @@ function addSingleCurveButton(div_id,curve_name){
 }
 
 
-function download(filename, text) {
-  var element = document.createElement('a');
-  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
-  element.setAttribute('download', filename);
-
-  element.style.display = 'none';
-  document.body.appendChild(element);
-
-  element.click();
-
-  document.body.removeChild(element);
-}
-
-
+//// function that creates a hidden link that is clicked programatically that uses HTML5 to download the file at that link
+//// the two arguments are the UWI string of the global temp_json object, and a stringified version of the entire wellio json object.
+//// It calls the download() function found in wellio.js JavaScript file.
 function download_test(){
-  console.log("download_test() ","in")
-  download('test_well.json', JSON.stringify(temp_json));
+  //console.log("download_test() ","in")
+  download(temp_json["WELL INFORMATION BLOCK"]["UWI"]["DATA"]+".json", JSON.stringify(temp_json));
 }
 
