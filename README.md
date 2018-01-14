@@ -39,15 +39,15 @@ Electronic data (including well logs, tops, etc.) for Athabasca Oil Sands Data M
 Report for Athabasca Oil Sands Data McMurray/Wabiskaw Oil Sands Deposit <a href="http://ags.aer.ca/document/OFR/OFR_1994_14.PDF">http://ags.aer.ca/document/OFR/OFR_1994_14.PDF</a>
 
 ### Why Bother? Geologists Use Python...
-While trying to build a machine-learning approach to mimic specific geologist's stratigraphic surface picking, I concluded I was limited by the number and quality of my input features. 
+While trying to build a machine-learning program to mimic specific geologist's stratigraphic surface picking, I concluded I was limited by the number and quality of my input features. Specifically, I needed more features and the methods I were using to come up with effective ones were too slow. 
 
-Specifically, I needed more features and the methods I were using to come up with effective ones were too slow. I found trying to do well log feature creation in Jupyter notebooks using only Python to be too linear and time intensive involving re-writing or re-running too much code in between seeing the results. JavaScript has more interactive and reactive data visualization libraries, so that is driving tool choice and the need to load las files into json for work with JavaScript. For clarity, I'm using the term reactive in the <a href="https://vimeo.com/36579366">Bret Victor</a> sense, not the <a href="https://reactjs.org/">react.js</a> sense. 
+I found trying to do well log feature creation in Jupyter notebooks using Python to be too linear and time intensive involving re-writing or re-running too much code in between seeing the results. JavaScript has more interactive and reactive data visualization libraries, so that is driving tool choice. For clarity, I'm using the term reactive in the <a href="https://vimeo.com/36579366">Bret Victor</a> sense, not the <a href="https://reactjs.org/">react.js</a> sense. 
 
 Additionally, using JavaScript opens up the possibility of simple widgets that could be run in the browser without needing to install a program on users' computers and the possibility of open-source well log software without needing to know a computer language to do things. 
 
-I'm imagining a reactive style well-log feature creation widget, something like <a href="http://ncase.me/joy/">joy.js</a>,  that would include cross-filtering across multiple figures like in <a href="https://dc-js.github.io/dc.js/">dc.js</a>, while also leveraging numpy-style array math, like in <a href="https://deeplearnjs.org/">deeplearn.js</a>. The resulting engineered features  could be leveraged in machine-learning, either via entirely-JavaScript-based ML or python-based ML done in a notebook calling JavaScript only for data visualization. 
+I'm imagining a reactive style well-log feature creation widget, something like <a href="http://ncase.me/joy/">joy.js</a>,  that would include cross-filtering across multiple figures like in <a href="https://dc-js.github.io/dc.js/">dc.js</a>, while also leveraging numpy-style array math, like in <a href="https://deeplearnjs.org/">deeplearn.js</a>. 
 
-*Long story short, I want to build a fast reactive well-log feature engineering widget, hence I needed a way to load las files and work with them in JavaScript.*
+*Long story short, I needed a way to load las files and work with them as json in JavaScript in order to build another thing.*
 
 ## Example
 
