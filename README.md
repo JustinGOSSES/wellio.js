@@ -52,7 +52,7 @@ I'm imagining a reactive style well-log feature creation widget, something like 
 ## Example
 
 ### Original las file example
-or go <a href="https://justingosses.github.io/wellio.js/">or go here</a> for live example.
+or go <a href="https://justingosses.github.io/wellio.js/">here</a> for live example.
 ```
 ~VERSION INFORMATION
  VERS.                 2.0:   CWLS LOG ASCII STANDARD -VERSION 2.0
