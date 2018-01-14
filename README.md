@@ -6,6 +6,23 @@
 ## Purpose
  There currently isn't any .las -> JSON parser that I was able to find. There is <a href="https://lasio.readthedocs.io/en/latest/">lasio</a> and <a href="https://github.com/agile-geoscience/welly">welly</a> for python, but nothing to ingest las files in JavaScript. Wellio.js is an attempt to fill that gap, so I can build other stuff. This script will have two functions. The first function converts a .las file into a json format file. They second function (not yet written) will do the inverse. Once you have well data as JSON, many other JavaScript-based things as possible. I'll try to keep those other things separate, except as demos for Wellio.
 
+## Does this upload my well logs to your server? 
+Nope, it only loads to your browser's memory and then your browser forgets it when you close the tab.
+
+## Can I see the demo right now?
+Yes, go to <a href="https://raw.githubusercontent.com/JustinGOSSES/wellio.js/master/assets/00-01-01-073-05W5-0.LAS">this</a> file. The link will take you to a raw version of a LAS file for well UWI 00-01-01-073-05W5-0. You should see the text of a LAS file in your browser window. Save as a LAS file to your local computer. Now, open the demo page running on github <a href="https://justingosses.github.io/wellio.js/">here</a>. Click the button to load the open a file loader and load the LAS file you just saved to your computer.
+
+## What are the files other than wellio.js
+Things for the demo. Specifically, opening up index.html in a browser should let you experiment. <a href="https://github.com/agile-geoscience/g3">G3.js</a> is used to draw a plot of a GR log. You can see what the LAS converted to JSON looks like using your browser's console window. 
+
+## Where To Get Open-Source Well Logs in .LAS format?
+You can use the file upload button to load into your browsers memory any LAS files from your local computer. I've also included a few well logs in the /assets/ folder of this repo from the electronic data file below. 
+
+Electronic data (including well logs, tops, etc.) for Athabasca Oil Sands Data McMurray/Wabiskaw Oil Sands Deposit <a href="http://ags.aer.ca/publications/SPE_006.html">http://ags.aer.ca/publications/SPE_006.html Data is also in the repo folder: SPE_006_originalData</a>
+
+Report for Athabasca Oil Sands Data McMurray/Wabiskaw Oil Sands Deposit <a href="http://ags.aer.ca/document/OFR/OFR_1994_14.PDF">http://ags.aer.ca/document/OFR/OFR_1994_14.PDF</a>
+
+
 ### Why Bother, Geologists Use Python
 While trying to build a machine-learning approach to mimic specific geologist's stratigraphic surface picking, I concluded I was limited by the number and quality of my input features. 
 
@@ -120,21 +137,8 @@ SUFT.C        0                    : SUFT         - SURFACE TEMPERATURE
   393.000    0.299    0.429   72.249  256.370    3.338
 ```
 
-## What are the files other than wellio.js
-Things for the demo. Specifically, opening up index.html in a browser should let you experiment. <a href="https://github.com/agile-geoscience/g3">G3.js</a> is used to draw a plot of a GR log. You can see what the LAS converted to JSON looks like using your browser's console window. 
 
-## Can I see the demo without any LAS files on my local computer and without cloning this repo?
-Yes, go to <a href="https://raw.githubusercontent.com/JustinGOSSES/wellio.js/master/assets/00-01-01-073-05W5-0.LAS">this</a> file. The link will take you to a raw version of a LAS file for well UWI 00-01-01-073-05W5-0. You should see the text of a LAS file in your browser window. Save as a LAS file to your local computer. Now, open the demo page running on github <a href="https://justingosses.github.io/wellio.js/">here</a>. Click the button to load the open a file loader and load the LAS file you just saved to your computer.
 
-## Where To Get Open-Source Well Logs in .LAS format?
-You can use the file upload button to load into your browsers memory any LAS files from your local computer. I've also included a few well logs in the /assets/ folder of this repo from the electronic data file below. 
-
-Electronic data (including well logs, tops, etc.) for Athabasca Oil Sands Data McMurray/Wabiskaw Oil Sands Deposit <a href="http://ags.aer.ca/publications/SPE_006.html">http://ags.aer.ca/publications/SPE_006.html Data is also in the repo folder: SPE_006_originalData</a>
-
-Report for Athabasca Oil Sands Data McMurray/Wabiskaw Oil Sands Deposit <a href="http://ags.aer.ca/document/OFR/OFR_1994_14.PDF">http://ags.aer.ca/document/OFR/OFR_1994_14.PDF</a>
-
-## Does this upload my well logs to your server? 
-Nope, it only loads to your browser's memory and then your browser forgets it when you close the tab.
 
 
 
