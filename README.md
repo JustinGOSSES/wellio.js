@@ -2,6 +2,7 @@
 #### JavaScript for converting well-log standard .las file format to json format and then back again.
 
 [THIS IS VERY NEW AND IN PROGRESS]
+[ONLY TRYING TO GET TO WORK WITH LAS 2.0 RIGHT NOW]
 
 ## Purpose
  There currently isn't any .las -> JSON parser that I was able to find. There is <a href="https://lasio.readthedocs.io/en/latest/">lasio</a> and <a href="https://github.com/agile-geoscience/welly">welly</a> for python, but nothing to ingest las files in JavaScript. Wellio.js is an attempt to fill that gap, so I can build other stuff. Once you have well data as JSON, many other JavaScript-based things as possible. I'll try to keep those other things separate, except as demos for Wellio.
