@@ -10,17 +10,26 @@
 Nope, it only loads to your browser's memory and then your browser forgets it when you close the tab.
 
 ## Can I see the demo right now?
-Yes, open the demo page running on github <a href="https://justingosses.github.io/wellio.js/">here</a>. Click the button to  open a file loader. You can either use a LAS files already part of the webpage or you can load a local LAS file from your computer. 
+Yes, open the demo page running on github <a href="https://justingosses.github.io/wellio.js/">here</a>. Click one of the big blue buttons up top to  open a file loader. You can either use a LAS files already part of the webpage or you can load a local LAS file from your computer. 
 
 If you don't have any local LAS files, you can quickly get one by going to <a href="https://raw.githubusercontent.com/JustinGOSSES/wellio.js/master/assets/00-01-01-073-05W5-0.LAS">this</a> link and saving the results to a ".las" file using your browser. That is a raw las file for well UWI 00-01-01-073-05W5-0.
 
 ## Code Organization Summary
+This repo contains code for the demo page</a>, which leverages the wellio.js JavaScript file in the js folder. 
 
+#### Wellio.js script will have a few basics functions (not all are written yet)
+1. las2json(onelas) : <i>Function that takes a single LAS text file representing a single well and returns an object variable in JSON format for that well.</i>
+2. json2las(oneJSON): <i>Function that takes a single json representing a single well and writes a LAS 2.0 file.</i>
+3. download(filename, text): <i>Function that takes a filename and text string and writes a file (either json or las) to your designated downloads folder.</i>
+4. additional?
 
-This script will have two functions. The first function converts a .las file into a json format file. They second function (not yet written) will do the inverse. 
+#### Demo
+Additional to the wellio.js file, there are a variety of files running the demo page at index.html or <a href="https://justingosses.github.io/wellio.js/">here</a>. The main javascript file aside from wellio.js is main.js
 
-## What are the files other than wellio.js
-Things for the demo. Specifically, opening up index.html in a browser should let you experiment. <a href="https://github.com/agile-geoscience/g3">G3.js</a> is used to draw a plot of a GR log. You can see what the LAS converted to JSON looks like using your browser's console window. 
+<a href="https://github.com/agile-geoscience/g3">G3.js</a> is used to draw a plot of the well log curves. It leverages <a href="https://github.com/d3">d3.js</a>.
+
+<a href="https://github.com/vkiryukhin/vkBeautify">VKbeautify.js</a> is a script for adding spaces and such to JSON to make them prettier when printed.
+<a href="https://github.com/google/code-prettify"><run_prettify.js</a> does something similar but is focused on making it print nicely into HTML DOM elements. 
 
 ## Where To Get Open-Source Well Logs in .LAS format?
 You can use the file upload button to load into your browsers memory any LAS files from your local computer. I've also included a few well logs in the /assets/ folder of this repo from the electronic data file below. 
@@ -29,8 +38,7 @@ Electronic data (including well logs, tops, etc.) for Athabasca Oil Sands Data M
 
 Report for Athabasca Oil Sands Data McMurray/Wabiskaw Oil Sands Deposit <a href="http://ags.aer.ca/document/OFR/OFR_1994_14.PDF">http://ags.aer.ca/document/OFR/OFR_1994_14.PDF</a>
 
-
-### Why Bother, Geologists Use Python
+### Why Bother? Geologists Use Python...
 While trying to build a machine-learning approach to mimic specific geologist's stratigraphic surface picking, I concluded I was limited by the number and quality of my input features. 
 
 Specifically, I needed more features and the methods I were using to come up with effective ones were too slow. I found trying to do well log feature creation in Jupyter notebooks using only Python to be too linear and time intensive involving re-writing or re-running too much code in between seeing the results. JavaScript has more interactive and reactive data visualization libraries, so that is driving tool choice and the need to load las files into json for work with JavaScript. For clarity, I'm using the term reactive in the <a href="https://vimeo.com/36579366">Bret Victor</a> sense, not the <a href="https://reactjs.org/">react.js</a> sense. 
