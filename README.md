@@ -32,6 +32,23 @@ Additional to the wellio.js file, there are a variety of files running the demo 
 <a href="https://github.com/vkiryukhin/vkBeautify">VKbeautify.js</a> is a script for adding spaces and such to JSON to make them prettier when printed.
 <a href="https://github.com/google/code-prettify">run_prettify.js</a> does something similar but is focused on making it print nicely into HTML DOM elements. 
 
+## Road Map
+Right now, wellio.js just does LAS -> Wellio JSON. There are variety of features that could be added to increase the functionality of wellio and in particular enable cross-communication with other LAS-focused projects. 
+
+Potential cross-communication conversions include:
+1. wellio <-> <a href="https://github.com/agile-geoscience/welly">welly</a> objects
+2. wellio <-> las files (have the las to wellio direction but need the back again conversion)
+3. wellio json objects -> wellio_plus json objects  with wellio_plus being defined as having data and functions that go behind the data in a LAS file. 
+
+Examples of wellio_plus data & functions that could be part of the prototype would be:
+- common function calls like max, min, average of each curve, etc.
+- pick depths
+- geographic location
+- age of data acquisition 
+- non-original curves that are created and used as engineered features for machine-learning.
+- other well-centric data points or datasets that might be useful for machine-learning. 
+
+
 ## Where To Get Open-Source Well Logs in .LAS format?
 You can use the file upload button to load into your browsers memory any LAS files from your local computer. I've also included a few well logs in the /assets/ folder of this repo from the electronic data file below. 
 
