@@ -36,8 +36,9 @@ Additional to the wellio.js file, there are a variety of files running the demo 
 Right now, wellio.js just does LAS -> Wellio JSON. There are variety of features that could be added to increase the functionality of wellio and in particular enable cross-communication with other LAS-focused projects. 
 
 Potential cross-communication conversions include:
-1. wellio <-> <a href="https://github.com/agile-geoscience/welly">welly</a> objects
-2. wellio <-> las files (have the las to wellio direction but need the back again conversion)
+1. wellio <-> las files (have the las to wellio direction but need the back again conversion)
+2. wellio <-> <a href="https://github.com/agile-geoscience/welly">welly</a> objects (python)
+2. wellio <-> <a href="https://lasio.readthedocs.io/en/latest/">lasio</a> (python)
 3. wellio json objects -> wellio_plus json objects  with wellio_plus being defined as having data and functions that go behind the data in a LAS file. 
 
 Examples of wellio_plus data & functions that could be part of the prototype would be:
