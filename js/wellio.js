@@ -43,12 +43,28 @@ function las2json(onelas){
 	var curve_info_obj = {"MNEM":"","UNIT":"","ERCB CURVE CODE":"","CURVE DESCRIPTION 1":"","CURVE DESCRIPTION 2":""};
 	var param_info_obj = {"MNEM":"","UNIT":"","DATA":"","DESCRIPTION OF MNEMONIC 1":"","DESCRIPTION OF MNEMONIC 2":""};
 	//// The las file is read as a txt file. It will first be split into seperate strings based on "~" character which occurs at the top of each "block"
+	console.log("onelas = ",onelas)
 	var split1 = onelas.split("~");
-	var vers_str = split1[1];
-	var well_info_str = split1[2];
-	var curve_info_str = split1[3];
-	var param_info_str = split1[4];
-	var curve_str = split1[5];
+	console.log("split1 = ",split1)
+	var vers_str = "";
+	var well_info_str = "";
+	var curve_info_str = "";
+	var param_info_str = "";
+	var other = "";
+	var curve_str = "";
+
+	//// As the 'OTHER' block may or may not be present, we have to split by '~' and then look for a substring to make sure we have the right block before we put each into a variable.
+	for(i = 0; i < split1.length; i++){
+		if(split1[i].includes("VERSION")){var vers_str = split1[i]}
+		else if (split1[i].includes("WELL INFORMATION")){well_info_str = split1[i]}
+		else if (split1[i].includes("CURVE INFORMATION")){curve_info_str = split1[i]}
+		else if (split1[i].includes("PARAMETER")){param_info_str = split1[i]}
+		else if (split1[i].includes("OTHER")){other = split1[i]}
+		else if (split1[i].includes("A  DEPTH")){curve_str = split1[i]}
+		else{console.log("there is a problem, in wellio.js the las2json() function has to many item in the string array created by splitting on '~'. ")}
+	}
+
+
 	//// Working with version block first by splitting it by newline and places each item into an array
 	//// and taking items of array 1 and 2 for vers and wrap
 	var vers_line = vers_str.split("\n")[1];
@@ -61,7 +77,8 @@ function las2json(onelas){
 		var vers_line_1half = arrayString.split(":")[0].replace(" ","");
 		//// splits the previous string variable by "." into an array of strings.
 		var vers_line_1half_array = vers_line_1half.split(".")
-		ver_info_obj["MNEM"] = vers_line_1half_array[0]
+		//// trimming this so I get "UWI" instead of "UWI    "
+		ver_info_obj["MNEM"] = vers_line_1half_array[0].trim()
 		var unit_and_data = vers_line_1half_array.slice(1,vers_line_1half_array.length);
 		var unit_and_data_str = "                        ";
 		if (unit_and_data.length > 1){
@@ -144,11 +161,15 @@ function las2json(onelas){
 	}
 	else{console.log("Couldn't find curve names above curves in LAS, check formatting!")}
 	//// start at position 1 instead of 0 is to avoid the curve names
-	for(j = 1; j < curve_str_array.length-1; j++){
+	for(j = 1; j < curve_str_array.length; j++){
 		var curve_data_line_array = curve_str_array[j].split(" ");
 		var counter_of_curve_names = 0;
+		console.log("curve_data_line_array.length = ",curve_data_line_array.length)
+		console.log("curve_data_line_array = ",curve_data_line_array)
 		var last_curv_data_line_position = curve_data_line_array.length - 1;
+		console.log("curve_data_line_array[last_curv_data_line_position] = ",curve_data_line_array[last_curv_data_line_position])
 		curve_data_line_array[last_curv_data_line_position] = curve_data_line_array[last_curv_data_line_position].replace("\r","")
+		console.log("curve_data_line_array[last_curv_data_line_position] = ",curve_data_line_array[last_curv_data_line_position])
 		for(k = 0; k < curve_data_line_array.length; k++){
 			if(curve_data_line_array[k] !== ""){				
 				lasjson["CURVES"][curve_names_array_holder[counter_of_curve_names]].push(curve_data_line_array[k])

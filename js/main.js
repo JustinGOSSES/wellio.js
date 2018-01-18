@@ -113,6 +113,7 @@ function convert_and_startHelpers(){
   //// function that looks at temp_json object, finds what curves are present in that well, and makes buttons to draw them using g3.js
   addCurveOptionButtons()
   //// adds inner html to p for the UWI name of the well in questino that was just loaded and converted
+  console.log("temp_json['WELL INFORMATION BLOCK'] =", JSON.stringify(temp_json["WELL INFORMATION BLOCK"]))
   document.getElementById("which_well").innerHTML = "UWI = "+temp_json["WELL INFORMATION BLOCK"]["UWI"]["DATA"];
 }
 
