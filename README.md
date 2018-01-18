@@ -18,7 +18,7 @@ If you want to test the 'load local file' feature and don't have any local LAS f
 ## Code Organization Summary
 This repo contains code for the demo page</a>, which leverages the wellio.js JavaScript file in the js folder. 
 
-#### Wellio.js script will have a few basics functions (not all are written yet)
+#### <b>Wellio.js</b> <a href="https://github.com/JustinGOSSES/wellio.js/blob/master/js/wellio.js">script</a> will have a few basics functions (not all are written yet)
 1. las2json(onelas) : <i>Function that takes a single LAS text file representing a single well and returns an object variable in JSON format for that well.</i>
 2. json2las(oneJSON): <i>Function that takes a single json representing a single well and writes a LAS 2.0 file.</i>
 3. download(filename, text): <i>Function that takes a filename and text string and writes a file (either json or las) to your designated downloads folder.</i>
@@ -148,17 +148,17 @@ var lasjson = {
 				"WRAP":{"MNEM":"","UNIT":"","DATA":"","DESCRIPTION OF MNEMONIC 1":"","DESCRIPTION OF MNEMONIC 2":""}
 			}
 			,
-			"WELL INFORMATION BLOCK":[{
+			"WELL INFORMATION BLOCK":{
 					"GENERATED":"",
 					"MNEM_0":{"MNEM":"","UNIT":"","DATA":"","DESCRIPTION OF MNEMONIC 1":"","DESCRIPTION OF MNEMONIC 2":""},
 					"MNEM_1":{"MNEM":"","UNIT":"","DATA":"","DESCRIPTION OF MNEMONIC 1":"","DESCRIPTION OF MNEMONIC 2":""},
 					"MNEM_2":{"MNEM":"","UNIT":"","DATA":"","DESCRIPTION OF MNEMONIC 1":"","DESCRIPTION OF MNEMONIC 2":""}
-				}]
+				}
 			,
-			"CURVE INFORMATION BLOCK":[{
+			"CURVE INFORMATION BLOCK":{
 					"MNEM_0":{"MNEM":"","UNIT":"","ERCB CURVE CODE":"","CURVE DESCRIPTION 1":"","CURVE DESCRIPTION 2":""}, 
 					"MNEM_0":{"MNEM":"","UNIT":"","ERCB CURVE CODE":"","CURVE DESCRIPTION 1":"","CURVE DESCRIPTION 2":""},
-				}]		
+				}		
 			,
 			"PARAMETER INFORMATION":{
 					"MNEM_0":{"MNEM":"","UNIT":"","DATA":"","DESCRIPTION OF MNEMONIC 1":"","DESCRIPTION OF MNEMONIC 2":""}, 
