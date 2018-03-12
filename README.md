@@ -32,6 +32,9 @@ Additional to the wellio.js file, there are a variety of files running the demo 
 <a href="https://github.com/vkiryukhin/vkBeautify">VKbeautify.js</a> is a script for adding spaces and such to JSON to make them prettier when printed.
 <a href="https://github.com/google/code-prettify">run_prettify.js</a> does something similar but is focused on making it print nicely into HTML DOM elements. 
 
+### DIST Folder
+The DIST folder holds files for the node.js version of wellio that runs on the server side or is called from the browser using require.js. The file with the wellio functions in the dist folder is index.js. The NPM page is <a href="https://www.npmjs.com/package/wellio"> here</a>. 
+
 ## Road Map
 Right now, wellio.js just does LAS -> Wellio JSON. There are variety of features that could be added to increase the functionality of wellio and in particular enable cross-communication with other LAS-focused projects. 
 
