@@ -41,8 +41,5 @@
   "bugs": {
     "url": "https://github.com/JustinGOSSES/wellio.js/issues"
   },
-  "homepage": "https://github.com/JustinGOSSES/wellio.js#readme",
-  "dependencies": {
-    "browserify": "^16.1.1"
-  }
+  "homepage": "https://github.com/JustinGOSSES/wellio.js#readme"
 }
