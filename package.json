@@ -43,6 +43,6 @@
   },
   "homepage": "https://github.com/JustinGOSSES/wellio.js#readme",
   "dependencies": {
-    "fs": "^2.2.2"
+    "browserify": "^16.1.1"
   }
 }
