@@ -23,24 +23,46 @@ ObservableHQ is new way to explore and play with JavaScript code. Think Jupyter 
 to call the sever-side wellio npm module functions in the browser.
 
 ## Code Organization Summary
-This repo contains code for the demo page</a>, which leverages the wellio.js JavaScript file in the js folder. 
 
-#### <b>Wellio.js</b> <a href="https://github.com/JustinGOSSES/wellio.js/blob/master/js/wellio.js">script</a> will have a few basics functions (not all are written yet)
-1. las2json(onelas) : <i>Function that takes a single LAS text file representing a single well and returns an object variable in JSON format for that well.</i>
-2. json2las(oneJSON): <i>Function that takes a single json representing a single well and writes a LAS 2.0 file.</i>
-3. download(filename, text): <i>Function that takes a filename and text string and writes a file (either json or las) to your designated downloads folder.</i>
-4. additional?
+There are currently separate front-end and back-end javascript versions of wellio. Eventually, they will merge.
 
-#### Demo
-Additional to the wellio.js file, there are a variety of files running the demo page at index.html or <a href="https://justingosses.github.io/wellio.js/">here</a>. The main javascript file aside from wellio.js is main.js
+#### Server-side
+The server-side wellio can be found in the <b>dist</b> folder. You can install it locally via `npm install wellio` as described on the npm homepage <a href="https://www.npmjs.com/package/wellio">here</a>. You can also call this via require(wellio) in ObservableHQ as described in the ObservableHQ demo above. 
+
+##### Functions currently working include:
+- returnThing: A testing function that returns anything provided to it. 
+	`wellio.returnThing("test")` = "test"
+- loadLAS: A function that takes an argument of the well log name as a string, finds that file in the local file system and returns it as a string of text. 
+	`var well_string = wellio.loadLAS("00/01-01-073-05W5/0.LAS")` = <full well log as string>
+- las2json: Takes the result of loadLAS or another text string, or another LAS file already loaded into memory, and converts it into the wellio json format. 
+	`var well_json = wellio.las2json(well_string)` = <all information in las 2.0 file but string txt file converted to json>
+- CurveNames: Given a well already converted into json, returns the available curves
+	`var curvesNames = wellio.CurveNames(well_json)` = ['GR','ILD','PHID']
+- VER_block: Given a well already converted into json, returns verision information block data
+	`var VER_block = wellio.VER_block(well_json)` = <verion information block of text information in string form>
+- UWI: Given a well already converted into json, returns the well UWI
+	`var UWI_well_json = wellio.UWI(well_json)` = text string of UWI, for example => '00/01-01-073-05W5/0'
+- getCurve: Given a well already converted into json, returns a given curve name in string format
+	`var GR_well_json = wellio.getCurve(well_json,"GR")` = an array of the GR data, for example [0.00,0.99,,,]
+
+
+#### Front-end side
+This repo contains various pieces of code for the github pages demo page. In addition to the the wellio.js JavaScript file in the js folder, there is the index.html, which is the main html page for <a href="https://justingosses.github.io/wellio.js/">the github pages demo</a>. 
+
+CSS files are in the CSS folder. 
+
+Several example well logs are in the ASSETS folder.
 
 <a href="https://github.com/agile-geoscience/g3">G3.js</a> is used to draw a plot of the well log curves. It leverages <a href="https://github.com/d3">d3.js</a>.
-
 <a href="https://github.com/vkiryukhin/vkBeautify">VKbeautify.js</a> is a script for adding spaces and such to JSON to make them prettier when printed.
 <a href="https://github.com/google/code-prettify">run_prettify.js</a> does something similar but is focused on making it print nicely into HTML DOM elements. 
 
-### DIST Folder
-The DIST folder holds files for the node.js version of wellio that runs on the server side or is called from the browser using require.js. The file with the wellio functions in the dist folder is index.js. The NPM page is <a href="https://www.npmjs.com/package/wellio"> here</a>. 
+
+#### <b>Wellio.js</b> <a href="https://github.com/JustinGOSSES/wellio.js/blob/master/js/wellio.js">script</a> will have a few basics functions (not all are written yet)
+1. las2json(onelas) : <i>Function that takes a single LAS text file representing a single well and returns an object variable in JSON format for that well.</i>
+2. download(filename, text): <i>Function that takes a filename and text string and writes a file (either json or las) to your designated downloads folder.</i>
+
+
 
 ## Road Map
 Right now, wellio.js just does LAS -> Wellio JSON. There are variety of features that could be added to increase the functionality of wellio and in particular enable cross-communication with other LAS-focused projects. 
