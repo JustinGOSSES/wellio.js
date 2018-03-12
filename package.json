@@ -1,14 +1,15 @@
 {
   "name": "wellio",
-  "version": "0.1.1",
+  "version": "0.1.0",
   "description": "Provides functionality to load a LAS 2.0 formatted well log file and convert it to a json file and then return different information about the well log",
   "main": "dist/index.js",
   "unpkg": "dist/index.js",
   "scripts": {
-    "test": "dist/test.js"
+    "test": "dist/test/test.js"
   },
   "files": [
-    "dist/test.js",
+    "dist/test/test.js",
+    "dist/test/test.LAS",
     "dist/index.js"
   ],
   "repository": {
@@ -40,5 +41,8 @@
   "bugs": {
     "url": "https://github.com/JustinGOSSES/wellio.js/issues"
   },
-  "homepage": "https://github.com/JustinGOSSES/wellio.js#readme"
+  "homepage": "https://github.com/JustinGOSSES/wellio.js#readme",
+  "dependencies": {
+    "fs": "^2.2.2"
+  }
 }
