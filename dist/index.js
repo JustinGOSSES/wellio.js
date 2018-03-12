@@ -1,6 +1,6 @@
 !function(e){"object"==typeof exports?module.exports=e():"function"==typeof define&&define.amd?define(e):"undefined"!=typeof window?window.commonJsModule=e():"undefined"!=typeof global?global.commonJsModule=e():"undefined"!=typeof self&&(self.commonJsModule=e())}(function(){var define,module,exports;module={exports:(exports={})};
 
-var fs = require('fs');
+// var fs = require('fs');
 
 module.exports = {
 	//// For quick testing when a LAS file isn't handy, use returnThing function
@@ -203,7 +203,7 @@ module.exports = {
 		var curveNames = Object.keys(well_json["CURVES"]);
 		return curveNames
 	},
-	//// Given a well already converted into json, returns verision information block data
+	//// 
 	VER_block: function(well_json){
 		return well_json["VERSION INFORMATION"]
 	},
