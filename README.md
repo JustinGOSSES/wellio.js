@@ -20,7 +20,7 @@ If you want to test the 'load local file' feature and don't have any local LAS f
 #### ObservableHQ demo <a href="https://beta.observablehq.com/@justingosses/upload-well-logs-convert-las-to-json-with-wellio-then-visual">page</a>:
 ObservableHQ is new way to explore and play with JavaScript code. Think Jupyter notebook but in a more reactive and interactive form. It runs JavaScript code instead of Python/Julia/R. I've created a notebook on there with the same functionality as the demo but with visualizations using Vega instead of g3.js & d3.js. This demo uses syntax of
 `wellio = require(wellio)`
-to call the sever-side wellio functions in the browser.
+to call the sever-side wellio npm module functions in the browser.
 
 ## Code Organization Summary
 This repo contains code for the demo page</a>, which leverages the wellio.js JavaScript file in the js folder. 
