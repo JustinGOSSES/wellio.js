@@ -42,7 +42,7 @@ The server-side wellio can be found in the <b>dist</b> folder. You can install i
 	`var VER_block = wellio.VER_block(well_json)`
 - UWI: Given a well already converted into json, returns the well UWI as a string.
 	`var UWI_well_json = wellio.UWI(well_json) ; where UWI_well_json is '00/01-01-073-05W5/0`
-- getCurve: Given a well already converted into json, returns a given curve name in string format
+- getCurve: Given a well already converted into json and the name of a curve as a string, returns an array of the data values for that curve. 
 	`var GR_well_json = wellio.getCurve(well_json,"GR") ; where GR_well_json is an array of the GR data, for example [99,93,76,55,67,66,67,78]`
 
 
