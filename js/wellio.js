@@ -181,6 +181,29 @@ function las2json(onelas){
 	return(lasjson)
 }
 
+//// Given a well already converted into json, returns the available curves
+function CurveNames(well_json){
+		var curveNames = Object.keys(well_json["CURVES"]);
+		return curveNames
+	}
+//// Given a well already converted into json, returns verision information block data
+function VER_block(well_json){
+		return well_json["VERSION INFORMATION"]
+	}
+//// Given a well already converted into json, returns the well UWI
+function UWI(well_json){
+		return well_json["WELL INFORMATION BLOCK"]["UWI"]["DATA"]
+	}
+//// Given a well already converted into json, returns a given curve name in string format
+function getCurve(well_json,curve){
+		if (!well_json["CURVES"][curve]){
+			console.log("in getCurve function, that curve does not exist! =",curve)
+			return "that curve does not exist! see console.log"
+		} else {
+			return well_json["CURVES"][curve]
+		}
+}
+
 
 //// Function that takes a single json representing a single well and writes a paper LAS 2.0 file.
 function json2las(oneJSON){
