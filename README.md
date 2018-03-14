@@ -33,15 +33,15 @@ The server-side wellio can be found in the <b>dist</b> folder. You can install i
 - returnThing: A testing function that returns anything provided to it. 
 	`wellio.returnThing("test")` = "test"
 - loadLAS: A function that takes an argument of the well log name as a string, finds that file in the local file system and returns it as a string of text. 
-	`var well_string = wellio.loadLAS("00/01-01-073-05W5/0.LAS") where well_string is a string of the LAS file given as input`
-- las2json: Takes the result of loadLAS or another text string, or another LAS file already loaded into memory, and converts it into the wellio json format. 
-	`var well_json = wellio.las2json(well_string) ; where well_json is all information in las 2.0 file but converted into a  json format`
-- CurveNames: Given a well already converted into json, returns the available curves
-	`var curvesNames = wellio.CurveNames(well_json) ; where curvesNames is any array like ['GR','ILD','PHID']`
-- VER_block: Given a well already converted into json, returns verision information block data
-	`var VER_block = wellio.VER_block(well_json) ; where VER_block is a string of the text information in the LAS file's verion information section`
-- UWI: Given a well already converted into json, returns the well UWI
-	`var UWI_well_json = wellio.UWI(well_json) ; where UWI_well_json is a text string of UWI, for example: '00/01-01-073-05W5/0`
+	`var well_string = wellio.loadLAS("00/01-01-073-05W5/0.LAS")`
+- las2json: Takes the result of loadLAS or another text string, or another LAS file already loaded into memory, and converts it into the wellio json format and returns that json string. 
+	`var well_json = wellio.las2json(well_string)`
+- CurveNames: Given a well already converted into json, returns the available curve names as an array.
+	`var curvesNames = wellio.CurveNames(well_json) ; where curvesNames = ['GR','ILD','PHID']`
+- VER_block: Given a well already converted into json, returns verision information block data as a string.
+	`var VER_block = wellio.VER_block(well_json)`
+- UWI: Given a well already converted into json, returns the well UWI as a string.
+	`var UWI_well_json = wellio.UWI(well_json) ; where UWI_well_json is '00/01-01-073-05W5/0`
 - getCurve: Given a well already converted into json, returns a given curve name in string format
 	`var GR_well_json = wellio.getCurve(well_json,"GR") ; where GR_well_json is an array of the GR data, for example [99,93,76,55,67,66,67,78]`
 
