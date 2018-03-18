@@ -22,8 +22,8 @@ ObservableHQ is new way to explore and play with JavaScript code. Think Jupyter 
 `wellio = require(wellio)`
 to call the sever-side wellio npm module functions in the browser.
 
-#### 3. <a href="https://github.com/JustinGOSSES/wellio.js/blob/master/notebooks/Wellio%20Demo%20in%20Jupyter%20Notebook%20Node.js.ipynb">Jupyter Notebook</a> Node.js demo
-Wellio can also be worked with in a jupyter notebook running a node.js kernal. Here is a <a href="https://github.com/JustinGOSSES/wellio.js/blob/master/notebooks/Wellio%20Demo%20in%20Jupyter%20Notebook%20Node.js.ipynb">brief demo</a>.
+#### 3. Jupyter Notebook Node.js <a href="https://github.com/JustinGOSSES/wellio.js/blob/master/notebooks/Wellio%20Demo%20in%20Jupyter%20Notebook%20Node.js.ipynb">demo</a>
+Wellio can also be worked with in a jupyter notebook running a node.js kernal.
 
 ## Code Organization Summary
 
