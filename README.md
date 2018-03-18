@@ -11,7 +11,7 @@
 Nope, it only loads to your browser's memory and then your browser forgets it when you close the tab.
 
 ## Can I see the demo right now?
-Yes, there are two options. 
+Yes, there are three options. 
 #### Github pages demo <a href="https://justingosses.github.io/wellio.js/">page</a>: 
 Open the demo page running on github pages. Click one of the big blue buttons up top to  open a file loader. You can either use a LAS files already part of the webpage or you can load a local LAS file from your computer. 
 
@@ -21,6 +21,9 @@ If you want to test the 'load local file' feature and don't have any local LAS f
 ObservableHQ is new way to explore and play with JavaScript code. Think Jupyter notebook but in a more reactive and interactive form. It runs JavaScript code instead of Python/Julia/R. I've created a notebook on there with the same functionality as the demo but with visualizations using Vega instead of g3.js & d3.js. This demo uses syntax of
 `wellio = require(wellio)`
 to call the sever-side wellio npm module functions in the browser.
+
+#### Jupyter Notebook Node.js option
+Wellio can also be worked with in a jupyter notebook running a node.js kernal. Here is a brief demo.
 
 ## Code Organization Summary
 
