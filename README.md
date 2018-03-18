@@ -12,18 +12,18 @@ Nope, it only loads to your browser's memory and then your browser forgets it wh
 
 ## Can I see the demo right now?
 Yes, there are three options. 
-#### Github pages demo <a href="https://justingosses.github.io/wellio.js/">page</a>: 
+#### 1. Github pages demo <a href="https://justingosses.github.io/wellio.js/">page</a>: 
 Open the demo page running on github pages. Click one of the big blue buttons up top to  open a file loader. You can either use a LAS files already part of the webpage or you can load a local LAS file from your computer. 
 
 If you want to test the 'load local file' feature and don't have any local LAS files, you can quickly get one by going to <a href="https://raw.githubusercontent.com/JustinGOSSES/wellio.js/master/assets/00-01-01-073-05W5-0.LAS">this</a> link and saving the results to a ".las" file using your browser. That is a raw las file for well UWI 00-01-01-073-05W5-0.
 
-#### ObservableHQ demo <a href="https://beta.observablehq.com/@justingosses/upload-well-logs-convert-las-to-json-with-wellio-then-visual/2">page</a>:
+#### 2. ObservableHQ demo <a href="https://beta.observablehq.com/@justingosses/upload-well-logs-convert-las-to-json-with-wellio-then-visual/2">page</a>:
 ObservableHQ is new way to explore and play with JavaScript code. Think Jupyter notebook but in a more reactive and interactive form. It runs JavaScript code instead of Python/Julia/R. I've created a notebook on there with the same functionality as the demo but with visualizations using Vega instead of g3.js & d3.js. This demo uses syntax of
 `wellio = require(wellio)`
 to call the sever-side wellio npm module functions in the browser.
 
-#### Jupyter Notebook Node.js option
-Wellio can also be worked with in a jupyter notebook running a node.js kernal. Here is a brief demo.
+#### 3. Jupyter Notebook Node.js option
+Wellio can also be worked with in a jupyter notebook running a node.js kernal. Here is a <a href="https://github.com/JustinGOSSES/wellio.js/blob/master/notebooks/Wellio%20Demo%20in%20Jupyter%20Notebook%20Node.js.ipynb">brief demo</a>.
 
 ## Code Organization Summary
 
