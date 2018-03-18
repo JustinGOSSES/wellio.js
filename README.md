@@ -17,7 +17,7 @@ Open the demo page running on github pages. Click one of the big blue buttons up
 
 If you want to test the 'load local file' feature and don't have any local LAS files, you can quickly get one by going to <a href="https://raw.githubusercontent.com/JustinGOSSES/wellio.js/master/assets/00-01-01-073-05W5-0.LAS">this</a> link and saving the results to a ".las" file using your browser. That is a raw las file for well UWI 00-01-01-073-05W5-0.
 
-#### ObservableHQ demo <a href="https://beta.observablehq.com/@justingosses/upload-well-logs-convert-las-to-json-with-wellio-then-visual">page</a>:
+#### ObservableHQ demo <a href="https://beta.observablehq.com/@justingosses/upload-well-logs-convert-las-to-json-with-wellio-then-visual/2">page</a>:
 ObservableHQ is new way to explore and play with JavaScript code. Think Jupyter notebook but in a more reactive and interactive form. It runs JavaScript code instead of Python/Julia/R. I've created a notebook on there with the same functionality as the demo but with visualizations using Vega instead of g3.js & d3.js. This demo uses syntax of
 `wellio = require(wellio)`
 to call the sever-side wellio npm module functions in the browser.
@@ -33,17 +33,17 @@ The server-side wellio can be found in the <b>dist</b> folder. You can install i
 - returnThing: A testing function that returns anything provided to it. 
 	`wellio.returnThing("test")` = "test"
 - loadLAS: A function that takes an argument of the well log name as a string, finds that file in the local file system and returns it as a string of text. 
-	`var well_string = wellio.loadLAS("00/01-01-073-05W5/0.LAS")` = <full well log as string>
-- las2json: Takes the result of loadLAS or another text string, or another LAS file already loaded into memory, and converts it into the wellio json format. 
-	`var well_json = wellio.las2json(well_string)` = <all information in las 2.0 file but string txt file converted to json>
-- CurveNames: Given a well already converted into json, returns the available curves
-	`var curvesNames = wellio.CurveNames(well_json)` = ['GR','ILD','PHID']
-- VER_block: Given a well already converted into json, returns verision information block data
-	`var VER_block = wellio.VER_block(well_json)` = <verion information block of text information in string form>
-- UWI: Given a well already converted into json, returns the well UWI
-	`var UWI_well_json = wellio.UWI(well_json)` = text string of UWI, for example => '00/01-01-073-05W5/0'
-- getCurve: Given a well already converted into json, returns a given curve name in string format
-	`var GR_well_json = wellio.getCurve(well_json,"GR")` = an array of the GR data, for example [0.00,0.99,,,]
+	`var well_string = wellio.loadLAS("00/01-01-073-05W5/0.LAS")`
+- las2json: Takes the result of loadLAS or another text string, or another LAS file already loaded into memory, and converts it into the wellio json format and returns that json string. 
+	`var well_json = wellio.las2json(well_string)`
+- CurveNames: Given a well already converted into json, returns the available curve names as an array.
+	`var curvesNames = wellio.CurveNames(well_json) ; where curvesNames = ['GR','ILD','PHID']`
+- VER_block: Given a well already converted into json, returns verision information block data as a string.
+	`var VER_block = wellio.VER_block(well_json)`
+- UWI: Given a well already converted into json, returns the well UWI as a string.
+	`var UWI_well_json = wellio.UWI(well_json) ; where UWI_well_json is '00/01-01-073-05W5/0`
+- getCurve: Given a well already converted into json and the name of a curve as a string, returns an array of the data values for that curve. 
+	`var GR_well_json = wellio.getCurve(well_json,"GR") ; where GR_well_json is an array of the GR data, for example [99,93,76,55,67,66,67,78]`
 
 
 #### Front-end side
