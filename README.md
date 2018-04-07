@@ -103,6 +103,9 @@ I'm imagining a reactive style well-log feature creation widget, something like 
 
 *Long story short, I needed a way to load las files and work with them as json in JavaScript in order to build another thing.*
 
+### Examples of where it can be used
+It can convert LAS files into JSON and then curves can be visualized in three dimensions using three.js as <a href="https://beta.observablehq.com/@justingosses/three-js-well-log-demo-geology">this</a> brief demo on ObservableHQ shows.
+
 ## Example
 
 ### Original las file example
