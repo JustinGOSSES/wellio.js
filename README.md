@@ -1,9 +1,6 @@
 # wellio.js
 #### JavaScript for converting well-log standard .las file format to json format and then back again.
 
-[THIS IS VERY NEW AND IN PROGRESS]
-[ONLY TRYING TO GET TO WORK WITH LAS 2.0 RIGHT NOW]
-
 ## Purpose
  There currently isn't any .las -> JSON parser that I was able to find. There is <a href="https://lasio.readthedocs.io/en/latest/">lasio</a> and <a href="https://github.com/agile-geoscience/welly">welly</a> for python, but nothing to ingest las files in JavaScript. Wellio.js is an attempt to fill that gap, so I can build other stuff. Once you have well data as JSON, many other JavaScript-based things as possible. I'll try to keep those other things separate, except as demos for Wellio.
 
@@ -11,7 +8,7 @@
 Nope, it only loads to your browser's memory and then your browser forgets it when you close the tab.
 
 ## Can I see the demo right now?
-Yes, there are three options. 
+Yes, there are several options. 
 #### 1. Github pages demo <a href="https://justingosses.github.io/wellio.js/">page</a>: 
 Open the demo page running on github pages. Click one of the big blue buttons up top to  open a file loader. You can either use a LAS files already part of the webpage or you can load a local LAS file from your computer. 
 
@@ -24,6 +21,9 @@ to call the sever-side wellio npm module functions in the browser.
 
 #### 3. Jupyter Notebook Node.js <a href="https://github.com/JustinGOSSES/wellio.js/blob/master/notebooks/Wellio%20Demo%20in%20Jupyter%20Notebook%20Node.js.ipynb">demo</a>
 Wellio can also be worked with in a jupyter notebook running a node.js kernal.
+
+#### 4. Jupyter Notebook running Python that uses node.js for a couple cells via Pixiedust library
+[This is coming. Currently <a href="">an issue</a> that needs help]. This will demonstrate a use-case where you want to manipulate LAS data in python but find it easier to visualize the data from a JSON format, likely using JavaScript data visaulization tooling.
 
 ## Code Organization Summary
 
@@ -106,7 +106,7 @@ I'm imagining a reactive style well-log feature creation widget, something like 
 ### Examples of where it can be used
 It can convert LAS files into JSON and then curves can be visualized in three dimensions using three.js as <a href="https://beta.observablehq.com/@justingosses/three-js-well-log-demo-geology">this</a> brief demo on ObservableHQ shows. Once your can make well logs in three.js, it is only a short jump to put them in augmented reality or virtual reality. For example, <a href="https://github.com/google-ar/three.ar.js?files=1">this repo</a> is a helper library for putting three.js objects into Augmented reality scenes.
 
-## Example
+## Example of LAS format and JSON formated well log data
 
 ### Original las file example
 or go <a href="https://justingosses.github.io/wellio.js/">here</a> for live example.
