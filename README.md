@@ -84,6 +84,8 @@ Examples of wellio_plus data & functions that could be part of the prototype wou
 - non-original curves that are created and used as engineered features for machine-learning.
 - other well-centric data points or datasets that might be useful for machine-learning. 
 
+#### Can you help? Of course you can! 
+There are a variety of <a href="https://github.com/JustinGOSSES/wellio.js/issues">issues</a> that need worked. Several of which are suitable for those who are new to JavaScript. Please add any suggestions you'd like or bugs you find to the issues.
 
 ## Where To Get Open-Source Well Logs in .LAS format?
 You can use the file upload button to load into your browsers memory any LAS files from your local computer. I've also included a few well logs in the /assets/ folder of this repo from the electronic data file below. 
