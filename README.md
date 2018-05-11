@@ -32,7 +32,7 @@ There are currently separate front-end and back-end javascript versions of welli
 #### Server-side
 The server-side wellio can be found in the <b>dist</b> folder. You can install it locally via `npm install wellio` as described on the npm homepage <a href="https://www.npmjs.com/package/wellio">here</a>. You can also call this via require(wellio) in ObservableHQ as described in the ObservableHQ demo above. 
 
-##### Functions currently working include:
+##### Wellio functions currently working include:
 - returnThing: A testing function that returns anything provided to it. 
 	`wellio.returnThing("test")` = "test"
 - loadLAS: A function that takes an argument of the well log name as a string, finds that file in the local file system and returns it as a string of text. 
@@ -47,6 +47,11 @@ The server-side wellio can be found in the <b>dist</b> folder. You can install i
 	`var UWI_well_json = wellio.UWI(well_json) ; where UWI_well_json is '00/01-01-073-05W5/0`
 - getCurve: Given a well already converted into json and the name of a curve as a string, returns an array of the data values for that curve. 
 	`var GR_well_json = wellio.getCurve(well_json,"GR") ; where GR_well_json is an array of the GR data, for example [99,93,76,55,67,66,67,78]`
+	
+##### Non-wellio fuctions you'll want to know about when using wellio to convert las -> json on command line using node.js
+- To start with node.js after installing it type into a command line `node` .
+- Once in command line node environment, to start with wellio, you'll have to do `wellio = require('wellio')` After this point, you'll be able to use the commands above.
+- After converting a las file to json format with the command `well_json = wellio.las2json(well_string)` as described above you'll have to stringify it first via `well_string = JSON.stringify(well_json)` and then write it to a file via `fs.writeFile("new_well.json", well_string, 'utf8', function (err) {console.log("error")})`
 
 
 #### Front-end side
