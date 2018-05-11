@@ -51,7 +51,7 @@ The server-side wellio can be found in the <b>dist</b> folder. You can install i
 ##### Non-wellio fuctions you'll want to know about when using wellio to convert las -> json on command line using node.js
 - To start with node.js after installing it type into a command line `node` .
 - Once in command line node environment, to start with wellio, you'll have to do `wellio = require('wellio')` After this point, you'll be able to use the commands above.
-- After converting a las file to json format with the command `well_json = wellio.las2json(well_string)` as described above you'll have to stringify it first via `well_string = JSON.stringify(well_json)` and then write it to a file via `fs.writeFile("new_well.json", well_string, 'utf8', function (err) {console.log("error")})`
+- After converting a las file to json format with the command `well_json = wellio.las2json(well_string)` as described above you'll have to stringify it first via `well_json_string = JSON.stringify(well_json)` and then write it to a file via `fs.writeFile("UWI_of_Well.json", well_json_string, 'utf8', function (err) {console.log("error")})`
 
 
 #### Front-end side
