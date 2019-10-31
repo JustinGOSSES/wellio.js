@@ -1,3 +1,4 @@
+///// THIS FILE NOT USED IN WELLIO.js THIS IS JUST DEVELOPMENT
 
 // // var a = dl.Array1D.new([1, 2, 3]);
 // // var b = dl.Scalar.new(2);
@@ -9,6 +10,7 @@
 
 // // Option 2: Synchronous download of data. This is simpler, but blocks the UI.
 // console.log(result.dataSync());
+
 
 
 function array_try_1(){
