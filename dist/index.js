@@ -78,7 +78,7 @@ module.exports = {
 			else if (split1[i].includes("PARAMETER")){param_info_str = split1[i]}
 			else if (split1[i].includes("OTHER")){other = split1[i]}
 			else if (split1[i].includes("A  DEPTH")){curve_str = split1[i]}
-			else{console.log("there is a problem, in wellio.js the las2json() function has to many item in the string array created by splitting on '~'. ")}
+			else{console.log("There is a problem. In wellio.js the las2json() function has too many items in the string array created by splitting on '~'. ")}
 		}
 
 
