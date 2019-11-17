@@ -11,9 +11,13 @@ module.exports = {
 	//// Loads a LAS 2.0 file from local files
 	loadLAS:function(well_log){
 		var file = well_log
-		var contents = fs.readFileSync(file).toString();
-		// var contents = fs.readFileSync('test.LAS', 'utf8');
-		return contents
+    var fs = '';
+    if (!process.env.BROWER) {
+       fs = require('fs');
+    }
+    var contents = fs.readFileSync(file).toString();
+    // var contents = fs.readFileSync('test.LAS', 'utf8');
+    return contents
 	},
 	//// Converts a LAS 2.0 file already loaded into memory into a json format
 	las2json: function(onelas){
