@@ -12,7 +12,8 @@ module.exports = {
 	loadLAS:function(well_log){
 		var file = well_log
     var fs = '';
-    if (!process.env.BROWER) {
+
+    if (process !== 'undefined' && process.versions != null && process.versions.node != null) {
        fs = require('fs');
     }
     var contents = fs.readFileSync(file).toString();
