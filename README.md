@@ -102,18 +102,12 @@ Electronic data (including well logs, tops, etc.) for Athabasca Oil Sands Data M
 Report for Athabasca Oil Sands Data McMurray/Wabiskaw Oil Sands Deposit <a href="http://ags.aer.ca/document/OFR/OFR_1994_14.PDF">http://ags.aer.ca/document/OFR/OFR_1994_14.PDF</a>
 
 ### Why Bother? Geologists Use Python...
-While trying to build a machine-learning program to mimic specific geologist's stratigraphic surface picking, I concluded I was limited by the number and quality of my input features. Specifically, I needed more features and the methods I were using to come up with effective ones were too slow. 
-
-I found trying to do well log feature creation in Jupyter notebooks using Python to be too linear and time intensive involving re-writing or re-running too much code in between seeing the results. JavaScript has more interactive and reactive data visualization libraries, so that is driving tool choice. For clarity, I'm using the term reactive in the <a href="https://vimeo.com/36579366">Bret Victor</a> sense, not the <a href="https://reactjs.org/">react.js</a> sense. 
-
-Additionally, using JavaScript opens up the possibility of simple widgets that could be run in the browser without needing to install a program on users' computers and the possibility of open-source well log software without needing to know a computer language to do things. 
-
-I'm imagining a reactive style well-log feature creation widget, something like <a href="http://ncase.me/joy/">joy.js</a>,  that would include cross-filtering across multiple figures like in <a href="https://dc-js.github.io/dc.js/">dc.js</a>, while also leveraging numpy-style array math, like in <a href="https://deeplearnjs.org/">deeplearn.js</a>. 
-
-*Long story short, I needed a way to load las files and work with them as json in JavaScript in order to build another thing.*
+EDIT: *Long story short, I needed a way to load las files and work with them as json in JavaScript in order to work with them on the web or using web tools*
 
 ### Examples of where it can be used
 It can convert LAS files into JSON and then curves can be visualized in three dimensions using three.js as <a href="https://beta.observablehq.com/@justingosses/three-js-well-log-demo-geology">this</a> brief demo on ObservableHQ shows. Once your can make well logs in three.js, it is only a short jump to put them in augmented reality or virtual reality. For example, <a href="https://github.com/google-ar/three.ar.js?files=1">this repo</a> is a helper library for putting three.js objects into Augmented reality scenes.
+
+There is also a few Observable notebooks (javascript, online, editable, and forkable by anyone) <a href="https://observablehq.com/@justingosses/well-log-in-d3-js-v5">here</a> and <a href="https://observablehq.com/@justingosses/well-log-curve-cross-sections">here</a> I've toyed around with that use wellio.js to import well logs and parse the string of the las file into JSON for visualization. 
 
 ## Example of LAS format and JSON formated well log data
 
