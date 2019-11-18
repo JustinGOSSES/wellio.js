@@ -5,12 +5,14 @@
   "main": "dist/index.js",
   "unpkg": "dist/index.js",
   "scripts": {
-    "test": "dist/test/test.js"
+    "test": "dist/test/test.js",
+    "test-lasload": "node dist/test/test_lasload.js"
   },
   "files": [
+    "dist/index.js",
     "dist/test/test.js",
     "dist/test/test.LAS",
-    "dist/index.js"
+    "dist/test/test_lasload.js"
   ],
   "repository": {
     "type": "git",
