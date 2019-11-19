@@ -6,7 +6,9 @@
   "unpkg": "dist/index.js",
   "scripts": {
     "test": "dist/test/test.js",
-    "test-lasload": "node dist/test/test_lasload.js"
+    "test-lasload": "tape dist/test/test_lasload.js",
+    "test-las2json": "tape dist/test/test_las2json.js",
+    "test-all": "tape dist/test/test*.js"
   },
   "files": [
     "dist/index.js",
