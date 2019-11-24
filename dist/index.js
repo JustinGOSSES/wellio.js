@@ -66,7 +66,8 @@ module.exports = {
 		var param_info_obj = {"MNEM":"","UNIT":"","DATA":"","DESCRIPTION OF MNEMONIC 1":"","DESCRIPTION OF MNEMONIC 2":""};
 		//// The las file is read as a txt file. It will first be split into seperate strings based on "~" character which occurs at the top of each "block"
 		console.log("onelas = ",onelas)
-		var split1 = onelas.split("~");
+		//// Split in to las sections that start with a tilde: ~.
+		var split1 = onelas.split(/(~[^~]+)/);
 		console.log("split1 = ",split1)
 		var vers_str = "";
 		var well_info_str = "";
@@ -77,13 +78,20 @@ module.exports = {
 
 		//// As the 'OTHER' block may or may not be present, we have to split by '~' and then look for a substring to make sure we have the right block before we put each into a variable.
 		for(i = 0; i < split1.length; i++){
-			if(split1[i].includes("VERSION")){var vers_str = split1[i]}
-			else if (split1[i].includes("WELL INFORMATION")){well_info_str = split1[i]}
-			else if (split1[i].includes("CURVE INFORMATION")){curve_info_str = split1[i]}
-			else if (split1[i].includes("PARAMETER")){param_info_str = split1[i]}
-			else if (split1[i].includes("OTHER")){other = split1[i]}
-			else if (split1[i].includes("A  DEPTH")){curve_str = split1[i]}
-			else{console.log("There is a problem. In wellio.js the las2json() function has too many items in the string array created by splitting on '~'. ")}
+			//// Skip blank entries in the split1 array.
+			if (split1[i].length === 0) {
+				continue;
+			}
+			if(split1[i].includes("~V")){var vers_str = split1[i]}
+			else if (split1[i].includes("~W")){well_info_str = split1[i]}
+			else if (split1[i].includes("~C")){curve_info_str = split1[i]}
+			else if (split1[i].includes("~P")){param_info_str = split1[i]}
+			else if (split1[i].includes("~O")){other = split1[i]}
+			else if (split1[i].includes("~A")){curve_str = split1[i]}
+			else{
+				console.log("WARNING: In wellio.js the las2json() function: split1[" + i + "] is not a recognized las section" )
+				console.log("elem: [" + split1[i] + "]"); 
+			}
 		}
 
 
@@ -112,52 +120,58 @@ module.exports = {
 			var unit = unit_and_data_str[0,5].trim();
 			var data = unit_and_data_str.substring(5,unit_and_data_str.length).trim();
 			ver_info_obj["DATA"] = data
-	  		ver_info_obj["UNIT"] = unit
-	  		//// 
-	  		if(arrayString.split(":")[1].indexOf("-") !== -1){
-	  			ver_info_obj["DESCRIPTION OF MNEMONIC 1"] = arrayString.split(":")[1].split("-")[0].trim()
-	  			ver_info_obj["DESCRIPTION OF MNEMONIC 2"] = arrayString.split(":")[1].split("-")[1].replace("\r","").trim()
-	  		}
-	  		else{
-	  			ver_info_obj["DESCRIPTION OF MNEMONIC 1"] = arrayString.split(":")[1].replace("\r","").trim()
-	  			ver_info_obj["DESCRIPTION OF MNEMONIC 2"] = ""
-	  		}
-	 		return ver_info_obj
+			ver_info_obj["UNIT"] = unit
+			//// 
+			if(arrayString.split(":")[1].indexOf("-") !== -1){
+				ver_info_obj["DESCRIPTION OF MNEMONIC 1"] = arrayString.split(":")[1].split("-")[0].trim()
+				ver_info_obj["DESCRIPTION OF MNEMONIC 2"] = arrayString.split(":")[1].split("-")[1].replace("\r","").trim()
+			}
+			else{
+				ver_info_obj["DESCRIPTION OF MNEMONIC 1"] = arrayString.split(":")[1].replace("\r","").trim()
+				ver_info_obj["DESCRIPTION OF MNEMONIC 2"] = ""
+			}
+			return ver_info_obj
 		};
 		lasjson["VERSION INFORMATION"]["WRAP"] = splitLineofType1(Object.assign({}, ver_info_obj),wrap_line);
 		lasjson["VERSION INFORMATION"]["VERS"] = splitLineofType1(Object.assign({}, ver_info_obj),vers_line);
-		//// Working with PARAMETER INFORMATION block second by splitting it by newline into an array and taking items after 0,1,2 or [3:]
-		//// This basically just skips some lines with titles and such
-		var param_line_array = param_info_str.split("\n").slice(3,);
+		//// Working with PARAMETER INFORMATION block second by splitting it by newline into an array.
+		//// This skips the line with the section's title.
+		var param_line_array = param_info_str.split("\n").slice(1,);
 		for(i = 0; i < param_line_array.length; i++){
 			//// create one object for parameter line
-			if(param_line_array[i] != ""){
+			//// Skip empty elements and comment elements that start with '#'.
+			if(param_line_array[i] != "" && param_line_array[i][0] !== '#'){
 				var param_obj_inst = splitLineofType1(Object.assign({}, param_info_obj),param_line_array[i]);
 				lasjson["PARAMETER INFORMATION"][param_obj_inst["MNEM"]] = param_obj_inst
 			}
 		}
-		//// Working with CURVE INFORMATION BLOCK second by splitting it by newline into an array and taking items after 0,1,2 or [3:]
-		var curve_line_array = curve_info_str.split("\n").slice(3,);
+		//// Working with CURVE INFORMATION BLOCK second by splitting it by newline into an array.
+		//// This skips the line with the section's title.
+		var curve_line_array = curve_info_str.split("\n").slice(1,);
 		for(i = 0; i < curve_line_array.length; i++){
 			//// create one object for parameter line
-			if(curve_line_array[i] != ""){
+			//// Skip empty elements and comment elements that start with '#'.
+			if(curve_line_array[i] != "" && curve_line_array[i][0] !== '#'){
 				var curve_obj_inst = splitLineofType1(Object.assign({}, curve_info_obj),curve_line_array[i]);
 				lasjson["CURVE INFORMATION BLOCK"][curve_obj_inst["MNEM"]] = curve_obj_inst
 			}
 		}
-		//// Working with WELL INFORMATION BLOCK second by splitting it by newline into an array and taking items after 0,1,2 or [3:]
-		var well_line_array = well_info_str.split("\n").slice(3,);
+		//// Working with WELL INFORMATION BLOCK second by splitting it by newline into an array.
+		//// This skips the line with the section's title.
+		var well_line_array = well_info_str.split("\n").slice(1,);
 		for(i = 0; i < well_line_array.length; i++){
 			if(well_line_array[i].includes("Generated")){
 				lasjson["WELL INFORMATION BLOCK"]["GENERATED"] = well_line_array[i].replace("\r","").replace("\t"," ").replace("#","")
 			}
 			//// create one object for parameter line
-			else if(well_line_array[i] != ""){
+			//// Skip empty elements and comment elements that start with '#'.
+			if(well_line_array[i] != "" && well_line_array[i][0] !== '#'){
 				var well_obj_inst = splitLineofType1(Object.assign({}, well_info_obj),well_line_array[i]);
 				lasjson["WELL INFORMATION BLOCK"][well_obj_inst["MNEM"]] = well_obj_inst
 			}
 			else{
-				console.log(" got else ")
+				console.log("INFO: in else for well_line: " + i)
+				console.log("elem: [" + well_line_array[i] + "]");
 			}
 		}
 		//// Working with CURVES second by splitting it by newline into an array,
@@ -167,8 +181,11 @@ module.exports = {
 		var curve_str_array = curve_str.split("\n");
 		var curve_names_array = [];
 		var curve_names_array_holder = [];
-		if(curve_str_array[0][0] === "A"){
-			curve_names_array = curve_str_array[0].split(" ")
+		curve_names_array = curve_str_array[0].split(" ")
+
+		//// If there are curve names, push them into the curve_names_array_holder
+		//// and intialize the curve key in CURVES
+		if(curve_names_array.length > 1){
 			var last_curv_name_position = curve_names_array.length - 1;
 			curve_names_array[last_curv_name_position] = curve_names_array[last_curv_name_position].replace("\r","")
 			console.log("0 curve_names_array = ",curve_names_array)
@@ -181,13 +198,48 @@ module.exports = {
 				}
 			}
 		}
-		else{console.log("Couldn't find curve names above curves in LAS, check formatting!")}
+		else{
+			console.log("INFO: Couldn't find curve names above curves in LAS, check formatting!");
+		}
+
 		//// start at position 1 instead of 0 is to avoid the curve names
 		for(j = 1; j < curve_str_array.length; j++){
-			var curve_data_line_array = curve_str_array[j].split(" ");
+			//// Skip empty rows.
+			if (curve_str_array[j].length === 0) {
+				continue;
+			}
+			var curve_data_line_array = curve_str_array[j].split(/\s+/);
+
+			//// Split can leave an empty element at the beginning, remove it.
+			if (curve_data_line_array[0].length === 0){
+				curve_data_line_array.shift();
+			}
 			var counter_of_curve_names = 0;
 			console.log("curve_data_line_array.length = ",curve_data_line_array.length)
 			console.log("curve_data_line_array = ",curve_data_line_array)
+			//// If we didn't get curve column names from '~A section header then
+			//// get them from get the column names from the curve information block
+			//// else
+			//// build a default set.
+			if (curve_names_array_holder.length === 0){
+				curve_info = Object.keys(lasjson['CURVE INFORMATION BLOCK']);
+
+				if (curve_info.length === curve_data_line_array.length){
+					for(k = 0; k < curve_data_line_array.length; k++){
+						col_name = curve_info[k];
+						curve_names_array_holder.push(col_name);
+						lasjson.CURVES[col_name] = [];
+					}
+				}
+				else {
+					for(k = 0; k < curve_data_line_array.length; k++){
+						num = k + 1;
+						col_name = 'COL' + num;
+						curve_names_array_holder.push(col_name);
+						lasjson.CURVES[col_name] = [];
+					}
+				}
+			}
 			var last_curv_data_line_position = curve_data_line_array.length - 1;
 			console.log("curve_data_line_array[last_curv_data_line_position] = ",curve_data_line_array[last_curv_data_line_position])
 			curve_data_line_array[last_curv_data_line_position] = curve_data_line_array[last_curv_data_line_position].replace("\r","")

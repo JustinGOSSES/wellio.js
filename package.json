@@ -7,7 +7,7 @@
   "scripts": {
     "test": "dist/test/test.js",
     "test-lasload": "tape dist/test/test_lasload.js",
-    "test-las2json": "tape dist/test/test_las2json.js",
+    "test-las2json": "tape dist/test/las2json/test_*.js",
     "test-all": "tape dist/test/test*.js"
   },
   "files": [
