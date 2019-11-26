@@ -178,23 +178,23 @@ module.exports = {
 		//// Interate through the array items populate arrays for each key
 		var curve_str_array = curve_str.split("\n");
 
-    //// Get the curve column names from the curve names in the curve information block
-    ////
-    //// Per LAS_20_Update_Jan2014.pdf section 5.5 specs for ~C(Curve Information)
-    //// - This section is manditory.
-    //// - It desribes the curves and its units in the order they appear in the ~ASCII
-    ////   log data section of the file.
-    //// - The channels described in this section must be present in the data set.
+		//// Get the curve column names from the curve names in the curve information block
+		////
+		//// Per LAS_20_Update_Jan2014.pdf section 5.5 specs for ~C(Curve Information)
+		//// - This section is manditory.
+		//// - It desribes the curves and its units in the order they appear in the ~ASCII
+		////	 log data section of the file.
+		//// - The channels described in this section must be present in the data set.
 		var curve_names_array_holder = [];
-    var curve_info = Object.keys(lasjson['CURVE INFORMATION BLOCK']);
+		var curve_info = Object.keys(lasjson['CURVE INFORMATION BLOCK']);
 
-    if (curve_info.length > 0){
-      for(k = 0; k < curve_info.length; k++){
-        col_name = curve_info[k];
-        curve_names_array_holder.push(col_name);
-        lasjson.CURVES[col_name] = [];
-      }
-    }
+		if (curve_info.length > 0){
+			for(k = 0; k < curve_info.length; k++){
+				col_name = curve_info[k];
+				curve_names_array_holder.push(col_name);
+				lasjson.CURVES[col_name] = [];
+			}
+		}
 
 		//// start at position 1 instead of 0 is to avoid the curve names
 		for(j = 1; j < curve_str_array.length; j++){
