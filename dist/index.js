@@ -174,33 +174,27 @@ module.exports = {
 				console.log("elem: [" + well_line_array[i] + "]");
 			}
 		}
-		//// Working with CURVES second by splitting it by newline into an array,
-		//// then using the first line item of that array to find the curve names
-		//// using those curves names to establish object keys and then interating through the other array items
-		//// and populating arrays for each key
+		//// Work with CURVES section by splitting it by newline into an array,
+		//// Interate through the array items populate arrays for each key
 		var curve_str_array = curve_str.split("\n");
-		var curve_names_array = [];
-		var curve_names_array_holder = [];
-		curve_names_array = curve_str_array[0].split(" ")
 
-		//// If there are curve names, push them into the curve_names_array_holder
-		//// and intialize the curve key in CURVES
-		if(curve_names_array.length > 1){
-			var last_curv_name_position = curve_names_array.length - 1;
-			curve_names_array[last_curv_name_position] = curve_names_array[last_curv_name_position].replace("\r","")
-			console.log("0 curve_names_array = ",curve_names_array)
-			curve_names_array = curve_names_array.slice(1,curve_names_array.length);
-			for(i = 0; i < curve_names_array.length; i++){
-				if(curve_names_array[i] !== ""){
-					console.log("0.5 curve_names_array[i] = ",curve_names_array[i])
-					curve_names_array_holder.push(curve_names_array[i]);
-					lasjson["CURVES"][curve_names_array[i]] = []
-				}
-			}
-		}
-		else{
-			console.log("INFO: Couldn't find curve names above curves in LAS, check formatting!");
-		}
+    //// Get the curve column names from the curve names in the curve information block
+    ////
+    //// Per LAS_20_Update_Jan2014.pdf section 5.5 specs for ~C(Curve Information)
+    //// - This section is manditory.
+    //// - It desribes the curves and its units in the order they appear in the ~ASCII
+    ////   log data section of the file.
+    //// - The channels described in this section must be present in the data set.
+		var curve_names_array_holder = [];
+    var curve_info = Object.keys(lasjson['CURVE INFORMATION BLOCK']);
+
+    if (curve_info.length > 0){
+      for(k = 0; k < curve_info.length; k++){
+        col_name = curve_info[k];
+        curve_names_array_holder.push(col_name);
+        lasjson.CURVES[col_name] = [];
+      }
+    }
 
 		//// start at position 1 instead of 0 is to avoid the curve names
 		for(j = 1; j < curve_str_array.length; j++){
@@ -217,29 +211,8 @@ module.exports = {
 			var counter_of_curve_names = 0;
 			console.log("curve_data_line_array.length = ",curve_data_line_array.length)
 			console.log("curve_data_line_array = ",curve_data_line_array)
-			//// If we didn't get curve column names from '~A section header then
-			//// get them from get the column names from the curve information block
-			//// else
-			//// build a default set.
-			if (curve_names_array_holder.length === 0){
-				curve_info = Object.keys(lasjson['CURVE INFORMATION BLOCK']);
 
-				if (curve_info.length === curve_data_line_array.length){
-					for(k = 0; k < curve_data_line_array.length; k++){
-						col_name = curve_info[k];
-						curve_names_array_holder.push(col_name);
-						lasjson.CURVES[col_name] = [];
-					}
-				}
-				else {
-					for(k = 0; k < curve_data_line_array.length; k++){
-						num = k + 1;
-						col_name = 'COL' + num;
-						curve_names_array_holder.push(col_name);
-						lasjson.CURVES[col_name] = [];
-					}
-				}
-			}
+
 			var last_curv_data_line_position = curve_data_line_array.length - 1;
 			console.log("curve_data_line_array[last_curv_data_line_position] = ",curve_data_line_array[last_curv_data_line_position])
 			curve_data_line_array[last_curv_data_line_position] = curve_data_line_array[last_curv_data_line_position].replace("\r","")
