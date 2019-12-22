@@ -7,8 +7,8 @@
  There currently isn't any .las -> JSON parser that I was able to find. There is <a href="https://lasio.readthedocs.io/en/latest/">lasio</a> and <a href="https://github.com/agile-geoscience/welly">welly</a> for python, but nothing to ingest las files in JavaScript. Wellio.js is an attempt to fill that gap, so I can build other stuff. Once you have well data as JSON, many other JavaScript-based things as possible. I'll try to keep those other things separate, except as demos for Wellio.
 
 ## Contributors: 
--- https://github.com/JustinGOSSES
--- https://github.com/dcslagel
+- https://github.com/JustinGOSSES
+- https://github.com/dcslagel
 
 ## Does this upload my well logs to your server? 
 Nope, it only loads to your browser's memory and then your browser forgets it when you close the tab.
