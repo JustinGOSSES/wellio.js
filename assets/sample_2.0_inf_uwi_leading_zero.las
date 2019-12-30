@@ -1,22 +1,28 @@
 ~Version Information
-VERS. 2.0: CWLS Log ASCII Standard - VERSION 2.0
-WRAP. NO: One line per depth step
+VERS.                   2.0   :   CWLS log ASCII Standard -VERSION 2.0
+WRAP.                   NO    :   One line per depth step
 ~Well Information Block
-STRT.FT 1365.0000:
-STOP.FT 8781.0000:
-STEP.FT 0.5000:
-NULL. -999.2500:
-COMP. Windsor Energy Group: COMPANY
-WELL. Christiansen 4-9: WELL
-FLD. Spindle: FIELD
-LOC. SHL: 1536' FNL & 1123' FWL SW NW--BHL: 662' FNL & 691' FWL NWNW--Sec. 9, Twp. 1S, Rge. 67W: LOCATION
-CNTY. Adams: COUNTY
-SRVC. PHOENIX SURVEYS, INC.: SERVICE COMPANY
-DATE. Fri Nov 30 03:06:59 2007: LOG DATE
-UWI. 05001095820000 : UNIQUE WELL ID
-STAT. Colorado: STATE
-~CURVE INFORMATION
-~PARAMETER INFORMATION
-~A  DEPTH     DT       RHOB     NPHI     SFLU     SFLA      ILM      ILD
-1670.000   123.450 2550.000    0.450  123.450  123.450  110.200  105.600
-
+STRT.M                          635.0000        :START DEPTH
+STOP.M                          400.0000        :STOP DEPTH
+STEP.M                          -0.1250         :STEP 
+NULL.                           -999.25         :NULL VALUE
+COMP.           ANY OIL COMPANY INC.            :COMPANY
+WELL.           ANY ET AL 12-34-12-34           :WELL
+FLD .           WILDCAT                         :FIELD
+LOC .           12-34-12-34W5M                  :LOCATION
+PROV.           ALBERTA                         :PROVINCE 
+SRVC.           ANY LOGGING COMPANY INC.        :SERVICE COMPANY
+DATE.           13-DEC-86                       :LOG DATE
+UWI .           05001095820000                  :UNIQUE WELL ID
+~C
+DEPT    .M                              :   DEPTH
+RHOB    .K/M3                           :   BULK DENSITY
+NPHI    .VOL/VOL                        :   NEUTRON POROSITY - SANDSTONE
+MSFL    .OHMM                           :   Rxo RESISTIVITY
+SFLA    .OHMM                           :   SHALLOW RESISTIVITY
+ILM     .OHMM                           :   MEDIUM RESISTIVITY
+ILD     .OHMM                           :   DEEP RESISTIVITY
+SP      .MV                             :   SPONTANEOUS POTENTIAL
+~A
+ 635.0000     2256.0000   0.4033  22.0781 22.0781 20.3438 3.6660 123.4
+ 634.8750     2256.0000   0.4033  22.0781 22.0781 20.3438 3.6660 123.4
