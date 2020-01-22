@@ -3,6 +3,21 @@
 // var fs = require('fs');
 
 module.exports = {
+
+  // Read and transform Lasio Json files to Wellio.js json data format
+  lasiojson2wellio: function(lasiojsonfile) {
+    let lj = JSON.parse(fs.readFileSync(lasiojsonfile, 'utf8'));
+    console.log(lj);
+    let lasjson = {};
+		lasjson["VERSION INFORMATION"] = {};
+		lasjson["WELL INFORMATION BLOCK"] = {};
+		lasjson["CURVE INFORMATION BLOCK"] = {};
+		lasjson["PARAMETER INFORMATION"] = {};
+		lasjson["CURVES"] = lj.data;
+
+    return lasjson;
+  },
+
 	//// For quick testing when a LAS file isn't handy, use returnThing function
 	//// It just returns the argument given to it
 	returnThing: function(onelas){
