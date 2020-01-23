@@ -7,13 +7,21 @@ module.exports = {
   // Read and transform Lasio Json files to Wellio.js json data format
   lasiojson2wellio: function(lasiojsonfile) {
     let lj = JSON.parse(fs.readFileSync(lasiojsonfile, 'utf8'));
-    console.log(lj);
+
+    let metaheaders = ['Version', 'Well', 'Curves', 'Parameter' ];
     let lasjson = {};
 		lasjson["VERSION INFORMATION"] = {};
 		lasjson["WELL INFORMATION BLOCK"] = {};
 		lasjson["CURVE INFORMATION BLOCK"] = {};
 		lasjson["PARAMETER INFORMATION"] = {};
 		lasjson["CURVES"] = lj.data;
+
+    // Example code for adding non-standard headers
+    for (let item in lj.metadata) {
+      if (! metaheaders.includes(item)) {
+        lasjson[item.toUpperCase()] = lj.metadata[item];
+      }
+    }
 
     return lasjson;
   },
