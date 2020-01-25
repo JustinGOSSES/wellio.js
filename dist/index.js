@@ -5,7 +5,15 @@
 module.exports = {
 
   // Read and transform Lasio Json files to Wellio.js json data format
-  lasiojson2wellio: function(lasiojsonfile) {
+  read_json: function(lasiojsonfile) {
+    // Configure fs if running from node
+    // TODO: implement how to handle when fs is not available.
+    var fs = '';
+
+    if (process !== 'undefined' && process.versions != null && process.versions.node != null) {
+       fs = require('fs');
+    }
+
     let lj = JSON.parse(fs.readFileSync(lasiojsonfile, 'utf8'));
 
     let metaheaders = ['Version', 'Well', 'Curves', 'Parameter' ];

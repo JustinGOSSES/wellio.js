@@ -1,0 +1,85 @@
+{
+    "data": {
+        "DEPT": [
+            1670.0,
+            1669.875,
+            1669.75
+        ],
+        "DT": [
+            123.45,
+            123.45,
+            123.45
+        ],
+        "ILD": [
+            105.6,
+            105.6,
+            105.6
+        ],
+        "ILM": [
+            110.2,
+            110.2,
+            110.2
+        ],
+        "NPHI": [
+            0.45,
+            0.45,
+            0.45
+        ],
+        "RHOB": [
+            2550.0,
+            2550.0,
+            2550.0
+        ],
+        "SFLA": [
+            123.45,
+            123.45,
+            123.45
+        ],
+        "SFLU": [
+            123.45,
+            123.45,
+            123.45
+        ]
+    },
+    "metadata": {
+        "Curves": {
+            "DEPT": "",
+            "DT": "60 520 32 00",
+            "ILD": "07 120 46 00",
+            "ILM": "07 120 44 00",
+            "NPHI": "42 890 00 00",
+            "RHOB": "45 350 01 00",
+            "SFLA": "07 222 01 00",
+            "SFLU": "07 220 04 00"
+        },
+        "Other": "Note: The logging tools became stuck at 625 metres causing the data\nbetween 625 metres and 615 metres to be invalid.",
+        "Parameter": {
+            "BHT": 35.5,
+            "BS": 200.0,
+            "DFD": 1525.0,
+            "FD": 1000.0,
+            "MATR": "SAND",
+            "MDEN": 2710.0,
+            "MUD": "GEL CHEM",
+            "RMF": 0.216
+        },
+        "Version": {
+            "VERS": 2.0,
+            "WRAP": "NO"
+        },
+        "Well": {
+            "COMP": "ANY OIL COMPANY INC.",
+            "DATE": "13-DEC-86",
+            "FLD": "WILDCAT",
+            "LOC": "12-34-12-34W5M",
+            "NULL": -999.25,
+            "PROV": "ALBERTA",
+            "SRVC": "ANY LOGGING COMPANY INC.",
+            "STEP": -0.125,
+            "STOP": 1660.0,
+            "STRT": 1670.0,
+            "UWI": "100123401234W500",
+            "WELL": "AAAAA_2"
+        }
+    }
+}
