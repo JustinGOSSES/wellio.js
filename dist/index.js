@@ -21,6 +21,54 @@ module.exports = {
       if (! metaheaders.includes(item)) {
         lasjson[item.toUpperCase()] = lj.metadata[item];
       }
+      else if (item == 'Version') {
+        for (let mykey in lj.metadata.Version) {
+          
+          lasjson["VERSION INFORMATION"][mykey] = {
+            MNEM: mykey,
+            UNIT: '',
+            DATA: lj.metadata.Version[mykey],
+            'DESCRIPTION OF MNEMONIC 1': '',
+            'DESCRIPTION OF MNEMONIC 2': ''
+          };
+        }
+      }
+      else if (item == 'Well') {
+        for (let mykey in lj.metadata.Well) {
+          
+          lasjson["WELL INFORMATION BLOCK"][mykey] = {
+            MNEM: mykey,
+            UNIT: '',
+            DATA: lj.metadata.Well[mykey],
+            'DESCRIPTION OF MNEMONIC 1': '',
+            'DESCRIPTION OF MNEMONIC 2': ''
+          };
+        }
+      }
+      else if (item == 'Parameter') {
+        for (let mykey in lj.metadata.Parameter) {
+          
+          lasjson["PARAMETER INFORMATION"][mykey] = {
+            MNEM: mykey,
+            UNIT: '',
+            DATA: lj.metadata.Parameter[mykey],
+            'DESCRIPTION OF MNEMONIC 1': '',
+            'DESCRIPTION OF MNEMONIC 2': ''
+          };
+        }
+      }
+      else if (item == 'Curves') {
+        for (let mykey in lj.metadata.Curves) {
+          
+          lasjson["CURVE INFORMATION BLOCK"][mykey] = {
+            MNEM: mykey,
+            UNIT: '',
+            DATA: lj.metadata.Curves[mykey],
+            'DESCRIPTION OF MNEMONIC 1': '',
+            'DESCRIPTION OF MNEMONIC 2': ''
+          };
+        }
+      }
     }
 
     return lasjson;
