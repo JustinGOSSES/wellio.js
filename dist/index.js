@@ -3,6 +3,55 @@
 // var fs = require('fs');
 
 module.exports = {
+
+  // Read and transform Lasio Json files to Wellio.js json data format
+  read_json: function(lasiojsonfile) {
+    // Configure fs if running from node
+    // TODO: implement how to handle when fs is not available.
+    var fs = '';
+
+    if (process !== 'undefined' && process.versions != null && process.versions.node != null) {
+       fs = require('fs');
+    }
+
+    let lj = JSON.parse(fs.readFileSync(lasiojsonfile, 'utf8'));
+
+    let std_headers = {
+      'Version': 'VERSION INFORMATION',
+      'Well': 'WELL INFORMATION BLOCK',
+      'Curves': 'CURVE INFORMATION BLOCK', 
+      'Parameter': 'PARAMETER INFORMATION'
+    };
+
+    let lasjson = {};
+		lasjson["VERSION INFORMATION"] = {};
+		lasjson["WELL INFORMATION BLOCK"] = {};
+		lasjson["CURVE INFORMATION BLOCK"] = {};
+		lasjson["PARAMETER INFORMATION"] = {};
+		lasjson["CURVES"] = lj.data;
+
+    // Example code for adding non-standard headers
+    for (let item in lj.metadata) {
+      if ( !(item in std_headers) ) {
+        lasjson[item.toUpperCase()] = lj.metadata[item];
+      }
+      else {
+        for (let mnemonic in lj.metadata[item]) {
+          section = std_headers[item];      
+          lasjson[section][mnemonic] = {
+            MNEM: mnemonic,
+            UNIT: '',
+            DATA: lj.metadata[item][mnemonic],
+            'DESCRIPTION OF MNEMONIC 1': '',
+            'DESCRIPTION OF MNEMONIC 2': ''
+          };
+        }
+      }
+    }
+
+    return lasjson;
+  },
+
 	//// For quick testing when a LAS file isn't handy, use returnThing function
 	//// It just returns the argument given to it
 	returnThing: function(onelas){
