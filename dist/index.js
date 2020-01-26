@@ -16,7 +16,13 @@ module.exports = {
 
     let lj = JSON.parse(fs.readFileSync(lasiojsonfile, 'utf8'));
 
-    let metaheaders = ['Version', 'Well', 'Curves', 'Parameter' ];
+    let std_headers = {
+      'Version': 'VERSION INFORMATION',
+      'Well': 'WELL INFORMATION BLOCK',
+      'Curves': 'CURVE INFORMATION BLOCK', 
+      'Parameter': 'PARAMETER INFORMATION'
+    };
+
     let lasjson = {};
 		lasjson["VERSION INFORMATION"] = {};
 		lasjson["WELL INFORMATION BLOCK"] = {};
@@ -26,52 +32,16 @@ module.exports = {
 
     // Example code for adding non-standard headers
     for (let item in lj.metadata) {
-      if (! metaheaders.includes(item)) {
+      if ( !(item in std_headers) ) {
         lasjson[item.toUpperCase()] = lj.metadata[item];
       }
-      else if (item == 'Version') {
-        for (let mykey in lj.metadata.Version) {
-          
-          lasjson["VERSION INFORMATION"][mykey] = {
-            MNEM: mykey,
+      else {
+        for (let mnemonic in lj.metadata[item]) {
+          section = std_headers[item];      
+          lasjson[section][mnemonic] = {
+            MNEM: mnemonic,
             UNIT: '',
-            DATA: lj.metadata.Version[mykey],
-            'DESCRIPTION OF MNEMONIC 1': '',
-            'DESCRIPTION OF MNEMONIC 2': ''
-          };
-        }
-      }
-      else if (item == 'Well') {
-        for (let mykey in lj.metadata.Well) {
-          
-          lasjson["WELL INFORMATION BLOCK"][mykey] = {
-            MNEM: mykey,
-            UNIT: '',
-            DATA: lj.metadata.Well[mykey],
-            'DESCRIPTION OF MNEMONIC 1': '',
-            'DESCRIPTION OF MNEMONIC 2': ''
-          };
-        }
-      }
-      else if (item == 'Parameter') {
-        for (let mykey in lj.metadata.Parameter) {
-          
-          lasjson["PARAMETER INFORMATION"][mykey] = {
-            MNEM: mykey,
-            UNIT: '',
-            DATA: lj.metadata.Parameter[mykey],
-            'DESCRIPTION OF MNEMONIC 1': '',
-            'DESCRIPTION OF MNEMONIC 2': ''
-          };
-        }
-      }
-      else if (item == 'Curves') {
-        for (let mykey in lj.metadata.Curves) {
-          
-          lasjson["CURVE INFORMATION BLOCK"][mykey] = {
-            MNEM: mykey,
-            UNIT: '',
-            DATA: lj.metadata.Curves[mykey],
+            DATA: lj.metadata[item][mnemonic],
             'DESCRIPTION OF MNEMONIC 1': '',
             'DESCRIPTION OF MNEMONIC 2': ''
           };
