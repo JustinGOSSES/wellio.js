@@ -11,7 +11,9 @@ test('readLasioJson: test_read_v2_sample', function(t) {
 
   let well_json = wellio.read_json(json_file);
 
-  t.equal(well_json["VERSION INFORMATION"].VERS.DATA, 2);
+  t.equal(well_json["VERSION INFORMATION"].VERS.DATA, 2,
+    "Sample json: LAS is version 2"
+  );
 
   t.end();
 });
