@@ -224,7 +224,7 @@ module.exports = {
 			}
 		}
 		//// Work with CURVES section by splitting it by newline into an array,
-		//// Interate through the array items populate arrays for each key
+		//// Iterate through the array items populate arrays for each key
 		var curve_str_array = curve_str.split("\n");
 
 		//// Get the curve column names from the curve names in the curve information block
@@ -245,18 +245,36 @@ module.exports = {
 			}
 		}
 
+		var curve_data_line_array = [];
+
 		//// start at position 1 instead of 0 is to avoid the curve names
 		for(j = 1; j < curve_str_array.length; j++){
 			//// Skip empty rows.
 			if (curve_str_array[j].length === 0) {
 				continue;
 			}
-			var curve_data_line_array = curve_str_array[j].split(/\s+/);
 
+			var temp_data_array = curve_str_array[j].split(/\s+/);
 			//// Split can leave an empty element at the beginning, remove it.
-			if (curve_data_line_array[0].length === 0){
-				curve_data_line_array.shift();
+			if (temp_data_array[0].length === 0){
+				temp_data_array.shift();
 			}
+
+			//// If data is wrapped continue to accumulate data from rows till
+			//// we have a data element for each data column
+			var idx = curve_data_line_array.length;
+			curve_data_line_array.length = idx + temp_data_array.length;
+			for (var i = 0; i < temp_data_array.length; i++, idx++) {
+				curve_data_line_array[idx] = temp_data_array[i];
+			}
+
+			if (
+				lasjson["VERSION INFORMATION"].WRAP.DATA == 'YES'
+				&& curve_data_line_array.length < curve_names_array_holder.length)
+			{
+				continue;
+			}
+
 			var counter_of_curve_names = 0;
 			console.log("curve_data_line_array.length = ",curve_data_line_array.length)
 			console.log("curve_data_line_array = ",curve_data_line_array)
@@ -272,6 +290,8 @@ module.exports = {
 					counter_of_curve_names += 1;
 				}
 			}
+			//// Zero out curve_data_line_array for next set of data
+			curve_data_line_array = [];
 		}
 		console.log(" test: lasjson",lasjson);
 		return(lasjson)
