@@ -1,0 +1,286 @@
+{
+    "CURVE INFORMATION BLOCK": {
+        "DEPT": {
+            "CURVE DESCRIPTION 1": "",
+            "CURVE DESCRIPTION 2": "",
+            "DATA": "",
+            "DESCRIPTION OF MNEMONIC 1": "1  DEPTH",
+            "DESCRIPTION OF MNEMONIC 2": "",
+            "ERCB CURVE CODE": "",
+            "MNEM": "DEPT",
+            "UNIT": ""
+        },
+        "DT": {
+            "CURVE DESCRIPTION 1": "",
+            "CURVE DESCRIPTION 2": "",
+            "DATA": "60 520 32 00",
+            "DESCRIPTION OF MNEMONIC 1": "2  SONIC TRANSIT TIME",
+            "DESCRIPTION OF MNEMONIC 2": "",
+            "ERCB CURVE CODE": "",
+            "MNEM": "DT",
+            "UNIT": ""
+        },
+        "ILD": {
+            "CURVE DESCRIPTION 1": "",
+            "CURVE DESCRIPTION 2": "",
+            "DATA": "07 120 46 00",
+            "DESCRIPTION OF MNEMONIC 1": "8  DEEP RESISTIVITY",
+            "DESCRIPTION OF MNEMONIC 2": "",
+            "ERCB CURVE CODE": "",
+            "MNEM": "ILD",
+            "UNIT": ""
+        },
+        "ILM": {
+            "CURVE DESCRIPTION 1": "",
+            "CURVE DESCRIPTION 2": "",
+            "DATA": "07 120 44 00",
+            "DESCRIPTION OF MNEMONIC 1": "7  MEDIUM RESISTIVITY",
+            "DESCRIPTION OF MNEMONIC 2": "",
+            "ERCB CURVE CODE": "",
+            "MNEM": "ILM",
+            "UNIT": ""
+        },
+        "NPHI": {
+            "CURVE DESCRIPTION 1": "",
+            "CURVE DESCRIPTION 2": "",
+            "DATA": "42 890 00 00",
+            "DESCRIPTION OF MNEMONIC 1": "4  NEUTRON POROSITY",
+            "DESCRIPTION OF MNEMONIC 2": "",
+            "ERCB CURVE CODE": "",
+            "MNEM": "NPHI",
+            "UNIT": ""
+        },
+        "RHOB": {
+            "CURVE DESCRIPTION 1": "",
+            "CURVE DESCRIPTION 2": "",
+            "DATA": "45 350 01 00",
+            "DESCRIPTION OF MNEMONIC 1": "3  BULK DENSITY",
+            "DESCRIPTION OF MNEMONIC 2": "",
+            "ERCB CURVE CODE": "",
+            "MNEM": "RHOB",
+            "UNIT": ""
+        },
+        "SFLA": {
+            "CURVE DESCRIPTION 1": "",
+            "CURVE DESCRIPTION 2": "",
+            "DATA": "07 222 01 00",
+            "DESCRIPTION OF MNEMONIC 1": "6  SHALLOW RESISTIVITY",
+            "DESCRIPTION OF MNEMONIC 2": "",
+            "ERCB CURVE CODE": "",
+            "MNEM": "SFLA",
+            "UNIT": ""
+        },
+        "SFLU": {
+            "CURVE DESCRIPTION 1": "",
+            "CURVE DESCRIPTION 2": "",
+            "DATA": "07 220 04 00",
+            "DESCRIPTION OF MNEMONIC 1": "5  SHALLOW RESISTIVITY",
+            "DESCRIPTION OF MNEMONIC 2": "",
+            "ERCB CURVE CODE": "",
+            "MNEM": "SFLU",
+            "UNIT": ""
+        }
+    },
+    "CURVES": {
+        "DEPT": [
+            "1670.000",
+            "1669.875",
+            "1669.750"
+        ],
+        "DT": [
+            "123.450",
+            "123.450",
+            "123.450"
+        ],
+        "ILD": [
+            "105.600",
+            "105.600",
+            "105.600"
+        ],
+        "ILM": [
+            "110.200",
+            "110.200",
+            "110.200"
+        ],
+        "NPHI": [
+            "0.450",
+            "0.450",
+            "0.450"
+        ],
+        "RHOB": [
+            "2550.000",
+            "2550.000",
+            "2550.000"
+        ],
+        "SFLA": [
+            "123.450",
+            "123.450",
+            "123.450"
+        ],
+        "SFLU": [
+            "123.450",
+            "123.450",
+            "123.450"
+        ]
+    },
+    "PARAMETER INFORMATION": {
+        "BHT": {
+            "DATA": "35.5000",
+            "DESCRIPTION OF MNEMONIC 1": "BOTTOM HOLE TEMPERATURE",
+            "DESCRIPTION OF MNEMONIC 2": "",
+            "MNEM": "BHT",
+            "UNIT": ""
+        },
+        "BS": {
+            "DATA": "200.0000",
+            "DESCRIPTION OF MNEMONIC 1": "BIT SIZE",
+            "DESCRIPTION OF MNEMONIC 2": "",
+            "MNEM": "BS",
+            "UNIT": ""
+        },
+        "DFD": {
+            "DATA": "1525.0000",
+            "DESCRIPTION OF MNEMONIC 1": "DRILL FLUID DENSITY",
+            "DESCRIPTION OF MNEMONIC 2": "",
+            "MNEM": "DFD",
+            "UNIT": ""
+        },
+        "FD": {
+            "DATA": "1000.0000",
+            "DESCRIPTION OF MNEMONIC 1": "FLUID DENSITY",
+            "DESCRIPTION OF MNEMONIC 2": "",
+            "MNEM": "FD",
+            "UNIT": ""
+        },
+        "MATR": {
+            "DATA": "SAND",
+            "DESCRIPTION OF MNEMONIC 1": "NEUTRON MATRIX",
+            "DESCRIPTION OF MNEMONIC 2": "",
+            "MNEM": "MATR",
+            "UNIT": ""
+        },
+        "MDEN": {
+            "DATA": "2710.0000",
+            "DESCRIPTION OF MNEMONIC 1": "LOGGING MATRIX DENSITY",
+            "DESCRIPTION OF MNEMONIC 2": "",
+            "MNEM": "MDEN",
+            "UNIT": ""
+        },
+        "MUD": {
+            "DATA": "GEL CHEM",
+            "DESCRIPTION OF MNEMONIC 1": "MUD TYPE",
+            "DESCRIPTION OF MNEMONIC 2": "",
+            "MNEM": "MUD",
+            "UNIT": ""
+        },
+        "RMF": {
+            "DATA": "0.2160",
+            "DESCRIPTION OF MNEMONIC 1": "MUD FILTRATE RESISTIVITY",
+            "DESCRIPTION OF MNEMONIC 2": "",
+            "MNEM": "RMF",
+            "UNIT": ""
+        }
+    },
+    "VERSION INFORMATION": {
+        "VERS": {
+            "DATA": "2.0",
+            "DESCRIPTION OF MNEMONIC 1": "CWLS LOG ASCII STANDARD",
+            "DESCRIPTION OF MNEMONIC 2": "VERSION 2.0",
+            "MNEM": "VERS",
+            "UNIT": ""
+        },
+        "WRAP": {
+            "DATA": "NO",
+            "DESCRIPTION OF MNEMONIC 1": "ONE LINE PER DEPTH STEP",
+            "DESCRIPTION OF MNEMONIC 2": "",
+            "MNEM": "WRAP",
+            "UNIT": ""
+        }
+    },
+    "WELL INFORMATION BLOCK": {
+        "COMP": {
+            "DATA": "ANY OIL COMPANY INC.",
+            "DESCRIPTION OF MNEMONIC 1": "COMPANY",
+            "DESCRIPTION OF MNEMONIC 2": "",
+            "MNEM": "COMP",
+            "UNIT": ""
+        },
+        "DATE": {
+            "DATA": "13-DEC-86",
+            "DESCRIPTION OF MNEMONIC 1": "LOG DATE",
+            "DESCRIPTION OF MNEMONIC 2": "",
+            "MNEM": "DATE",
+            "UNIT": ""
+        },
+        "FLD": {
+            "DATA": "WILDCAT",
+            "DESCRIPTION OF MNEMONIC 1": "FIELD",
+            "DESCRIPTION OF MNEMONIC 2": "",
+            "MNEM": "FLD",
+            "UNIT": ""
+        },
+        "LOC": {
+            "DATA": "12-34-12-34W5M",
+            "DESCRIPTION OF MNEMONIC 1": "LOCATION",
+            "DESCRIPTION OF MNEMONIC 2": "",
+            "MNEM": "LOC",
+            "UNIT": ""
+        },
+        "NULL": {
+            "DATA": "-999.25",
+            "DESCRIPTION OF MNEMONIC 1": "NULL VALUE",
+            "DESCRIPTION OF MNEMONIC 2": "",
+            "MNEM": "NULL",
+            "UNIT": ""
+        },
+        "PROV": {
+            "DATA": "ALBERTA",
+            "DESCRIPTION OF MNEMONIC 1": "PROVINCE",
+            "DESCRIPTION OF MNEMONIC 2": "",
+            "MNEM": "PROV",
+            "UNIT": ""
+        },
+        "SRVC": {
+            "DATA": "ANY LOGGING COMPANY INC.",
+            "DESCRIPTION OF MNEMONIC 1": "SERVICE COMPANY",
+            "DESCRIPTION OF MNEMONIC 2": "",
+            "MNEM": "SRVC",
+            "UNIT": ""
+        },
+        "STEP": {
+            "DATA": "-0.1250",
+            "DESCRIPTION OF MNEMONIC 1": "STEP",
+            "DESCRIPTION OF MNEMONIC 2": "",
+            "MNEM": "STEP",
+            "UNIT": ""
+        },
+        "STOP": {
+            "DATA": "1660.0000",
+            "DESCRIPTION OF MNEMONIC 1": "STOP DEPTH",
+            "DESCRIPTION OF MNEMONIC 2": "",
+            "MNEM": "STOP",
+            "UNIT": ""
+        },
+        "STRT": {
+            "DATA": "1670.0000",
+            "DESCRIPTION OF MNEMONIC 1": "START DEPTH",
+            "DESCRIPTION OF MNEMONIC 2": "",
+            "MNEM": "STRT",
+            "UNIT": ""
+        },
+        "UWI": {
+            "DATA": "100123401234W500",
+            "DESCRIPTION OF MNEMONIC 1": "UNIQUE WELL ID",
+            "DESCRIPTION OF MNEMONIC 2": "",
+            "MNEM": "UWI",
+            "UNIT": ""
+        },
+        "WELL": {
+            "DATA": "AAAAA_2",
+            "DESCRIPTION OF MNEMONIC 1": "WELL",
+            "DESCRIPTION OF MNEMONIC 2": "",
+            "MNEM": "WELL",
+            "UNIT": ""
+        }
+    }
+}

@@ -8,7 +8,6 @@
     "test": "dist/test/test.js",
     "test-lasload": "tape dist/test/test_lasload.js",
     "test-las2json": "tape dist/test/las2json/test_*.js",
-    "test-read-lasio-json": "tape dist/test/read_las_json/test_*.js",
     "test-all": "tape dist/test/test*.js"
   },
   "files": [
@@ -47,7 +46,8 @@
     "eslint-plugin-node": "^6.0.1",
     "eslint-plugin-promise": "^3.7.0",
     "eslint-plugin-standard": "^3.0.1",
-    "tape": "~4.9.0"
+    "tape": "~4.9.0",
+    "ajv-cli": "^3.0.0"
   },
   "bugs": {
     "url": "https://github.com/JustinGOSSES/wellio.js/issues"
