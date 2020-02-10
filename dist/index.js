@@ -58,6 +58,11 @@ module.exports = {
 		return onelas
 	},
 	//// Loads a LAS 2.0 file from local files
+	/**
+	 * Loads a LAS 2.0 file from local files
+	 * @param {string} well_log A string reprepresentatiion of filename of well log to be loaded into memory
+	 * @returns {string} A string representation of the contents of that well log file. It is a single string.
+	 */
 	loadLAS:function(well_log){
 		var file = well_log
     var fs = '';
@@ -70,6 +75,11 @@ module.exports = {
     return contents
 	},
 	//// Converts a LAS 2.0 file already loaded into memory into a json format
+	/**
+	 * las2jso function converts a LAS 2.0 file already loaded into memory as a string into a JSON object
+	 * @param {string} onelas A string representation of a LAS 2.0 well log file. Typically from the result of the loadLAS function.
+	 * @returns {Object} A JSON object that represents the information that was in the LAS 2.0 well log file but in JSON wellio style format.
+	 */
 	las2json: function(onelas){
 		//// var lasjson establishes a blank json for holding las 2.0 data. It will look like the example below:
 		var lasjson = {
