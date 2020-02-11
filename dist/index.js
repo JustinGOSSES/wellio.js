@@ -5,6 +5,11 @@
 module.exports = {
 
   // Read and transform Lasio Json files to Wellio.js json data format
+/**
+* The read_json function reads and transforms lasio style JSOn files into wellio.js style JSON data format in memory and returns it.
+* @param {string} lasiojsonfile A string reprepresentatiion of filename of well log in a .json file to be loaded into memory and converted from lasio to wellio style JSON
+* @returns {object} A wellio style JSON object
+*/
   read_json: function(lasiojsonfile) {
     // Configure fs if running from node
     // TODO: implement how to handle when fs is not available.
@@ -52,17 +57,23 @@ module.exports = {
     return lasjson;
   },
 
-	//// For quick testing when a LAS file isn't handy, use returnThing function
-	//// It just returns the argument given to it
+
+/**
+ * A helper function that proves wellio,js was installed correctly. It merely returns the argument provided to it. For example, "test" as input would return "test".
+ * @param {*} onelas anything
+ * @returns Returens the input that was givne as an argument. This is just for testing that wellio was installed correctly.
+ * @example wellio.returnThing("test") = "test"
+ */
 	returnThing: function(onelas){
 		return onelas
 	},
-	//// Loads a LAS 2.0 file from local files
-	/**
-	 * Loads a LAS 2.0 file from local files
-	 * @param {string} well_log A string reprepresentatiion of filename of well log to be loaded into memory
-	 * @returns {string} A string representation of the contents of that well log file. It is a single string.
-	 */
+
+
+/**
+* Loads a LAS 2.0 file from local files
+* @param {string} well_log A string reprepresentatiion of filename of well log to be loaded into memory
+* @returns {string} A string representation of the contents of that well log file. It is a single string.
+*/
 	loadLAS:function(well_log){
 		var file = well_log
     var fs = '';

@@ -1,0 +1,16 @@
+toc:
+  - name: wellioviz
+    description: |
+      ### Wellio.js is a JavaScript library for converting a LAS 2.0 well log file into a wellio style JSON.
+      ### Other documentation here
+      ### How to use
+      ### How to install
+      ### Tests
+      Need to figure out why test functions aren't showing here!
+      ### How Contribute to Documentation
+      Make changes to documentation in the index.js file. 
+      This is the description of how the functions run at the top of each function between /** *.
+      Alternatively, make change to the documentation.yml file in the docs folder.
+      Go to the top level folder. (assuming documentation.js is alredy installed) Run `documentation build -c docs/documentation.yml dist/* -f html -o docs'
+      Now CD to docs folder. Run `python3 -m http.server`. You should be able to go to your browser at http://0.0.0.0:8000/ and see the docs. 
+      Once you push the repo to github, the docs should be at the top level of the githu pages page plus /docs/index.html
