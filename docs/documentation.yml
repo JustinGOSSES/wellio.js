@@ -6,7 +6,7 @@ toc:
       ### How to use
       ### How to install
       ### Tests
-      Need to figure out why test functions aren't showing here!
+      Need to figure out why test functions aren't showing here! Is it because there isn't any documentation for them yet? Probably.
       ### How Contribute to Documentation
       Make changes to documentation in the index.js file. 
       This is the description of how the functions run at the top of each function between /** *.
