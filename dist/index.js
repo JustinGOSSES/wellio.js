@@ -12,7 +12,7 @@ module.exports = {
  *
  * @returns {string} : The file's contents as a string.
  */
-  read_file: function(file_to_read) {
+  read_lasio_json_file: function(file_to_read) {
     // Configure fs if running from node
     let fs = '';
 
@@ -29,7 +29,7 @@ module.exports = {
 *
 * @example
 * let wellio = require('wellio')
-* let lasio_json_str = wellio.read_file('lasio.json');
+* let lasio_json_str = wellio.read_lasio_json_file('lasio.json');
 * let lasio_obj = JSON.parse(lasio_json_str);
 * let wellio_obj = wellio.lasio_obj_2_wellio_obj(lasio_obj);
 *
