@@ -24,18 +24,18 @@ module.exports = {
   },
 
 /**
-* The lasio_2_wellio function transforms lasio JSON strings into wellio.js JSON data format in memory and returns it.
+* The lasio_obj_2_wellio_obj function transforms lasio JSON strings into wellio.js JSON data format in memory and returns it.
 * @param {object} lasio_json - A JavaScript object representation of lasio well log format
 *
 * @example
 * let wellio = require('wellio')
 * let lasio_json_str = wellio.read_file('lasio.json');
 * let lasio_obj = JSON.parse(lasio_json_str);
-* let wellio_obj = wellio.lasio_2_wellio(lasio_obj);
+* let wellio_obj = wellio.lasio_obj_2_wellio_obj(lasio_obj);
 *
 * @returns {object} A wellio style JSON object
 */
-  lasio_2_wellio: function(lasio_obj) {
+  lasio_obj_2_wellio_obj: function(lasio_obj) {
 
     let std_headers = {
       'Version': 'VERSION INFORMATION',

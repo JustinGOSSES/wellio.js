@@ -14,7 +14,7 @@ test('readLasioJson: test_read_v2_sample_empty_headers', function(t) {
 
   let lasio_json_str = wellio.read_file(json_file);
   let lasio_obj = JSON.parse(lasio_json_str);
-  let wellio_obj = wellio.lasio_2_wellio(lasio_obj);
+  let wellio_obj = wellio.lasio_obj_2_wellio_obj(lasio_obj);
 
   t.false('VERS' in wellio_obj["VERSION INFORMATION"],
     "Sample json, empty headers: 'VERS' key is not in the Version section"
