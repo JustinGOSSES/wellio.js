@@ -1,0 +1,72 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "version.schema.json",
+  "title": "Product",
+  "description": "Log Ascii Standard version schema",
+  "type": "object",
+  "properties": {
+    "VERSION INFORMATION": {
+      "description": "Version section information",
+      "type": "object",
+      "properties": {
+        "VERS": {
+          "description": "Log Ascii Standard Version number",
+          "type": "object",
+          "properties": {
+            "MNEM": {
+              "description": "This element's name",
+              "type": "string"
+            },
+            "UNIT": {
+              "description": "This element's measurment unit (optional)",
+              "type": "string"
+            },
+            "DATA": {
+              "description": "This element's value",
+              "type": "string"
+            },
+            "DESCRIPTION OF MNEMONIC 1": {
+              "description": "This element's first description field",
+              "type": "string"
+            },
+            "DESCRIPTION OF MNEMONIC 2": {
+              "description": "This element's second description field",
+              "type": "string"
+            }
+          },
+          "required": [ "MNEM", "UNIT", "DATA", "DESCRIPTION OF MNEMONIC 1", "DESCRIPTION OF MNEMONIC 2" ]
+        },
+        "WRAP": {
+          "description": "Flag indicating a row of data elements wraps to multiple file lines",
+          "type": "object",
+          "properties": {
+            "MNEM": {
+              "description": "This element's name",
+              "type": "string"
+            },
+            "UNIT": {
+              "description": "This element's measurment unit (optional)",
+              "type": "string"
+            },
+            "DATA": {
+              "description": "This element's value",
+              "type": "string"
+            },
+            "DESCRIPTION OF MNEMONIC 1": {
+              "description": "This element's first description field",
+              "type": "string"
+            },
+            "DESCRIPTION OF MNEMONIC 2": {
+              "description": "This element's second description field",
+              "type": "string"
+            }
+          },
+          "required": [ "MNEM", "UNIT", "DATA", "DESCRIPTION OF MNEMONIC 1", "DESCRIPTION OF MNEMONIC 2" ]
+        }
+      },
+      "required": [ "VERS", "WRAP" ]
+    }
+  },
+  "required": [ "VERSION INFORMATION" ]
+}
+
