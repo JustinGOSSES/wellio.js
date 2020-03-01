@@ -5,21 +5,37 @@
 module.exports = {
 
   // Read and transform Lasio Json files to Wellio.js json data format
+
 /**
-* The read_json function reads and transforms lasio style JSOn files into wellio.js style JSON data format in memory and returns it.
-* @param {string} lasiojsonfile A string reprepresentatiion of filename of well log in a .json file to be loaded into memory and converted from lasio to wellio style JSON
-* @returns {object} A wellio style JSON object
-*/
-  read_json: function(lasiojsonfile) {
+ * File reading utility function.
+ * @param {string} : file_to_read - The file to open.
+ *
+ * @returns {string} : The file's contents as a string.
+ */
+  read_lasio_json_file: function(file_to_read) {
     // Configure fs if running from node
-    // TODO: implement how to handle when fs is not available.
-    var fs = '';
+    let fs = '';
 
     if (process !== 'undefined' && process.versions != null && process.versions.node != null) {
        fs = require('fs');
     }
 
-    let lj = JSON.parse(fs.readFileSync(lasiojsonfile, 'utf8'));
+    return fs.readFileSync(file_to_read, 'utf8');
+  },
+
+/**
+* The lasio_obj_2_wellio_obj function transforms lasio JSON strings into wellio.js JSON data format in memory and returns it.
+* @param {object} lasio_json - A JavaScript object representation of lasio well log format
+*
+* @example
+* let wellio = require('wellio')
+* let lasio_json_str = wellio.read_lasio_json_file('lasio.json');
+* let lasio_obj = JSON.parse(lasio_json_str);
+* let wellio_obj = wellio.lasio_obj_2_wellio_obj(lasio_obj);
+*
+* @returns {object} A wellio style JSON object
+*/
+  lasio_obj_2_wellio_obj: function(lasio_obj) {
 
     let std_headers = {
       'Version': 'VERSION INFORMATION',
@@ -33,20 +49,20 @@ module.exports = {
 		lasjson["WELL INFORMATION BLOCK"] = {};
 		lasjson["CURVE INFORMATION BLOCK"] = {};
 		lasjson["PARAMETER INFORMATION"] = {};
-		lasjson["CURVES"] = lj.data;
+		lasjson["CURVES"] = lasio_obj.data;
 
     // Example code for adding non-standard headers
-    for (let item in lj.metadata) {
+    for (let item in lasio_obj.metadata) {
       if ( !(item in std_headers) ) {
-        lasjson[item.toUpperCase()] = lj.metadata[item];
+        lasjson[item.toUpperCase()] = lasio_obj.metadata[item];
       }
       else {
-        for (let mnemonic in lj.metadata[item]) {
+        for (let mnemonic in lasio_obj.metadata[item]) {
           section = std_headers[item];      
           lasjson[section][mnemonic] = {
             MNEM: mnemonic,
             UNIT: '',
-            DATA: lj.metadata[item][mnemonic],
+            DATA: lasio_obj.metadata[item][mnemonic],
             'DESCRIPTION OF MNEMONIC 1': '',
             'DESCRIPTION OF MNEMONIC 2': ''
           };
@@ -61,7 +77,7 @@ module.exports = {
 /**
  * A helper function that proves wellio,js was installed correctly. It merely returns the argument provided to it. For example, "test" as input would return "test".
  * @param {*} onelas anything
- * @returns Returens the input that was givne as an argument. This is just for testing that wellio was installed correctly.
+ * @returns Returns the input that was givne as an argument. This is just for testing that wellio was installed correctly.
  * @example wellio.returnThing("test") = "test"
  */
 	returnThing: function(onelas){
