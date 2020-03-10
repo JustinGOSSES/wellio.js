@@ -218,3 +218,216 @@ function download (filename, text) {
   element.click()
   document.body.removeChild(element)
 }
+
+//  Function that takes a single LAS file and returns a JSON formatted object.
+function lasToJSON(lastext) {
+  const lasjson = {};
+  let delimiter = ' ';
+  // Mandatory sections of LAS 2.0 file format
+  // lasjson["VERSION"] = [];
+  // lasjson["WELL"] = [];
+  // lasjson["CURVE"] = [];
+  // lasjson["ASCII"] = [];
+
+  const formatSection = (block, sectionTitle, dataType) => {
+    if (dataType) {
+      lasjson[dataType][sectionTitle] = [];
+    } else {
+      lasjson[sectionTitle] = [];
+    }
+
+    for (let i = 1; i < block.length; i++) {
+      // Skip comment lines
+      if (block[i].indexOf('#') === 0) {
+        continue;
+      }
+
+      // Format of the data line should be:
+      // MNEM.UNIT VALUE : DESCRIPTION {FORMAT} | ASSOC1, ASSOC2, ...
+      let dataLine = block[i].trim();
+
+      let mnem = dataLine.substring(0, dataLine.indexOf('.')).trim();
+      // Remove MNEM
+      dataLine = dataLine.slice(dataLine.indexOf('.') + 1);
+
+      let unit = dataLine.substring(0, dataLine.indexOf(' ')).trim();
+      // Remove UNIT
+      dataLine = dataLine.slice(dataLine.indexOf(' ') + 1);
+
+      let association = null;
+      if (dataLine.lastIndexOf('|') !== -1) {
+        association = dataLine.substring(dataLine.lastIndexOf('|') + 1).trim();
+        association = association.split(delimiter);
+        // Remove ASSOCIATION
+        dataLine = dataLine.slice(0, dataLine.lastIndexOf('|'));
+      }
+
+      let format = null;
+      if (dataLine.lastIndexOf('{') !== -1) {
+        format = dataLine.substring(dataLine.lastIndexOf('{') + 1, dataLine.lastIndexOf('}')).trim();
+        // Remove FORMAT
+        dataLine = dataLine.slice(0, dataLine.lastIndexOf('{'));
+      }
+
+      let value = dataLine.substring(0, dataLine.lastIndexOf(':')).trim();
+      // Remove VALUE
+      dataLine = dataLine.slice(dataLine.lastIndexOf(':') + 1).trim();
+
+      // Format data line into object
+      const line = {
+        MNEM: mnem === '' ? null : mnem,
+        UNIT: unit === '' ? null : unit,
+        VALUE: value === '' ? null : value,
+        DESCRIPTION: dataLine === '' ? null : dataLine,
+        FORMAT: format,
+        ASSOCIATION: association
+      };
+
+      if (dataType) {
+        lasjson[dataType][sectionTitle].push(line);
+      } else {
+        lasjson[sectionTitle].push(line);
+      }
+
+    }
+  };
+
+  const formatData = (block, sectionTitle) => {
+    lasjson[sectionTitle] = [];
+
+    for (let i = 1; i < block.length; i++) {
+      // Skip comment lines
+      if (block[i].indexOf('#') === 0) {
+        continue;
+      }
+
+      let line = block[i].trim().split(delimiter);
+
+      let trimmedLine = line.filter(data => data !== '').map(data => data.trim());
+
+      lasjson[sectionTitle].push(trimmedLine);
+    }
+  }
+
+  // Divide file into sections by section title lines
+  const sections = lastext.split('~');
+  // Divide section into line blocks by CR LF
+  const blocks = [];
+  for (let i = 1; i < sections.length; i++) {
+    blocks.push(sections[i].trim().split('\r\n'));
+  }
+
+  // Version section must be the first section in LAS
+  if (blocks[0][0].charAt(0).toUpperCase() === 'V') {
+    formatSection(blocks[0], 'VERSION');
+
+    if (lasjson['VERSION'][1]['VALUE'].toUpperCase() === 'YES') {
+      // WRAP YES has been dropped in LAS 3.0
+      throw 'WRAP YES is not supported';
+    }
+
+    // Determine data delimiter after parsing version section
+    delimiter = getDelimiter(lasjson);
+
+    // Well section must be the second section in LAS
+    if (blocks[1][0].charAt(0).toUpperCase() === 'W') {
+      formatSection(blocks[1], 'WELL');
+
+      // Loop through remaining blocks and format based on section title
+      for (let i = 2; i < blocks.length; i++) {
+        let sectionTitle = blocks[i][0].toUpperCase();
+
+        // Parse title to decide what kind of format
+        if (
+          sectionTitle.charAt(0) === 'C'
+          || sectionTitle.includes('DEFINITION')
+        ) {
+          formatSection(blocks[i], 'CURVE');
+        } else if (
+          sectionTitle.charAt(0) === 'P'
+          || sectionTitle.includes('PARAMETER')
+        ) {
+          formatSection(blocks[i], 'PARAMETER');
+        } else if (
+          sectionTitle.charAt(0) === 'A'
+          || sectionTitle.includes('DATA')
+        ) {
+          formatData(blocks[i], 'ASCII');
+        } else {
+          // Unrecognized section titles
+          lasjson[sectionTitle] = [];
+
+          for (let j = 1; j < blocks[i].length; j++) {
+            // Skip comment lines
+            if (blocks[i][j].indexOf('#') === 0) {
+              continue;
+            }
+
+            let dataLine = blocks[i][j].trim();
+
+            lasjson[sectionTitle].push(dataLine);
+          }
+        }
+      }
+    } else {
+      throw 'Format error';
+    }
+  } else {
+    throw 'Format error';
+  }
+  return lasjson;
+}
+
+//  Function that takes a single LAS object and returns a LAS formatted text
+function jsonToLAS(json) {
+  let lastext = '';
+  const delimiter = getDelimiter(json);
+  // Section order is iterated based on the creation order of the JSON
+  for (let section in json) {
+    lastext += `~${section}\r\n`;
+    if (section !== 'ASCII') {
+      for (let line of json[section]) {
+        let mnem = line.MNEM;
+        let unit = line.UNIT ? line.UNIT : '';
+        let value = line.VALUE ? line.VALUE : '';
+        let desc = line.DESCRIPTION ? line.DESCRIPTION : '';
+        let format = line.FORMAT ? `{${line.FORMAT}}` : '';
+        let asso = line.ASSOCIATION ? `| ${line.ASSOCIATION}` : '';
+        let textLine = `${mnem}.${unit} ${value} : ${desc} ${format} ${asso}`;
+        lastext += textLine + '\r\n';
+      }
+    } else {
+      for (let line of json[section]) {
+        let dataLine = line.join(delimiter);
+        lastext += dataLine + '\r\n';
+      }
+    }
+  }
+  return lastext.trim();
+}
+
+// Takes a LAS json and returns the null value set for the LAS file
+function getNull(lasjson) {
+  // Check null value in well info block
+  for (let line of lasjson['WELL']) {
+    if (line['MNEM'] === 'NULL') {
+      return line['VALUE'];
+    }
+  }
+
+  throw 'Format error: Null value not found';
+}
+
+// Function to get the delimiter of the LAS JSON object
+function getDelimiter(lasjson) {
+  // Default delimiter
+  let delimiter = ' ';
+  if (lasjson['VERSION'][2]) {
+    if (lasjson['VERSION'][2]['VALUE'] === 'TAB') {
+      delimiter = '\t';
+    } else if (lasjson['VERSION'][2]['VALUE'] === 'COMMA') {
+      delimiter = ',';
+    }
+  }
+  return delimiter;
+}
