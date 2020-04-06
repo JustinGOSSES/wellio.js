@@ -1,9 +1,9 @@
 const test = require('tape');
 const wellio = require('../../index.js');
 
-test('las2json: test_read_v2_sample', function(t) {
+test('readLasioJson: test_read_lasio_sample_2.0_pretty.json', function(t) {
   t.plan(2);
-  json_file = "assets/json_files/sample_2.0_pretty.json";
+  json_file = "assets/json_files/lasio_sample_2.0_pretty.json";
 
   t.doesNotThrow(function() {
     let lasio_json_str = wellio.read_lasio_json_file(json_file);
