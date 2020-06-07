@@ -200,8 +200,12 @@ module.exports = {
 			if (unit_and_data.length > 1){
 				unit_and_data_str = unit_and_data[0].toString()+"."+unit_and_data[1].toString();
 			}
-      else if (unit_and_data.length <= 1) {
-        return ver_info_obj;
+			// This is an empty ver_info_obj, print a warning and return
+			else if (ver_info_obj["MNEM"] == '' && unit_and_data.length == 0) {
+				console.log("WARN: Metatdata line has no data: ", vers_line_1half_array);
+				return ver_info_obj;
+			}
+			else {
 				unit_and_data_str = unit_and_data.toString()
 			}
 			var unit = unit_and_data_str[0,5].trim();
@@ -229,9 +233,9 @@ module.exports = {
 			//// Skip empty elements and comment elements that start with '#'.
 			if(param_line_array[i] != "" && param_line_array[i][0] !== '#'){
 				var param_obj_inst = splitLineofType1(Object.assign({}, param_info_obj),param_line_array[i]);
-        if (param_obj_inst.MNEM) {
-          lasjson["PARAMETER INFORMATION"][param_obj_inst["MNEM"]] = param_obj_inst;
-          }
+				if (param_obj_inst.MNEM) {
+					lasjson["PARAMETER INFORMATION"][param_obj_inst["MNEM"]] = param_obj_inst;
+				}
 			}
 		}
 		//// Working with CURVE INFORMATION BLOCK second by splitting it by newline into an array.
@@ -242,9 +246,9 @@ module.exports = {
 			//// Skip empty elements and comment elements that start with '#'.
 			if(curve_line_array[i] != "" && curve_line_array[i][0] !== '#'){
 				var curve_obj_inst = splitLineofType1(Object.assign({}, curve_info_obj),curve_line_array[i]);
-        if (curve_obj_inst.MNEM) {
-          lasjson["CURVE INFORMATION BLOCK"][curve_obj_inst["MNEM"]] = curve_obj_inst;
-        }
+				if (curve_obj_inst.MNEM) {
+					lasjson["CURVE INFORMATION BLOCK"][curve_obj_inst["MNEM"]] = curve_obj_inst;
+				}
 			}
 		}
 		//// Working with WELL INFORMATION BLOCK second by splitting it by newline into an array.
@@ -258,9 +262,9 @@ module.exports = {
 			//// Skip empty elements and comment elements that start with '#'.
 			if(well_line_array[i] != "" && well_line_array[i][0] !== '#'){
 				var well_obj_inst = splitLineofType1(Object.assign({}, well_info_obj),well_line_array[i]);
-        if (well_obj_inst.MNEM) {
-          lasjson["WELL INFORMATION BLOCK"][well_obj_inst["MNEM"]] = well_obj_inst;
-        }
+				if (well_obj_inst.MNEM) {
+					lasjson["WELL INFORMATION BLOCK"][well_obj_inst["MNEM"]] = well_obj_inst;
+				}
 			}
 			else{
 				console.log("INFO: in else for well_line: " + i)
