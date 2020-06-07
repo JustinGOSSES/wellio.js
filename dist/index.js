@@ -202,7 +202,7 @@ module.exports = {
 			}
 			// This is an empty ver_info_obj, print a warning and return
 			else if (ver_info_obj["MNEM"] == '' && unit_and_data.length == 0) {
-				console.log("WARN: Metatdata line has no data: ", vers_line_1half_array);
+				console.log("WARNING: Metatdata line has no data: ", vers_line_1half_array);
 				return ver_info_obj;
 			}
 			else {
