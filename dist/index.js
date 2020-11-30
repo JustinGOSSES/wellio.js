@@ -208,7 +208,13 @@ module.exports = {
 			else {
 				unit_and_data_str = unit_and_data.toString()
 			}
-			var unit = unit_and_data_str[0,5].trim();
+
+			// Sometimes the unit_and_data_str are less that 5 chars
+			var last_idx = 5;
+			if ((unit_and_data_str.length - 1) < 5) {
+				last_idx = unit_and_data_str.length - 1;
+			}
+			var unit = unit_and_data_str[0,last_idx].trim();
 			var data = unit_and_data_str.substring(5,unit_and_data_str.length).trim();
 			ver_info_obj["DATA"] = data
 			ver_info_obj["UNIT"] = unit
@@ -231,20 +237,21 @@ module.exports = {
 		for(i = 0; i < param_line_array.length; i++){
 			//// create one object for parameter line
 			//// Skip empty elements and comment elements that start with '#'.
-			if(param_line_array[i] != "" && param_line_array[i][0] !== '#'){
+			if(param_line_array[i] != "" && ! param_line_array[i].trim().startsWith("#")) {
 				var param_obj_inst = splitLineofType1(Object.assign({}, param_info_obj),param_line_array[i]);
 				if (param_obj_inst.MNEM) {
 					lasjson["PARAMETER INFORMATION"][param_obj_inst["MNEM"]] = param_obj_inst;
 				}
 			}
 		}
-		//// Working with CURVE INFORMATION BLOCK second by splitting it by newline into an array.
+		//// Working with CURVE INFORMATION BLOCK second by splitting it by newline
+		//// into an array.
 		//// This skips the line with the section's title.
 		var curve_line_array = curve_info_str.split("\n").slice(1,);
 		for(i = 0; i < curve_line_array.length; i++){
 			//// create one object for parameter line
 			//// Skip empty elements and comment elements that start with '#'.
-			if(curve_line_array[i] != "" && curve_line_array[i][0] !== '#'){
+			if(curve_line_array[i] != "" && ! curve_line_array[i].trim().startsWith("#")) {
 				var curve_obj_inst = splitLineofType1(Object.assign({}, curve_info_obj),curve_line_array[i]);
 				if (curve_obj_inst.MNEM) {
 					lasjson["CURVE INFORMATION BLOCK"][curve_obj_inst["MNEM"]] = curve_obj_inst;
@@ -260,7 +267,7 @@ module.exports = {
 			}
 			//// create one object for parameter line
 			//// Skip empty elements and comment elements that start with '#'.
-			if(well_line_array[i] != "" && well_line_array[i][0] !== '#'){
+			else if(well_line_array[i] != "" && ! well_line_array[i].trim().startsWith("#")) {
 				var well_obj_inst = splitLineofType1(Object.assign({}, well_info_obj),well_line_array[i]);
 				if (well_obj_inst.MNEM) {
 					lasjson["WELL INFORMATION BLOCK"][well_obj_inst["MNEM"]] = well_obj_inst;
