@@ -34,11 +34,40 @@
 	<script src="./js/g3.js"></script>
 	<!-- PLOTTING FUNCTIONS THAT CALL G3.JS FROM MAIN.JS -->
 	<script src="./js/call_plots.js"></script>
+	
+	<!-- LAS TO JSON JAVASCRIPT FUNCTIONS -->
+	<!-- <script src="./js/wellio.js"></script> -->
+	<script src="./dist/index.js"></script>
+	<script src="https://requirejs.org/docs/release/2.3.5/minified/require.js"></script>
+	<script type="module">
+		// import('./dist/index.js').then(module => { module.index.returnThing("test it here")})
+		var wellio_holder = ""
+		var las2json = ""
+		// import { read_lasio_json_file, lasio_obj_2_wellio_obj, returnThing, loadLAS, las2json } from './dist/index.js';
+		// console.log("test test:",returnThing(test))
+		const wellio = require(['./dist/index.js'],function(wellio){
+			console.log("wellio test",wellio)
+			wellio_holder = wellio
+			las2json = wellio_holder.las2json
+			console.log("wellio_holder.loadLAS",wellio_holder.returnThing("test of return"))
+			console.log("las2json test",las2json)
+			return wellio})
+		setTimeout(() => {  
+			console.log("test wellio from require: ",wellio_holder)
+			console.log("test wellio_holder.returnThing('test of return'): ",wellio_holder.returnThing("test of return"))
+			var returnThing = wellio_holder.returnThing
+			console.log("this is another test of return",returnThing("popcorn"))
+			var las2json = wellio_holder.las2json
+			console.log("test of las2json",las2json("this is a test"))
+			; }, 100);
+
+		console.log("test")
+		
+		// console.log("test wellio from require: ",wellio.o.returnThing("testing again"))
+		// var wellio2 = require('./dist/index.js')
+	</script>
 	<!-- REST OF THE WEBPAGE FUNCTIONS -->
 	<script src="./js/main.js"></script>
-	<!-- LAS TO JSON JAVASCRIPT FUNCTIONS -->
-	<script src="./js/wellio.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.5/require.min.js.map"></script>
 </head>
 <body>
 	<div class="jumbotron text-center">

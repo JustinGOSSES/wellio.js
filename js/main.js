@@ -6,6 +6,19 @@ var all_files = [""];
 //// var temp_json is the single well las file converted to json object format
 var temp_json = {};
 
+var wellio_holder = ""
+var las2json = ""
+
+var wellio = require(['./dist/index.js'],function(wellio){
+  console.log("wellio test",wellio)
+  wellio_holder = wellio
+  las2json = wellio_holder.las2json
+  console.log("wellio_holder.loadLAS",wellio_holder.returnThing("test of return"))
+  console.log("las2json test",las2json)
+  return wellio})
+
+
+
 ////////////////////////  HELPER FUNCTIONS  //////////////////////// 
 
 
