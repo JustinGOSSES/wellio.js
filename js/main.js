@@ -6,16 +6,13 @@ var all_files = [""];
 //// var temp_json is the single well las file converted to json object format
 var temp_json = {};
 
-var wellio_holder = ""
-var las2json = ""
 
-var wellio = require(['./dist/index.js'],function(wellio){
+//// THIS BRINGS IN ALL THE WELLIO CODE FROM THE `/dist/index.js' file.
+// To call the las2json function use wellio.las2json()
+
+wellio = require(['./dist/index.js'],function(wellio_obj){
   console.log("wellio test",wellio)
-  wellio_holder = wellio
-  las2json = wellio_holder.las2json
-  console.log("wellio_holder.loadLAS",wellio_holder.returnThing("test of return"))
-  console.log("las2json test",las2json)
-  return wellio})
+  wellio = wellio_obj})
 
 
 
@@ -119,7 +116,7 @@ function convert_and_startHelpers(){
   //// removes the buttons for the well curves from the previous well if they exist
   remove_DOM_children("curveButtons_holder")
   //// calls the function that takes a single LAS text file representing a single well and returns an object variable in JSON format for that well.
-  var single_well_json = las2json(all_files[0]);
+  var single_well_json = wellio.las2json(all_files[0]);
   // console.log('single_well_json = ',single_well_json)
   //// replaces the global variable temp_json with the new well json var single_well_json
   temp_json = single_well_json
