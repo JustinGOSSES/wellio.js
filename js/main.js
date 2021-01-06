@@ -124,7 +124,15 @@ function convert_and_startHelpers(){
   addCurveOptionButtons()
   //// adds inner html to p for the UWI name of the well in questino that was just loaded and converted
   console.log("temp_json['WELL INFORMATION BLOCK'] =", JSON.stringify(temp_json["WELL INFORMATION BLOCK"]))
-  document.getElementById("which_well").innerHTML = "UWI = "+temp_json["WELL INFORMATION BLOCK"]["UWI"]["DATA"];
+  //// THIS PART IS IMPORTANT TO HAVE A TRY AND CATCH AS NOT ALL WELLS WILL HAVE A UWI!!!s
+  well_name = ""
+  try {
+    document.getElementById("which_well").innerHTML = "UWI = "+temp_json["WELL INFORMATION BLOCK"]["UWI"]["DATA"];
+  }
+  catch(err) {
+    document.getElementById("which_well").innerHTML = "UWI = "+"none found";
+  }
+  
 }
 
 

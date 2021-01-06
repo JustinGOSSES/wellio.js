@@ -107,7 +107,7 @@ module.exports = {
 	 * @param {string} onelas A string representation of a LAS 2.0 well log file. Typically from the result of the loadLAS function.
 	 * @returns {Object} A JSON object that represents the information that was in the LAS 2.0 well log file but in JSON wellio style format.
 	 */
-	las2json: function(onelas){
+	las2json: function(onelas,print=true){
 		//// var lasjson establishes a blank json for holding las 2.0 data. It will look like the example below:
 		var lasjson = {
 				"VERSION INFORMATION":{
@@ -151,10 +151,16 @@ module.exports = {
 		var curve_info_obj = {"MNEM":"","UNIT":"","ERCB CURVE CODE":"","CURVE DESCRIPTION 1":"","CURVE DESCRIPTION 2":""};
 		var param_info_obj = {"MNEM":"","UNIT":"","DATA":"","DESCRIPTION OF MNEMONIC 1":"","DESCRIPTION OF MNEMONIC 2":""};
 		//// The las file is read as a txt file. It will first be split into seperate strings based on "~" character which occurs at the top of each "block"
-		console.log("onelas = ",onelas)
+		if (print==true){
+			console.log("onelas = ",onelas)
+		}
+		
 		//// Split in to las sections that start with a tilde: ~.
 		var split1 = onelas.split(/(~[^~]+)/);
-		console.log("split1 = ",split1)
+		if (print==true){
+			console.log("split1 = ",split1)
+		}
+		
 		var vers_str = "";
 		var well_info_str = "";
 		var curve_info_str = "";
@@ -163,6 +169,10 @@ module.exports = {
 		var curve_str = "";
 
 		//// As the 'OTHER' block may or may not be present, we have to split by '~' and then look for a substring to make sure we have the right block before we put each into a variable.
+		if (print==true){
+			console.log("split1.lengths = ",split1.length)
+			console.log("split1 = ",split1)
+		}
 		for(i = 0; i < split1.length; i++){
 			//// Skip blank entries in the split1 array.
 			if (split1[i].length === 0) {
