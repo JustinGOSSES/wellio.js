@@ -1,6 +1,6 @@
 {
   "name": "wellio",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "description": "Provides functionality to load a LAS 2.0 formatted well log file and convert it to a json file and then return different information about the well log",
   "main": "dist/index.js",
   "unpkg": "dist/index.js",
