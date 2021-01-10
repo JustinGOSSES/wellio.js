@@ -78,7 +78,11 @@ Several example well logs are in the ASSETS folder.
 1. las2json(onelas) : <i>Function that takes a single LAS text file representing a single well and returns an object variable in JSON format for that well.</i>
 2. download(filename, text): <i>Function that takes a filename and text string and writes a file (either json or las) to your designated downloads folder.</i>
 
+## Documentation
 
+Please find the documentation here: https://justingosses.github.io/wellio.js/docs/ They are still in flux.
+
+Docs are a great way to make pull request contributions even if you aren't immmersed in the code base yet.
 
 ## Road Map
 Right now, wellio.js just does LAS -> Wellio JSON. There are variety of features that could be added to increase the functionality of wellio and in particular enable cross-communication with other LAS-focused projects. 
