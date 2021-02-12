@@ -2,15 +2,49 @@ toc:
   - name: wellioviz
     description: |
       ### Wellio.js is a JavaScript library for converting a LAS 2.0 well log file into a wellio style JSON.
-      ### Other documentation here
-      ### How to use
-      ### How to install
+      
+  - name: How to Use
+    description: |
+      ### Server-side
+      The server-side wellio can be found in the <b>dist</b> folder. You can install it locally via `npm install wellio` as described on the npm homepage <a href="https://www.npmjs.com/package/wellio">here</a>. You can also call this via require(wellio) in ObservableHQ as described in the ObservableHQ demo above. 
+
+      ##### Non-wellio fuctions you'll want to know about when using wellio to convert las -> json on command line using node.js
+      - To start with node.js after installing it type into a command line `node` .
+      - Once in command line node environment, to start with wellio, you'll have to do `wellio = require('wellio')` After this point, you'll be able to use the commands above.
+      - After converting a las file to json format with the command `well_json = wellio.las2json(well_string)` as described above you'll have to stringify it first via `well_json_string = JSON.stringify(well_json)` and then write it to a file via `fs.writeFile("UWI_of_Well.json", well_json_string, 'utf8', function (err) {console.log("error")})`
+
+
+      #### Front-end side
+      This repo contains various pieces of code for the github pages demo page. In addition to the the wellio.js JavaScript file in the js folder, there is the index.html, which is the main html page for <a href="https://justingosses.github.io/wellio.js/">the github pages demo</a>. 
+
+      CSS files are in the CSS folder. 
+
+      Several example well logs are in the ASSETS folder.
+
+
+      <a href="https://github.com/agile-geoscience/g3">G3.js</a> is used to draw a plot of the well log curves. It leverages <a href="https://github.com/d3">d3.js</a>.
+      <a href="https://github.com/vkiryukhin/vkBeautify">VKbeautify.js</a> is a script for adding spaces and such to JSON to make them prettier when printed.
+      <a href="https://github.com/google/code-prettify">run_prettify.js</a> does something similar but is focused on making it print nicely into HTML DOM elements. 
+
+
+      #### <b>Wellio.js</b> <a href="https://github.com/JustinGOSSES/wellio.js/blob/master/js/wellio.js">script</a> will have a few basics functions (not all are written yet)
+      1. las2json(onelas) : <i>Function that takes a single LAS text file representing a single well and returns an object variable in JSON format for that well.</i>
+      2. download(filename, text): <i>Function that takes a filename and text string and writes a file (either json or las) to your designated downloads folder.</i>
+
+  - name: Tests
+    description: |
       ### Tests
       Need to figure out why test functions aren't showing here! Is it because there isn't any documentation for them yet? Probably.
-      ### How Contribute to Documentation
-      Make changes to documentation in the index.js file. 
-      This is the description of how the functions run at the top of each function between /** *.
-      Alternatively, make change to the documentation.yml file in the docs folder.
-      Go to the top level folder. (assuming documentation.js is alredy installed) Run `documentation build -c docs/documentation.yml dist/* -f html -o docs'
-      Now CD to docs folder. Run `python3 -m http.server`. You should be able to go to your browser at http://0.0.0.0:8000/ and see the docs. 
-      Once you push the repo to github, the docs should be at the top level of the githu pages page plus /docs/index.html
+
+  - name: How to Edit Documentation
+    description: |
+      - Make changes to documentation in the index.js file. 
+      - Alternatively, make change to the documentation.yml file in the docs folder.
+      - Go to the top level folder. 
+      - (assuming documentation.js is alredy installed) Run `documentation build -c docs/documentation.yml dist/* -f html -o docs'
+      - Now CD to docs folder. 
+      - Run `python3 -m http.server`. You should be able to go to your browser at http://0.0.0.0:8000/ and see the docs. 
+      - Once you push the repo to github, the docs should be at the top level of the githu pages page plus /docs/index.html
+
+  - name: Functions
+    description: |

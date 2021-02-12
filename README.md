@@ -90,16 +90,7 @@ Right now, wellio.js just does LAS -> Wellio JSON. There are variety of features
 Potential cross-communication conversions include:
 1. wellio <-> las files (have the las to wellio direction but need the back again conversion)
 2. wellio <-> <a href="https://github.com/agile-geoscience/welly">welly</a> objects (python)
-2. wellio <-> <a href="https://lasio.readthedocs.io/en/latest/">lasio</a> (python)
-3. wellio json objects -> wellio_plus json objects  with wellio_plus being defined as having data and functions that go behind the data in a LAS file. 
-
-Examples of wellio_plus data & functions that could be part of the prototype would be:
-- common function calls like max, min, average of each curve, etc.
-- pick depths
-- geographic location
-- age of data acquisition 
-- non-original curves that are created and used as engineered features for machine-learning.
-- other well-centric data points or datasets that might be useful for machine-learning. 
+3. wellio <-> <a href="https://lasio.readthedocs.io/en/latest/">lasio</a> (python)
 
 #### Can you help? Of course you can! 
 There are a variety of <a href="https://github.com/JustinGOSSES/wellio.js/issues">issues</a> that need worked. Several of which are suitable for those who are new to JavaScript. Please add any suggestions you'd like or bugs you find to the issues.
@@ -111,13 +102,20 @@ Electronic data (including well logs, tops, etc.) for Athabasca Oil Sands Data M
 
 Report for Athabasca Oil Sands Data McMurray/Wabiskaw Oil Sands Deposit <a href="http://ags.aer.ca/document/OFR/OFR_1994_14.PDF">http://ags.aer.ca/document/OFR/OFR_1994_14.PDF</a>
 
+You can also find them on USGS and Kansas open data sites as is done in <a href="https://observablehq.com/@justingosses/a-notebook-using-wellio-js-wellioviz-js-for-quick-looks-of-la">this Observable notebook</a> that leverages wellio & wellioviz.
+
 ### Why Bother? Geologists Use Python...
-EDIT: *Long story short, I needed a way to load las files and work with them as json in JavaScript in order to work with them on the web or using web tools*
+*Long story short, I needed a way to load las files and work with them as json in JavaScript in order to work with them on the web or using web tools*
 
 ### Examples of where it can be used
-It can convert LAS files into JSON and then curves can be visualized in three dimensions using three.js as <a href="https://beta.observablehq.com/@justingosses/three-js-well-log-demo-geology">this</a> brief demo on ObservableHQ shows. Once your can make well logs in three.js, it is only a short jump to put them in augmented reality or virtual reality. For example, <a href="https://github.com/google-ar/three.ar.js?files=1">this repo</a> is a helper library for putting three.js objects into Augmented reality scenes.
-
 There is also a few Observable notebooks (javascript, online, editable, and forkable by anyone) <a href="https://observablehq.com/@justingosses/well-log-in-d3-js-v5">here</a> and <a href="https://observablehq.com/@justingosses/well-log-curve-cross-sections">here</a> I've toyed around with that use wellio.js to import well logs and parse the string of the las file into JSON for visualization. 
+
+## Wellio.js & Wellioviz.js
+<i>Wellioviz</i> is a companion to <i>wellio</i>!
+
+Where are <i>Wellio</i> is just concerned with the conversion of LAS 2.0 files into JSON, <i>Wellioviz</i> is concerned with making a visualization of the resulting JSON using d3.js v5. This means you can load, convert, and visualize well logs entirely on the web with front-end JavaScript.
+
+<a href="https://github.com/JustinGOSSES/wellioviz"><b>Find out more about WELLIOVIZ here</b></a>
 
 ## Example of LAS format and JSON formated well log data
 
