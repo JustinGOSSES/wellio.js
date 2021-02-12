@@ -2,11 +2,54 @@ toc:
   - name: wellioviz
     description: |
       ### Wellio.js is a JavaScript library for converting a LAS 2.0 well log file into a wellio style JSON.
-      ### Other documentation here
       ### How to use
-      ### How to install
+      
+
+      #### Server-side
+      The server-side wellio can be found in the <b>dist</b> folder. You can install it locally via `npm install wellio` as described on the npm homepage <a href="https://www.npmjs.com/package/wellio">here</a>. You can also call this via require(wellio) in ObservableHQ as described in the ObservableHQ demo above. 
+
+      ##### Wellio functions currently working include:
+      - returnThing: A testing function that returns anything provided to it. 
+        `wellio.returnThing("test")` = "test"
+      - loadLAS: A function that takes an argument of the well log name as a string, finds that file in the local file system and returns it as a string of text. 
+        `var well_string = wellio.loadLAS("00/01-01-073-05W5/0.LAS")`
+      - las2json: Takes the result of loadLAS or another text string, or another LAS file already loaded into memory, and converts it into the wellio json format and returns that json string. 
+        `var well_json = wellio.las2json(well_string)`
+      - CurvseNames: Given a well already converted into json, returns the available curve names as an array.
+        `var curvesNames = wellio.CurveNames(well_json) ; where curvesNames = ['GR','ILD','PHID']`
+      - VER_block: Given a well already converted into json, returns verision information block data as a string.
+        `var VER_block = wellio.VER_block(well_json)`
+      - UWI: Given a well already converted into json, returns the well UWI as a string.
+        `var UWI_well_json = wellio.UWI(well_json) ; where UWI_well_json is '00/01-01-073-05W5/0`
+      - getCurve: Given a well already converted into json and the name of a curve as a string, returns an array of the data values for that curve. 
+        `var GR_well_json = wellio.getCurve(well_json,"GR") ; where GR_well_json is an array of the GR data, for example [99,93,76,55,67,66,67,78]`
+        
+      ##### Non-wellio fuctions you'll want to know about when using wellio to convert las -> json on command line using node.js
+      - To start with node.js after installing it type into a command line `node` .
+      - Once in command line node environment, to start with wellio, you'll have to do `wellio = require('wellio')` After this point, you'll be able to use the commands above.
+      - After converting a las file to json format with the command `well_json = wellio.las2json(well_string)` as described above you'll have to stringify it first via `well_json_string = JSON.stringify(well_json)` and then write it to a file via `fs.writeFile("UWI_of_Well.json", well_json_string, 'utf8', function (err) {console.log("error")})`
+
+
+      #### Front-end side
+      This repo contains various pieces of code for the github pages demo page. In addition to the the wellio.js JavaScript file in the js folder, there is the index.html, which is the main html page for <a href="https://justingosses.github.io/wellio.js/">the github pages demo</a>. 
+
+      CSS files are in the CSS folder. 
+
+      Several example well logs are in the ASSETS folder.
+
+      <a href="https://github.com/agile-geoscience/g3">G3.js</a> is used to draw a plot of the well log curves. It leverages <a href="https://github.com/d3">d3.js</a>.
+      <a href="https://github.com/vkiryukhin/vkBeautify">VKbeautify.js</a> is a script for adding spaces and such to JSON to make them prettier when printed.
+      <a href="https://github.com/google/code-prettify">run_prettify.js</a> does something similar but is focused on making it print nicely into HTML DOM elements. 
+
+
+      #### <b>Wellio.js</b> <a href="https://github.com/JustinGOSSES/wellio.js/blob/master/js/wellio.js">script</a> will have a few basics functions (not all are written yet)
+      1. las2json(onelas) : <i>Function that takes a single LAS text file representing a single well and returns an object variable in JSON format for that well.</i>
+      2. download(filename, text): <i>Function that takes a filename and text string and writes a file (either json or las) to your designated downloads folder.</i>
+
+
       ### Tests
       Need to figure out why test functions aren't showing here! Is it because there isn't any documentation for them yet? Probably.
+
       ### How Contribute to Documentation
       Make changes to documentation in the index.js file. 
       This is the description of how the functions run at the top of each function between /** *.

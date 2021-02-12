@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset='utf-8'>
-  <title>wellio 0.1.6 | Documentation</title>
+  <title>wellio 0.1.10 | Documentation</title>
   <meta name='description' content='Provides functionality to load a LAS 2.0 formatted well log file and convert it to a json file and then return different information about the well log'>
   <meta name='viewport' content='width=device-width,initial-scale=1'>
   <link href='assets/bass.css' rel='stylesheet'>
@@ -15,7 +15,7 @@
       <div id='split-left' class='overflow-auto fs0 height-viewport-100'>
         <div class='py1 px2'>
           <h3 class='mb0 no-anchor'>wellio</h3>
-          <div class='mb1'><code>0.1.6</code></div>
+          <div class='mb1'><code>0.1.10</code></div>
           <input
             placeholder='Filter'
             id='filter-input'
@@ -36,9 +36,19 @@
               
                 
                 <li><a
-                  href='#read_json'
+                  href='#read_lasio_json_file'
                   class="">
-                  read_json
+                  read_lasio_json_file
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#lasio_obj_2_wellio_obj'
+                  class="">
+                  lasio_obj_2_wellio_obj
                   
                 </a>
                 
@@ -102,9 +112,58 @@
 
   
     <h3>Wellio.js is a JavaScript library for converting a LAS 2.0 well log file into a wellio style JSON.</h3>
-<h3>Other documentation here</h3>
 <h3>How to use</h3>
-<h3>How to install</h3>
+<h4>Server-side</h4>
+<p>The server-side wellio can be found in the <b>dist</b> folder. You can install it locally via <code>npm install wellio</code> as described on the npm homepage <a href="https://www.npmjs.com/package/wellio">here</a>. You can also call this via require(wellio) in ObservableHQ as described in the ObservableHQ demo above. </p>
+<h5>Wellio functions currently working include:</h5>
+<ul>
+<li>
+<p>returnThing: A testing function that returns anything provided to it.
+<code>wellio.returnThing("test")</code> = "test"</p>
+</li>
+<li>
+<p>loadLAS: A function that takes an argument of the well log name as a string, finds that file in the local file system and returns it as a string of text.
+<code>var well_string = wellio.loadLAS("00/01-01-073-05W5/0.LAS")</code></p>
+</li>
+<li>
+<p>las2json: Takes the result of loadLAS or another text string, or another LAS file already loaded into memory, and converts it into the wellio json format and returns that json string.
+<code>var well_json = wellio.las2json(well_string)</code></p>
+</li>
+<li>
+<p>CurvseNames: Given a well already converted into json, returns the available curve names as an array.
+<code>var curvesNames = wellio.CurveNames(well_json) ; where curvesNames = ['GR','ILD','PHID']</code></p>
+</li>
+<li>
+<p>VER_block: Given a well already converted into json, returns verision information block data as a string.
+<code>var VER_block = wellio.VER_block(well_json)</code></p>
+</li>
+<li>
+<p>UWI: Given a well already converted into json, returns the well UWI as a string.
+<code>var UWI_well_json = wellio.UWI(well_json) ; where UWI_well_json is '00/01-01-073-05W5/0</code></p>
+</li>
+<li>
+<p>getCurve: Given a well already converted into json and the name of a curve as a string, returns an array of the data values for that curve.
+<code>var GR_well_json = wellio.getCurve(well_json,"GR") ; where GR_well_json is an array of the GR data, for example [99,93,76,55,67,66,67,78]</code></p>
+</li>
+</ul>
+<h5>Non-wellio fuctions you'll want to know about when using wellio to convert las -> json on command line using node.js</h5>
+<ul>
+<li>To start with node.js after installing it type into a command line <code>node</code> .</li>
+<li>Once in command line node environment, to start with wellio, you'll have to do <code>wellio = require('wellio')</code> After this point, you'll be able to use the commands above.</li>
+<li>After converting a las file to json format with the command <code>well_json = wellio.las2json(well_string)</code> as described above you'll have to stringify it first via <code>well_json_string = JSON.stringify(well_json)</code> and then write it to a file via <code>fs.writeFile("UWI_of_Well.json", well_json_string, 'utf8', function (err) {console.log("error")})</code></li>
+</ul>
+<h4>Front-end side</h4>
+<p>This repo contains various pieces of code for the github pages demo page. In addition to the the wellio.js JavaScript file in the js folder, there is the index.html, which is the main html page for <a href="https://justingosses.github.io/wellio.js/">the github pages demo</a>. </p>
+<p>CSS files are in the CSS folder. </p>
+<p>Several example well logs are in the ASSETS folder.</p>
+<p><a href="https://github.com/agile-geoscience/g3">G3.js</a> is used to draw a plot of the well log curves. It leverages <a href="https://github.com/d3">d3.js</a>.
+<a href="https://github.com/vkiryukhin/vkBeautify">VKbeautify.js</a> is a script for adding spaces and such to JSON to make them prettier when printed.
+<a href="https://github.com/google/code-prettify">run_prettify.js</a> does something similar but is focused on making it print nicely into HTML DOM elements. </p>
+<h4><b>Wellio.js</b> <a href="https://github.com/JustinGOSSES/wellio.js/blob/master/js/wellio.js">script</a> will have a few basics functions (not all are written yet)</h4>
+<ol>
+<li>las2json(onelas) : <i>Function that takes a single LAS text file representing a single well and returns an object variable in JSON format for that well.</i></li>
+<li>download(filename, text): <i>Function that takes a filename and text string and writes a file (either json or las) to your designated downloads folder.</i></li>
+</ol>
 <h3>Tests</h3>
 <p>Need to figure out why test functions aren't showing here! Is it because there isn't any documentation for them yet? Probably.</p>
 <h3>How Contribute to Documentation</h3>
@@ -125,17 +184,17 @@ Once you push the repo to github, the docs should be at the top level of the git
   
   <div class='clearfix'>
     
-    <h3 class='fl m0' id='read_json'>
-      read_json
+    <h3 class='fl m0' id='read_lasio_json_file'>
+      read_lasio_json_file
     </h3>
     
     
   </div>
   
 
-  <p>The read_json function reads and transforms lasio style JSOn files into wellio.js style JSON data format in memory and returns it.</p>
+  <p>File reading utility function.</p>
 
-    <div class='pre p1 fill-light mt0'>read_json(lasiojsonfile: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></div>
+    <div class='pre p1 fill-light mt0'>read_lasio_json_file(file_to_read: any, null: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></div>
   
   
 
@@ -152,8 +211,94 @@ Once you push the repo to github, the docs should be at the top level of the git
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>lasiojsonfile</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
-	    A string reprepresentatiion of filename of well log in a .json file to be loaded into memory and converted from lasio to wellio style JSON
+            <span class='code bold'>file_to_read</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>null</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    : file_to_read - The file to open.
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>:
+        : The file's contents as a string.
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='lasio_obj_2_wellio_obj'>
+      lasio_obj_2_wellio_obj
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>The lasio_obj_2_wellio_obj function transforms lasio JSON strings into wellio.js JSON data format in memory and returns it.</p>
+
+    <div class='pre p1 fill-light mt0'>lasio_obj_2_wellio_obj(lasio_obj: any, lasio_json: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>lasio_obj</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>lasio_json</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>)</code>
+	    A JavaScript object representation of lasio well log format
 
           </div>
           
@@ -176,6 +321,15 @@ Once you push the repo to github, the docs should be at the top level of the git
 
   
 
+  
+    <div class='py1 quiet mt1 prose-big'>Example</div>
+    
+      
+      <pre class='p1 overflow-auto round fill-light'><span class="hljs-keyword">let</span> wellio = <span class="hljs-built_in">require</span>(<span class="hljs-string">'wellio'</span>)
+<span class="hljs-keyword">let</span> lasio_json_str = wellio.read_lasio_json_file(<span class="hljs-string">'lasio.json'</span>);
+<span class="hljs-keyword">let</span> lasio_obj = <span class="hljs-built_in">JSON</span>.parse(lasio_json_str);
+<span class="hljs-keyword">let</span> wellio_obj = wellio.lasio_obj_2_wellio_obj(lasio_obj);</pre>
+    
   
 
   
@@ -238,7 +392,7 @@ Once you push the repo to github, the docs should be at the top level of the git
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
       <code>any</code>:
-        Returens the input that was givne as an argument. This is just for testing that wellio was installed correctly.
+        Returns the input that was givne as an argument. This is just for testing that wellio was installed correctly.
 
       
     
@@ -351,7 +505,7 @@ Once you push the repo to github, the docs should be at the top level of the git
 
   <p>las2jso function converts a LAS 2.0 file already loaded into memory as a string into a JSON object</p>
 
-    <div class='pre p1 fill-light mt0'>las2json(onelas: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></div>
+    <div class='pre p1 fill-light mt0'>las2json(onelas: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, print: any): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></div>
   
   
 
@@ -371,6 +525,15 @@ Once you push the repo to github, the docs should be at the top level of the git
             <span class='code bold'>onelas</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
 	    A string representation of a LAS 2.0 well log file. Typically from the result of the loadLAS function.
 
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>print</span> <code class='quiet'>(any
+            = <code>true</code>)</code>
+	    
           </div>
           
         </div>
