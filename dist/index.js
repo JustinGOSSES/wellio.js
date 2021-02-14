@@ -4,89 +4,34 @@
 
 module.exports = {
 
-  // Read and transform Lasio Json files to Wellio.js json data format
 
 /**
- * File reading utility function.
- * @param {string} : file_to_read - The file to open.
- *
- * @returns {string} : The file's contents as a string.
+ * A helper function that proves wellio.js was installed correctly. It tells the user what functions are available and what they probably need to run to get started loading and converting LAS 2.0 file to json.
+ * @returns Returns the input that was givne as an argument. This is just for testing that wellio was installed correctly.
+ * @example wellio.help() >>> Wellio has the following functions: 'help', 'returnThing', 'loadLAS', 'las2json', 'read_lasio_json_file', and 'lasio_obj_2_wellio_obj'. /n You'll probably want to do well_string = wellio.loadLAS and then well_as_json = las2json(well_string)."
  */
-  read_lasio_json_file: function(file_to_read) {
-    // Configure fs if running from node
-    let fs = '';
-
-    if (process !== 'undefined' && process.versions != null && process.versions.node != null) {
-       fs = require('fs');
-    }
-
-    return fs.readFileSync(file_to_read, 'utf8');
-  },
-
-/**
-* The lasio_obj_2_wellio_obj function transforms lasio JSON strings into wellio.js JSON data format in memory and returns it.
-* @param {object} lasio_json - A JavaScript object representation of lasio well log format
-*
-* @example
-* let wellio = require('wellio')
-* let lasio_json_str = wellio.read_lasio_json_file('lasio.json');
-* let lasio_obj = JSON.parse(lasio_json_str);
-* let wellio_obj = wellio.lasio_obj_2_wellio_obj(lasio_obj);
-*
-* @returns {object} A wellio style JSON object
-*/
-  lasio_obj_2_wellio_obj: function(lasio_obj) {
-
-    let std_headers = {
-      'Version': 'VERSION INFORMATION',
-      'Well': 'WELL INFORMATION BLOCK',
-      'Curves': 'CURVE INFORMATION BLOCK', 
-      'Parameter': 'PARAMETER INFORMATION'
-    };
-
-    let lasjson = {};
-		lasjson["VERSION INFORMATION"] = {};
-		lasjson["WELL INFORMATION BLOCK"] = {};
-		lasjson["CURVE INFORMATION BLOCK"] = {};
-		lasjson["PARAMETER INFORMATION"] = {};
-		lasjson["CURVES"] = lasio_obj.data;
-
-    // Example code for adding non-standard headers
-    for (let item in lasio_obj.metadata) {
-      if ( !(item in std_headers) ) {
-        lasjson[item.toUpperCase()] = lasio_obj.metadata[item];
-      }
-      else {
-        for (let mnemonic in lasio_obj.metadata[item]) {
-          section = std_headers[item];      
-          lasjson[section][mnemonic] = {
-            MNEM: mnemonic,
-            UNIT: '',
-            DATA: lasio_obj.metadata[item][mnemonic],
-            'DESCRIPTION OF MNEMONIC 1': '',
-            'DESCRIPTION OF MNEMONIC 2': ''
-          };
-        }
-      }
-    }
-
-    return lasjson;
-  },
+help: function(){
+	answer = "Wellio has the following functions: 'help', 'returnThing', 'loadLAS', 'las2json', 'read_lasio_json_file', and 'lasio_obj_2_wellio_obj'. You'll probably want to do well_string = wellio.loadLAS and then well_as_json = las2json(well_string)."
+	return onelas
+},
 
 
 /**
  * A helper function that proves wellio,js was installed correctly. It merely returns the argument provided to it. For example, "test" as input would return "test".
- * @param {*} onelas anything
+ * @param {*} onelas string
  * @returns Returns the input that was givne as an argument. This is just for testing that wellio was installed correctly.
- * @example wellio.returnThing("test") = "test"
+ * @example wellio.returnThing("test") >>> "test"
  */
-	returnThing: function(onelas){
-		return onelas
-	},
+returnThing: function(onelas){
+	return onelas
+},
+
+
+  // Read and transform Lasio Json files to Wellio.js json data format
 
 
 /**
-* Loads a LAS 2.0 file from local files
+* Loads a LAS 2.0 file from local files. Takes one argument `well_log` and returns a string representation of the contents of the well log file.
 * @param {string} well_log A string reprepresentatiion of filename of well log to be loaded into memory
 * @returns {string} A string representation of the contents of that well log file. It is a single string.
 */
@@ -103,7 +48,7 @@ module.exports = {
 	},
 	//// Converts a LAS 2.0 file already loaded into memory into a json format
 	/**
-	 * las2jso function converts a LAS 2.0 file already loaded into memory as a string into a JSON object
+	 * las2json function converts a LAS 2.0 file already loaded into memory as a string into a JSON object
 	 * @param {string} onelas A string representation of a LAS 2.0 well log file. Typically from the result of the loadLAS function.
 	 * @returns {Object} A JSON object that represents the information that was in the LAS 2.0 well log file but in JSON wellio style format.
 	 */
@@ -384,7 +329,83 @@ module.exports = {
 		} else {
 			return well_json["CURVES"][curve]
 		}
+	},
+
+	/**
+	 * File reading utility function for a JSON file that contains what was a LAS 2.0 well log already converted into JSON by the Python package Lasio. 
+	 * Lasio is also used by Welly. 
+	 * This function will read the file and keep it in memory. 
+	 * After running this function, You'll likely want to use the `lasio_obj_2_wellio_obj` function to convert the lasio-style JSON in memory to wellio-style JSON in memory.
+	 * @param {string} : file_to_read - The file to open.
+	 *
+	 * @returns {string} : The file's contents as a string.
+	 */
+	read_lasio_json_file: function(file_to_read) {
+		// Configure fs if running from node
+		let fs = '';
+
+		if (process !== 'undefined' && process.versions != null && process.versions.node != null) {
+		fs = require('fs');
+		}
+
+		return fs.readFileSync(file_to_read, 'utf8');
+	},
+
+	/**
+	* The lasio_obj_2_wellio_obj function transforms lasio-style JSON strings into wellio-style JSON data format in memory and returns it.
+	* If you're working with a JSON file created by lasio, you'll want to load it into memory first using the `read_lasio_json_file` function.
+	* @param {object} lasio_json - A JavaScript object representation of lasio well log format
+	*
+	* @example
+	* This is an example of a full sequence of calls that also uses this function.
+	* let wellio = require('wellio')
+	* let lasio_json_str = wellio.read_lasio_json_file('lasio.json');
+	* let lasio_obj = JSON.parse(lasio_json_str);
+	* let wellio_obj = wellio.lasio_obj_2_wellio_obj(lasio_obj);
+	*
+	* @returns {object} A wellio style JSON object
+	*/
+	lasio_obj_2_wellio_obj: function(lasio_obj) {
+
+		let std_headers = {
+		'Version': 'VERSION INFORMATION',
+		'Well': 'WELL INFORMATION BLOCK',
+		'Curves': 'CURVE INFORMATION BLOCK', 
+		'Parameter': 'PARAMETER INFORMATION'
+		};
+
+		let lasjson = {};
+			lasjson["VERSION INFORMATION"] = {};
+			lasjson["WELL INFORMATION BLOCK"] = {};
+			lasjson["CURVE INFORMATION BLOCK"] = {};
+			lasjson["PARAMETER INFORMATION"] = {};
+			lasjson["CURVES"] = lasio_obj.data;
+
+		// Example code for adding non-standard headers
+		for (let item in lasio_obj.metadata) {
+		if ( !(item in std_headers) ) {
+			lasjson[item.toUpperCase()] = lasio_obj.metadata[item];
+		}
+		else {
+			for (let mnemonic in lasio_obj.metadata[item]) {
+			section = std_headers[item];      
+			lasjson[section][mnemonic] = {
+				MNEM: mnemonic,
+				UNIT: '',
+				DATA: lasio_obj.metadata[item][mnemonic],
+				'DESCRIPTION OF MNEMONIC 1': '',
+				'DESCRIPTION OF MNEMONIC 2': ''
+			};
+			}
+		}
+		}
+
+		return lasjson;
 	}
+
+
+
+
 }
 
 

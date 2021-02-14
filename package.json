@@ -48,7 +48,9 @@
     "eslint-plugin-promise": "^3.7.0",
     "eslint-plugin-standard": "^3.0.1",
     "tape": "~4.9.0",
-    "ajv-cli": "^3.0.0"
+    "ajv-cli": "^3.0.0",
+    "docjs-theme": "git://github.com/documentationjs/documentation-theme-light",
+    "documentation": "^13.1.1"
   },
   "bugs": {
     "url": "https://github.com/JustinGOSSES/wellio.js/issues"

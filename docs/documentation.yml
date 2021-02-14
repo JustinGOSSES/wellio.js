@@ -1,20 +1,65 @@
 toc:
-  - name: wellioviz
+  - name: wellio
     description: |
       ### Wellio.js is a JavaScript library for converting a LAS 2.0 well log file into a wellio style JSON.
-      
+      Why would you want to do this? You can think of both LAS 2.0 and JSON as file formats that hold strings. 
+      The difference is <a href="https://en.wikipedia.org/wiki/JSON">JSON</a> is a very common data format widely used across a variety of computer languages. It is used extensively on the web to hold data. 
+      LAS 2.0 is not. LAS 2.0 is specifically for well logs. <a href="https://en.wikipedia.org/wiki/Well_logging">Well logs</a> are measurements along a well bore that meausure changes in subsurface properties.
+      By converting LAS 2.0 to JSON, we get data into a format that is much easier to work with on the web. 
+      Wellio's companion library  <a href="https://github.com/JustinGOSSES/wellioviz">wellioviz</a> takes the JSON that results from Wellio and visualizes it by leveraging <a href="https://d3js.org/">D3.js</a> v5. 
+      However, you could visualize the same wellio JSON with a wide variety of other visualization tools too, because nearly all of them can consume JSON.
+
   - name: How to Use
     description: |
+      Wellio.js is packaged as <a href="https://en.wikipedia.org/wiki/Npm_(software)">npm</a> module as seen <a href="https://www.npmjs.com/package/wellio">here</a>. 
+      The code that you pull when you install the npm module is found in the `dist` folder of the <a href="https://github.com/JustinGOSSES/wellio.js">wellio repository</a> on GitHub.
+      
+      It can be run from the back-end or front-end. Frontend being from a webpage running HTML, CSS, and JavaScript. Backend meaning on a server or in your terminal. 
+      Most people will probably be interested in running it on the frontend, but we'll start by explaining how to run it on the backend or server side as that's a bit easier to explain.
+
       ### Server-side
-      The server-side wellio can be found in the <b>dist</b> folder. You can install it locally via `npm install wellio` as described on the npm homepage <a href="https://www.npmjs.com/package/wellio">here</a>. You can also call this via require(wellio) in ObservableHQ as described in the ObservableHQ demo above. 
+      1. If you haven't already, <a href="https://nodejs.dev/learn/how-to-install-nodejs">install node.js</a> and npm. Node.js is server-side JavaScript. NPM is the package manager for node.js. 
+      When you install Node.js, you should also get npm as described <a href="https://www.npmjs.com/get-npm">here</a>.
+      2. Navigate in your terminal to where you want to work. 
+      3. To install wellio run: 
+      > ```npm install wellio```
 
-      ##### Non-wellio fuctions you'll want to know about when using wellio to convert las -> json on command line using node.js
-      - To start with node.js after installing it type into a command line `node` .
-      - Once in command line node environment, to start with wellio, you'll have to do `wellio = require('wellio')` After this point, you'll be able to use the commands above.
-      - After converting a las file to json format with the command `well_json = wellio.las2json(well_string)` as described above you'll have to stringify it first via `well_json_string = JSON.stringify(well_json)` and then write it to a file via `fs.writeFile("UWI_of_Well.json", well_json_string, 'utf8', function (err) {console.log("error")})`
+     
+      4. Move a LAS 2.0 well log file into the same directory if not already there.
+      5. Enter node, but typing in the termianl 
+      > `node`
+      6. Once in command line node environment, to start with wellio, you'll have to run 
+      > `wellio = require('wellio')` . 
+      7. You should see something print out like:
+      > { read_lasio_json_file: [Function: read_lasio_json_file], 
+      > lasio_obj_2_wellio_obj: [Function: lasio_obj_2_wellio_obj],
+      > returnThing: [Function: returnThing],
+      > loadLAS: [Function: loadLAS],
+      > las2json: [Function: las2json],
+      > CurveNames: [Function: CurveNames],
+      > VER_block: [Function: VER_block],
+      > UWI: [Function: UWI],
+      > getCurve: [Function: getCurve] }
+      8. Now we have wellio installed and imported, so it is ready for use. We can load a well log saved as a .las file with:
+        > file_loaded_as_string = wellio.loadLAS("path_to_file")
+      9. We can convert that string into wellio style JSON in memory with:
+        > wellio_style_json = wellio.las2json(file_loaded_as_string)
+      10. We can now use the wellio_style_json object that is in memory. We can manipulate it with other JavaScript code or use wellioviz to visualize it. We can also save it to as a JSON file to our local computer, which follows the commands below.
+        You'll have to stringify it first and then write it to a file.
+        > `well_json_string = JSON.stringify(well_json)` 
+
+        > `fs.writeFile("UWI_of_Well.json", well_json_string, 'utf8', function (err) {console.log("error")})`
 
 
-      #### Front-end side
+      ### Observable Notebooks
+      The process for calling wellio in an Observable notebook is very easy as it is a npm module. It is literally as easy as:
+      > `wellio = require(wellio)`.
+      
+      As seen in the example notebook <a href="https://observablehq.com/@justingosses/a-notebook-using-wellio-js-wellioviz-js-for-quick-looks-of-la">here</a>.
+      Once wellio is imported using require, you can call any wellio function like:
+       > `well_as_wellio_style_json_in_memory = wellio.las2json(las_file_read_in_as_string)
+
+      ### Front-end side
       This repo contains various pieces of code for the github pages demo page. In addition to the the wellio.js JavaScript file in the js folder, there is the index.html, which is the main html page for <a href="https://justingosses.github.io/wellio.js/">the github pages demo</a>. 
 
       CSS files are in the CSS folder. 
@@ -27,15 +72,6 @@ toc:
       <a href="https://github.com/google/code-prettify">run_prettify.js</a> does something similar but is focused on making it print nicely into HTML DOM elements. 
 
 
-      #### <b>Wellio.js</b> <a href="https://github.com/JustinGOSSES/wellio.js/blob/master/js/wellio.js">script</a> will have a few basics functions (not all are written yet)
-      1. las2json(onelas) : <i>Function that takes a single LAS text file representing a single well and returns an object variable in JSON format for that well.</i>
-      2. download(filename, text): <i>Function that takes a filename and text string and writes a file (either json or las) to your designated downloads folder.</i>
-
-  - name: Tests
-    description: |
-      ### Tests
-      Need to figure out why test functions aren't showing here! Is it because there isn't any documentation for them yet? Probably.
-
   - name: How to Edit Documentation
     description: |
       - Make changes to documentation in the index.js file. 
@@ -47,4 +83,3 @@ toc:
       - Once you push the repo to github, the docs should be at the top level of the githu pages page plus /docs/index.html
 
   - name: Functions
-    description: |
