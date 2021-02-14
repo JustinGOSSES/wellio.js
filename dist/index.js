@@ -6,8 +6,8 @@ module.exports = {
 
 
 /**
- * A helper function that proves wellio.js was installed correctly. It tells the user what functions are available and what they probably need to run to get started loading and converting LAS 2.0 file to json.
- * @returns Returns the input that was givne as an argument. This is just for testing that wellio was installed correctly.
+ * A helper function that takes no input arugments and returns a string with some basic information about wellio.
+ * @returns {string} A predetermined string message to the user about wellio.
  * @example wellio.help() >>> Wellio has the following functions: 'help', 'returnThing', 'loadLAS', 'las2json', 'read_lasio_json_file', and 'lasio_obj_2_wellio_obj'. /n You'll probably want to do well_string = wellio.loadLAS and then well_as_json = las2json(well_string)."
  */
 help: function(){
@@ -18,12 +18,12 @@ help: function(){
 
 /**
  * A helper function that proves wellio,js was installed correctly. It merely returns the argument provided to it. For example, "test" as input would return "test".
- * @param {*} onelas string
- * @returns Returns the input that was givne as an argument. This is just for testing that wellio was installed correctly.
+ * @param {string} a_test_string Any string
+ * @returns {string} Returns the input that was given as an argument. This is just for testing that wellio was installed correctly.
  * @example wellio.returnThing("test") >>> "test"
  */
-returnThing: function(onelas){
-	return onelas
+returnThing: function(a_test_string){
+	return a_test_string
 },
 
 
@@ -48,8 +48,9 @@ returnThing: function(onelas){
 	},
 	//// Converts a LAS 2.0 file already loaded into memory into a json format
 	/**
-	 * las2json function converts a LAS 2.0 file already loaded into memory as a string into a JSON object
+	 * las2json function converts a LAS 2.0 file already loaded into memory as a string into a wellio-style JSON object
 	 * @param {string} onelas A string representation of a LAS 2.0 well log file. Typically from the result of the loadLAS function.
+	 * @param {boolean} print A true or false boolean. If true, intermediate products are sent to console.log() to help withe debugging.
 	 * @returns {Object} A JSON object that represents the information that was in the LAS 2.0 well log file but in JSON wellio style format.
 	 */
 	las2json: function(onelas,print=true){
