@@ -12,8 +12,15 @@
 - https://github.com/JustinGOSSES
 - https://github.com/dcslagel
 
+
 ## Does this upload my well logs to your server? 
 Nope, it only loads to your browser's memory and then your browser forgets it when you close the tab.
+
+## Documentation
+
+Please find the documentation here: https://justingosses.github.io/wellio.js/docs/ 
+
+Docs are a great way to make pull request contributions even if you aren't immmersed in the code base yet.
 
 ## Can I see the demo right now?
 Yes, there are several options. 
@@ -33,12 +40,8 @@ Wellio can also be worked with in a jupyter notebook running a node.js kernal.
 #### 4. Jupyter Notebook running Python that uses node.js for a couple cells via Pixiedust library
 [This is coming. Currently <a href="">an issue</a> that needs help]. This will demonstrate a use-case where you want to manipulate LAS data in python but find it easier to visualize the data from a JSON format, likely using JavaScript data visaulization tooling.
 
-## Code Organization Summary
-
-There are currently separate front-end and back-end javascript versions of wellio. Eventually, they will merge.
-
 #### Server-side
-The server-side wellio can be found in the <b>dist</b> folder. You can install it locally via `npm install wellio` as described on the npm homepage <a href="https://www.npmjs.com/package/wellio">here</a>. You can also call this via require(wellio) in ObservableHQ as described in the ObservableHQ demo above. 
+The main wellio code can be found in the <b>dist</b> folder. You can install it locally via `npm install wellio` as described on the npm homepage <a href="https://www.npmjs.com/package/wellio">here</a>. You can also call this via require(wellio) in ObservableHQ as described in the ObservableHQ demo above. 
 
 ##### Wellio functions currently working include:
 - returnThing: A testing function that returns anything provided to it. 
@@ -78,11 +81,6 @@ Several example well logs are in the ASSETS folder.
 1. las2json(onelas) : <i>Function that takes a single LAS text file representing a single well and returns an object variable in JSON format for that well.</i>
 2. download(filename, text): <i>Function that takes a filename and text string and writes a file (either json or las) to your designated downloads folder.</i>
 
-## Documentation
-
-Please find the documentation here: https://justingosses.github.io/wellio.js/docs/ They are still in flux.
-
-Docs are a great way to make pull request contributions even if you aren't immmersed in the code base yet.
 
 ## Road Map
 Right now, wellio.js just does LAS -> Wellio JSON. There are variety of features that could be added to increase the functionality of wellio and in particular enable cross-communication with other LAS-focused projects. 
