@@ -6,94 +6,65 @@
 [![NPM](https://nodei.co/npm/wellio.png?compact=true)](https://npmjs.org/package/wellio)
 
 ## Purpose
- There currently isn't any .las -> JSON parser that I was able to find. There is <a href="https://lasio.readthedocs.io/en/latest/">lasio</a> and <a href="https://github.com/agile-geoscience/welly">welly</a> for python, but nothing to ingest las files in JavaScript. Wellio.js is an attempt to fill that gap, so I can build other stuff. Once you have well data as JSON, many other JavaScript-based things as possible. I'll try to keep those other things separate, except as demos for Wellio.
+<b> Wellio.js is a JavaScript library for converting a LAS 2.0 well log file into a wellio style JSON. It was created to enable well logs to be easily visualized on the web.s</b>s
 
-## Contributors: 
-- https://github.com/JustinGOSSES
-- https://github.com/dcslagel
+##### You might be wondering...Why Bother? Geologists Use Python.
+Although Python is great for data analysis, and it is the language most learned by geologists, it isn't great for building user interfaces that live on the web. If you want to enable that functionality, you need to get well logs into a format JavaScript visualization libraries can consume and that's JSON.
 
-## Does this upload my well logs to your server? 
-Nope, it only loads to your browser's memory and then your browser forgets it when you close the tab.
+Further explanation on why create wellio is given in the <a href="https://justingosses.github.io/wellio.js/docs/">docs</a>.
 
-## Can I see the demo right now?
-Yes, there are several options. 
+## Demos
+
 #### 1. Github pages demo <a href="https://justingosses.github.io/wellio.js/">page</a>: 
 Open the demo page running on github pages. Click one of the big blue buttons up top to  open a file loader. You can either use a LAS files already part of the webpage or you can load a local LAS file from your computer. 
 
 If you want to test the 'load local file' feature and don't have any local LAS files, you can quickly get one by going to <a href="https://raw.githubusercontent.com/JustinGOSSES/wellio.js/master/assets/00-01-01-073-05W5-0.LAS">this</a> link and saving the results to a ".las" file using your browser. That is a raw las file for well UWI 00-01-01-073-05W5-0.
 
 #### 2. ObservableHQ demo <a href="https://beta.observablehq.com/@justingosses/upload-well-logs-convert-las-to-json-with-wellio-then-visual/2">page</a>:
-ObservableHQ is new way to explore and play with JavaScript code. Think Jupyter notebook but in a more reactive and interactive form. It runs JavaScript code instead of Python/Julia/R. I've created a notebook on there with the same functionality as the demo but with visualizations using Vega instead of g3.js & d3.js. This demo uses syntax of
-`wellio = require(wellio)`
-to call the sever-side wellio npm module functions in the browser. There is also <a href="https://observablehq.com/@justingosses/well-log-in-d3-js-v5">this demo on OBservable that loads a LAS file directly.
+ObservableHQ is new way to explore and play with JavaScript code. Think Jupyter notebook but in a more reactive and interactive form. It runs JavaScript code instead of Python/Julia/R. There's <a href="https://observablehq.com/@justingosses/upload-well-logs-convert-las-to-json-with-wellio-then-visual/2">this</a> demo that uses vega to visualize the well log but is limited to horizontal visualization. There's also <a href="https://observablehq.com/@justingosses/a-notebook-using-wellio-js-wellioviz-js-for-quick-looks-of-la"> this </a> demo that uses wellioviz to visualize the well log as people expect it to be visualized in a vertical orientation with shading, etc. 
 
 #### 3. Jupyter Notebook Node.js <a href="https://github.com/JustinGOSSES/wellio.js/blob/master/notebooks/Wellio%20Demo%20in%20Jupyter%20Notebook%20Node.js.ipynb">demo</a>
 Wellio can also be worked with in a jupyter notebook running a node.js kernal.
 
-#### 4. Jupyter Notebook running Python that uses node.js for a couple cells via Pixiedust library
-[This is coming. Currently <a href="">an issue</a> that needs help]. This will demonstrate a use-case where you want to manipulate LAS data in python but find it easier to visualize the data from a JSON format, likely using JavaScript data visaulization tooling.
-
-## Code Organization Summary
-
-There are currently separate front-end and back-end javascript versions of wellio. Eventually, they will merge.
-
-#### Server-side
-The server-side wellio can be found in the <b>dist</b> folder. You can install it locally via `npm install wellio` as described on the npm homepage <a href="https://www.npmjs.com/package/wellio">here</a>. You can also call this via require(wellio) in ObservableHQ as described in the ObservableHQ demo above. 
-
-##### Wellio functions currently working include:
-- returnThing: A testing function that returns anything provided to it. 
-	`wellio.returnThing("test")` = "test"
-- loadLAS: A function that takes an argument of the well log name as a string, finds that file in the local file system and returns it as a string of text. 
-	`var well_string = wellio.loadLAS("00/01-01-073-05W5/0.LAS")`
-- las2json: Takes the result of loadLAS or another text string, or another LAS file already loaded into memory, and converts it into the wellio json format and returns that json string. 
-	`var well_json = wellio.las2json(well_string)`
-- CurveNames: Given a well already converted into json, returns the available curve names as an array.
-	`var curvesNames = wellio.CurveNames(well_json) ; where curvesNames = ['GR','ILD','PHID']`
-- VER_block: Given a well already converted into json, returns verision information block data as a string.
-	`var VER_block = wellio.VER_block(well_json)`
-- UWI: Given a well already converted into json, returns the well UWI as a string.
-	`var UWI_well_json = wellio.UWI(well_json) ; where UWI_well_json is '00/01-01-073-05W5/0`
-- getCurve: Given a well already converted into json and the name of a curve as a string, returns an array of the data values for that curve. 
-	`var GR_well_json = wellio.getCurve(well_json,"GR") ; where GR_well_json is an array of the GR data, for example [99,93,76,55,67,66,67,78]`
-	
-##### Non-wellio fuctions you'll want to know about when using wellio to convert las -> json on command line using node.js
-- To start with node.js after installing it type into a command line `node` .
-- Once in command line node environment, to start with wellio, you'll have to do `wellio = require('wellio')` After this point, you'll be able to use the commands above.
-- After converting a las file to json format with the command `well_json = wellio.las2json(well_string)` as described above you'll have to stringify it first via `well_json_string = JSON.stringify(well_json)` and then write it to a file via `fs.writeFile("UWI_of_Well.json", well_json_string, 'utf8', function (err) {console.log("error")})`
-
-
-#### Front-end side
-This repo contains various pieces of code for the github pages demo page. In addition to the the wellio.js JavaScript file in the js folder, there is the index.html, which is the main html page for <a href="https://justingosses.github.io/wellio.js/">the github pages demo</a>. 
-
-CSS files are in the CSS folder. 
-
-Several example well logs are in the ASSETS folder.
-
-<a href="https://github.com/agile-geoscience/g3">G3.js</a> is used to draw a plot of the well log curves. It leverages <a href="https://github.com/d3">d3.js</a>.
-<a href="https://github.com/vkiryukhin/vkBeautify">VKbeautify.js</a> is a script for adding spaces and such to JSON to make them prettier when printed.
-<a href="https://github.com/google/code-prettify">run_prettify.js</a> does something similar but is focused on making it print nicely into HTML DOM elements. 
-
-
-#### <b>Wellio.js</b> <a href="https://github.com/JustinGOSSES/wellio.js/blob/master/js/wellio.js">script</a> will have a few basics functions (not all are written yet)
-1. las2json(onelas) : <i>Function that takes a single LAS text file representing a single well and returns an object variable in JSON format for that well.</i>
-2. download(filename, text): <i>Function that takes a filename and text string and writes a file (either json or las) to your designated downloads folder.</i>
-
 ## Documentation
 
-Please find the documentation here: https://justingosses.github.io/wellio.js/docs/ They are still in flux.
+#### Please find the documentation here: https://justingosses.github.io/wellio.js/docs/ 
+Contents include:
+- PURPOSE
+- USAGE
+- HOW TO INSTALL
+- HOW TO USE ONCE INSTALLED
+- WELLIO-STYLE JSON VS OTHERS
+- HOW TO EDIT DOCUMENTATION
+- FUNCTIONS
+
+## Contributing
+There are a variety of <a href="https://github.com/JustinGOSSES/wellio.js/issues">issues</a> that need worked. Several of which are suitable for those who are new to JavaScript. 
+
+Please add any suggestions you'd like or bugs you find to the issues.
 
 Docs are a great way to make pull request contributions even if you aren't immmersed in the code base yet.
 
+## Contributors: 
+- https://github.com/JustinGOSSES
+- https://github.com/dcslagel
+
+
 ## Road Map
-Right now, wellio.js just does LAS -> Wellio JSON. There are variety of features that could be added to increase the functionality of wellio and in particular enable cross-communication with other LAS-focused projects. 
+Right now, the main functionality of wellio.js is LAS file -> Wellio-style JSON. 
 
-Potential cross-communication conversions include:
-1. wellio <-> las files (have the las to wellio direction but need the back again conversion)
-2. wellio <-> <a href="https://github.com/agile-geoscience/welly">welly</a> objects (python)
-3. wellio <-> <a href="https://lasio.readthedocs.io/en/latest/">lasio</a> (python)
+There is also functionality to:
+- save wellio-style JSON as a .json file.
+- load & convert <a href="https://lasio.readthedocs.io/en/latest/">LASIO</a>-style json into wellio-style JSON.
 
-#### Can you help? Of course you can! 
-There are a variety of <a href="https://github.com/JustinGOSSES/wellio.js/issues">issues</a> that need worked. Several of which are suitable for those who are new to JavaScript. Please add any suggestions you'd like or bugs you find to the issues.
+In the future, we may add functionality to convert <a href="https://jsonwelllogformat.org/">JSON well log format</as>, or what becomes the unfortunately named JSON-style JSON, to wellio-style json and back.
+
+## Wellio.js & Wellioviz.js
+<i>Wellioviz</i> is the visualization companion to <i>wellio</i>!
+
+Where are <i>Wellio</i> is just concerned with the conversion of LAS 2.0 files into JSON, <i>Wellioviz</i> is concerned with making a visualization of the resulting JSON using d3.js v5. This means you can load, convert, and visualize well logs entirely on the web with front-end JavaScript.
+
+<a href="https://github.com/JustinGOSSES/wellioviz"><b>Find out more about WELLIOVIZ here</b></a>
 
 ## Where To Get Open-Source Well Logs in .LAS format?
 You can use the file upload button to load into your browsers memory any LAS files from your local computer. I've also included a few well logs in the /assets/ folder of this repo from the electronic data file below. 
@@ -104,18 +75,6 @@ Report for Athabasca Oil Sands Data McMurray/Wabiskaw Oil Sands Deposit <a href=
 
 You can also find them on USGS and Kansas open data sites as is done in <a href="https://observablehq.com/@justingosses/a-notebook-using-wellio-js-wellioviz-js-for-quick-looks-of-la">this Observable notebook</a> that leverages wellio & wellioviz.
 
-### Why Bother? Geologists Use Python...
-*Long story short, I needed a way to load las files and work with them as json in JavaScript in order to work with them on the web or using web tools*
-
-### Examples of where it can be used
-There is also a few Observable notebooks (javascript, online, editable, and forkable by anyone) <a href="https://observablehq.com/@justingosses/well-log-in-d3-js-v5">here</a> and <a href="https://observablehq.com/@justingosses/well-log-curve-cross-sections">here</a> I've toyed around with that use wellio.js to import well logs and parse the string of the las file into JSON for visualization. 
-
-## Wellio.js & Wellioviz.js
-<i>Wellioviz</i> is a companion to <i>wellio</i>!
-
-Where are <i>Wellio</i> is just concerned with the conversion of LAS 2.0 files into JSON, <i>Wellioviz</i> is concerned with making a visualization of the resulting JSON using d3.js v5. This means you can load, convert, and visualize well logs entirely on the web with front-end JavaScript.
-
-<a href="https://github.com/JustinGOSSES/wellioviz"><b>Find out more about WELLIOVIZ here</b></a>
 
 ## Example of LAS format and JSON formated well log data
 
@@ -189,7 +148,7 @@ SUFT.C        0                    : SUFT         - SURFACE TEMPERATURE
 
 #### LAS -> JSON
 ```var lasjson = function las2json(onelas)```
-will give you something like this:
+will give you something like this though in the example below all the data is taken out to save space:
 ``` 
 var lasjson = {
 			"VERSION INFORMATION":{
