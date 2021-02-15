@@ -34,7 +34,7 @@ toc:
   - name: Link to wellio GitHub repository
     description: |
       <a href="https://github.com/JustinGOSSES/wellio.js">https://github.com/JustinGOSSES/wellio.js</a>
-      
+
   - name: Usage
     description: |
       In the wellio documentation, we have split out <b>"How to Install & Get Ready to Use"</b> and <b>"How to Use Once Installed"</b>, because installation varies depending on whether wellio is being used as front-end JavaScript code on a website, in an Observable JavaScript Notebook, or server-side via a command line or node.js script. 
@@ -158,10 +158,31 @@ toc:
 
       <code class="black"> wellio.returnThing("This is a test string that should be returned exactly as shown") </code>
 
+      #### Getting specific pieces of information out of the wellio-style JSON
+
+      Although getting information out of the wellio-style JSON is as straight forward as navigating a python dict, there are a few helper functions built-in.
+      Clicking on each will bring you to the documenation for that function.
+
+      - <a href="#CurveNames">`wellio.CurveNames()`</a>  will return all the curve names in a wellio-style JSON.
+      - <a href="#VER_block">`wellio.VER_block()`</a>  will return version information that was in the original LAS file now in the wellio-style JSON.
+      - <a href="#UWI">`wellio.UWI()`</a>  wellio.UWI will return the UWI if it exists. If you use this, wrap it in a function that fails as you intend it to.
+      - <a href="#getCurve">`wellio.getCurve()`</a>  will return all the curve data for a given curve name in a wellio-style JSON.
+
 
       #### Working with well logs in JSONs other than wellio-style JSON
 
-      The last two functions are `wellio.read_lasio_json_file` and `wellio.lasio_obj_2_wellio_obj`. These are for converting Lasio-style JSON to wellio-style JSON as described in the next section.
+      These two functions are for converting Lasio-style JSON to wellio-style JSON. They are defined in the "functions section". 
+      Clicking on them will take you directly to their documentation. 
+      Why they exist is explained in the section directly below.
+    
+      
+      <a href="#read_lasio_json_file">`wellio.read_lasio_json_file`</a> 
+      
+      and 
+      
+      <a href="#lasio_obj_2_wellio_obj">`wellio.lasio_obj_2_wellio_obj`</a>. 
+      
+      
 
   - name: Wellio-style JSON vs Others
     description: |
@@ -251,16 +272,8 @@ toc:
       - Run <code class="black">python3 -m http.server</code>
       - You should be able to go to your browser at http://0.0.0.0:8000/ and see the docs. 
 
-
-  - name: other functions to be documented    
+  - name: Tests
     description: |
-      - CurveNames: Given a well already converted into json, returns the available curve names as an array.
-        `var curvesNames = wellio.CurveNames(well_json) ; where curvesNames = ['GR','ILD','PHID']`
-      - VER_block: Given a well already converted into json, returns verision information block data as a string.
-        `var VER_block = wellio.VER_block(well_json)`
-      - UWI: Given a well already converted into json, returns the well UWI as a string.
-        `var UWI_well_json = wellio.UWI(well_json) ; where UWI_well_json is '00/01-01-073-05W5/0`
-      - getCurve: Given a well already converted into json and the name of a curve as a string, returns an array of the data values for that curve. 
-        `var GR_well_json = wellio.getCurve(well_json,"GR") ; where GR_well_json is an array of the GR data, for example [99,93,76,55,67,66,67,78]`
+      There are test functions used for testing wellio used in the <a href="https://github.com/JustinGOSSES/wellio.js/tree/master/dist/test">`dist/test/`</a> folder. 
 
   - name: Functions

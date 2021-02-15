@@ -1,9 +1,6 @@
 const test = require('tape');
 const wellio = require('../../index.js');
 
-/**
-* A test function for v2 empty headers. Need to finish documentation.
-*/
 test('readLasioJson: test_read_lasio_sample_2.0_with_empty_headers.json', function(t) {
   t.plan(2);
   json_file = "assets/json_files/lasio_sample_2.0_empty_headers.json";

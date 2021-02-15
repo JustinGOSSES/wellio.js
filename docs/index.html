@@ -96,9 +96,9 @@
               
                 
                 <li><a
-                  href='#other-functions-to-be-documented'
+                  href='#tests'
                   class="h5 bold black caps">
-                  other functions to be documented
+                  Tests
                   
                 </a>
                 
@@ -156,6 +156,46 @@
               
                 
                 <li><a
+                  href='#curvenames'
+                  class="">
+                  CurveNames
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#ver_block'
+                  class="">
+                  VER_block
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#uwi'
+                  class="">
+                  UWI
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#getcurve'
+                  class="">
+                  getCurve
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
                   href='#read_lasio_json_file'
                   class="">
                   read_lasio_json_file
@@ -169,16 +209,6 @@
                   href='#lasio_obj_2_wellio_obj'
                   class="">
                   lasio_obj_2_wellio_obj
-                  
-                </a>
-                
-                </li>
-              
-                
-                <li><a
-                  href='#test'
-                  class="">
-                  test
                   
                 </a>
                 
@@ -358,8 +388,22 @@ You'll have to stringify it first and then write it to a file. In this case, the
 They don't require any inputs to work. They can simply be called. </p>
 <p><code class="black"> wellio.help() </code></p>
 <p><code class="black"> wellio.returnThing("This is a test string that should be returned exactly as shown") </code></p>
+<h4>Getting specific pieces of information out of the wellio-style JSON</h4>
+<p>Although getting information out of the wellio-style JSON is as straight forward as navigating a python dict, there are a few helper functions built-in.
+Clicking on each will bring you to the documenation for that function.</p>
+<ul>
+<li><a href="#CurveNames"><code>wellio.CurveNames()</code></a>  will return all the curve names in a wellio-style JSON.</li>
+<li><a href="#VER_block"><code>wellio.VER_block()</code></a>  will return version information that was in the original LAS file now in the wellio-style JSON.</li>
+<li><a href="#UWI"><code>wellio.UWI()</code></a>  wellio.UWI will return the UWI if it exists. If you use this, wrap it in a function that fails as you intend it to.</li>
+<li><a href="#getCurve"><code>wellio.getCurve()</code></a>  will return all the curve data for a given curve name in a wellio-style JSON.</li>
+</ul>
 <h4>Working with well logs in JSONs other than wellio-style JSON</h4>
-<p>The last two functions are <code>wellio.read_lasio_json_file</code> and <code>wellio.lasio_obj_2_wellio_obj</code>. These are for converting Lasio-style JSON to wellio-style JSON as described in the next section.</p>
+<p>These two functions are for converting Lasio-style JSON to wellio-style JSON. They are defined in the "functions section".
+Clicking on them will take you directly to their documentation.
+Why they exist is explained in the section directly below.</p>
+<p><a href="#read_lasio_json_file"><code>wellio.read_lasio_json_file</code></a> </p>
+<p>and </p>
+<p><a href="#lasio_obj_2_wellio_obj"><code>wellio.lasio_obj_2_wellio_obj</code></a>. </p>
 
   
 </section></div>
@@ -461,21 +505,12 @@ Lasio has the ability to export data loaded from a LAS 2.0 well log file into JS
           
             <div class='keyline-top-not py2'><section class='py2 clearfix'>
 
-  <h2 id='other-functions-to-be-documented' class='mt0'>
-    other functions to be documented
+  <h2 id='tests' class='mt0'>
+    Tests
   </h2>
 
   
-    <ul>
-<li>CurveNames: Given a well already converted into json, returns the available curve names as an array.
-<code>var curvesNames = wellio.CurveNames(well_json) ; where curvesNames = ['GR','ILD','PHID']</code></li>
-<li>VER_block: Given a well already converted into json, returns verision information block data as a string.
-<code>var VER_block = wellio.VER_block(well_json)</code></li>
-<li>UWI: Given a well already converted into json, returns the well UWI as a string.
-<code>var UWI_well_json = wellio.UWI(well_json) ; where UWI_well_json is '00/01-01-073-05W5/0</code></li>
-<li>getCurve: Given a well already converted into json and the name of a curve as a string, returns an array of the data values for that curve.
-<code>var GR_well_json = wellio.getCurve(well_json,"GR") ; where GR_well_json is an array of the GR data, for example [99,93,76,55,67,66,67,78]</code></li>
-</ul>
+    <p>There are test functions used for testing wellio used in the <a href="https://github.com/JustinGOSSES/wellio.js/tree/master/dist/test"><code>dist/test/</code></a> folder. </p>
 
   
 </section></div>
@@ -789,20 +824,17 @@ Lasio has the ability to export data loaded from a LAS 2.0 well log file into JS
   
   <div class='clearfix'>
     
-    <h3 class='fl m0' id='read_lasio_json_file'>
-      read_lasio_json_file
+    <h3 class='fl m0' id='curvenames'>
+      CurveNames
     </h3>
     
     
   </div>
   
 
-  <p>File reading utility function for a JSON file that contains what was a LAS 2.0 well log already converted into JSON by the Python package Lasio.
-Lasio is also used by Welly.
-This function will read the file and keep it in memory.
-After running this function, You'll likely want to use the <code>lasio_obj_2_wellio_obj</code> function to convert the lasio-style JSON in memory to wellio-style JSON in memory.</p>
+  <p>Given a well already converted into wellio-style json in memory, the CurveNames function returns the available curves in that well.</p>
 
-    <div class='pre p1 fill-light mt0'>read_lasio_json_file(file_to_read: any, null: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></div>
+    <div class='pre p1 fill-light mt0'>CurveNames(well_json: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a></div>
   
   
 
@@ -819,16 +851,300 @@ After running this function, You'll likely want to use the <code>lasio_obj_2_wel
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>file_to_read</span> <code class='quiet'>(any)</code>
-	    
+            <span class='code bold'>well_json</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>)</code>
+	    A wellio-style json in memory, typically resulting from the wellio.las2json() function.
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a></code>:
+        An array of strings representing the curve names in the well.
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='ver_block'>
+      VER_block
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Given a well already converted into wellio-style json in memory, the VER_block function returns the entire version block of the original LAS file as a string.</p>
+
+    <div class='pre p1 fill-light mt0'>VER_block(well_json: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>well_json</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>)</code>
+	    A wellio-style json in memory, typically resulting from the wellio.las2json() function.
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>:
+        An array of strings representing the entire version block of the original LAS file as a string.
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='uwi'>
+      UWI
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Given a well already converted into wellio-style json in memory, the UWI function attempts to return the UWI field of the original LAS file as a string. Pleaes note that this doesn't exisst in every well log and will therefore fail sometimes!</p>
+
+    <div class='pre p1 fill-light mt0'>UWI(well_json: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>well_json</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>)</code>
+	    A wellio-style json in memory, typically resulting from the wellio.las2json() function.
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>:
+        An a string representing the UWI field of the original LAS file.
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='getcurve'>
+      getCurve
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Given a well already converted into wellio-style json in memory, the wellio.getCurve() function attempts to return the curve data of a given well log. If it doesn't exist, the message "that curve does not exist! see console.log" is outputted to console.log and returned by the function.</p>
+
+    <div class='pre p1 fill-light mt0'>getCurve(well_json: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>, curve: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">array</a></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>well_json</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>)</code>
+	    A wellio-style json in memory, typically resulting from the wellio.las2json() function.
+
           </div>
           
         </div>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>null</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
-	    : file_to_read - The file to open.
+            <span class='code bold'>curve</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    A string representation of a particular curve name.
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">array</a></code>:
+        An array of integers or floats representing the data for a particular curve in a given well log.
+
+      
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='read_lasio_json_file'>
+      read_lasio_json_file
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>File reading utility function for a JSON file that contains what was a LAS 2.0 well log already converted into JSON by the Python package Lasio.
+Lasio is also used by Welly.
+This function will read the file and keep it in memory.
+After running this function, You'll likely want to use the <code>lasio_obj_2_wellio_obj</code> function to convert the lasio-style JSON in memory to wellio-style JSON in memory.</p>
+
+    <div class='pre p1 fill-light mt0'>read_lasio_json_file(file_to_read: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>file_to_read</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    : file_to_read - The file to open.s
 
           </div>
           
@@ -940,54 +1256,6 @@ If you're working with a JSON file created by lasio, you'll want to load it into
 <span class="hljs-title">let</span> <span class="hljs-title">lasio_obj</span> = <span class="hljs-title">JSON</span>.<span class="hljs-title">parse</span>(<span class="hljs-params">lasio_json_str</span>);
 <span class="hljs-title">let</span> <span class="hljs-title">wellio_obj</span> = <span class="hljs-title">wellio</span>.<span class="hljs-title">lasio_obj_2_wellio_obj</span>(<span class="hljs-params">lasio_obj</span>);</span></pre>
     
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-          
-        
-          
-          <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-  <div class='clearfix'>
-    
-    <h3 class='fl m0' id='test'>
-      test
-    </h3>
-    
-    
-  </div>
-  
-
-  <p>A test function for v2 empty headers. Need to finish documentation.</p>
-
-    <div class='pre p1 fill-light mt0'>test</div>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-
-  
-
-  
-
-  
-
   
 
   
