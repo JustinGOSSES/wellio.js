@@ -35,6 +35,15 @@ toc:
     description: |
       <a href="https://github.com/JustinGOSSES/wellio.js">https://github.com/JustinGOSSES/wellio.js</a>
 
+      The <a href="https://github.com/JustinGOSSES/wellio.js/blob/master/README.md">README.md</a> has additional information to the README, including sections:
+      - Demos
+      - Contributing
+      - Contributors
+      - Road Map
+      - Wellio.js & Wellioviz.js
+      - Where To Get Open-Source Well Logs in .LAS format?
+      - Example of LAS format and JSON formated well log data
+
   - name: Usage
     description: |
       In the wellio documentation, we have split out <b>"How to Install & Get Ready to Use"</b> and <b>"How to Use Once Installed"</b>, because installation varies depending on whether wellio is being used as front-end JavaScript code on a website, in an Observable JavaScript Notebook, or server-side via a command line or node.js script. 
@@ -271,6 +280,9 @@ toc:
       - Now CD to docs folder. 
       - Run <code class="black">python3 -m http.server</code>
       - You should be able to go to your browser at http://0.0.0.0:8000/ and see the docs. 
+
+      Note, if you want to change the styling of the documentation, you there is a style header towards the top of the `documentation.yml` file in the `docs` folder. 
+      You can change the page style there. This isn't a documented way to style things in documentation.js, but it works and is way easier than the "official" way to change the theme style.
 
   - name: Tests
     description: |
