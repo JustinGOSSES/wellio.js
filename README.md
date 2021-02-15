@@ -13,9 +13,18 @@ Although Python is great for data analysis, and it is the language most learned 
 
 Further explanation on why create wellio is given in the <a href="https://justingosses.github.io/wellio.js/docs/">docs</a>.
 
-## Contributors: 
-- https://github.com/JustinGOSSES
-- https://github.com/dcslagel
+## Demos
+
+#### 1. Github pages demo <a href="https://justingosses.github.io/wellio.js/">page</a>: 
+Open the demo page running on github pages. Click one of the big blue buttons up top to  open a file loader. You can either use a LAS files already part of the webpage or you can load a local LAS file from your computer. 
+
+If you want to test the 'load local file' feature and don't have any local LAS files, you can quickly get one by going to <a href="https://raw.githubusercontent.com/JustinGOSSES/wellio.js/master/assets/00-01-01-073-05W5-0.LAS">this</a> link and saving the results to a ".las" file using your browser. That is a raw las file for well UWI 00-01-01-073-05W5-0.
+
+#### 2. ObservableHQ demo <a href="https://beta.observablehq.com/@justingosses/upload-well-logs-convert-las-to-json-with-wellio-then-visual/2">page</a>:
+ObservableHQ is new way to explore and play with JavaScript code. Think Jupyter notebook but in a more reactive and interactive form. It runs JavaScript code instead of Python/Julia/R. There's <a href="https://observablehq.com/@justingosses/upload-well-logs-convert-las-to-json-with-wellio-then-visual/2">this</a> demo that uses vega to visualize the well log but is limited to horizontal visualization. There's also <a href="https://observablehq.com/@justingosses/a-notebook-using-wellio-js-wellioviz-js-for-quick-looks-of-la"> this </a> demo that uses wellioviz to visualize the well log as people expect it to be visualized in a vertical orientation with shading, etc. 
+
+#### 3. Jupyter Notebook Node.js <a href="https://github.com/JustinGOSSES/wellio.js/blob/master/notebooks/Wellio%20Demo%20in%20Jupyter%20Notebook%20Node.js.ipynb">demo</a>
+Wellio can also be worked with in a jupyter notebook running a node.js kernal.
 
 ## Documentation
 
@@ -36,30 +45,22 @@ Please add any suggestions you'd like or bugs you find to the issues.
 
 Docs are a great way to make pull request contributions even if you aren't immmersed in the code base yet.
 
-## Demos
+## Contributors: 
+- https://github.com/JustinGOSSES
+- https://github.com/dcslagel
 
-#### 1. Github pages demo <a href="https://justingosses.github.io/wellio.js/">page</a>: 
-Open the demo page running on github pages. Click one of the big blue buttons up top to  open a file loader. You can either use a LAS files already part of the webpage or you can load a local LAS file from your computer. 
-
-If you want to test the 'load local file' feature and don't have any local LAS files, you can quickly get one by going to <a href="https://raw.githubusercontent.com/JustinGOSSES/wellio.js/master/assets/00-01-01-073-05W5-0.LAS">this</a> link and saving the results to a ".las" file using your browser. That is a raw las file for well UWI 00-01-01-073-05W5-0.
-
-#### 2. ObservableHQ demo <a href="https://beta.observablehq.com/@justingosses/upload-well-logs-convert-las-to-json-with-wellio-then-visual/2">page</a>:
-ObservableHQ is new way to explore and play with JavaScript code. Think Jupyter notebook but in a more reactive and interactive form. It runs JavaScript code instead of Python/Julia/R. There's <a href="https://observablehq.com/@justingosses/upload-well-logs-convert-las-to-json-with-wellio-then-visual/2">this</a> demo that uses vega to visualize the well log but is limited to horizontal visualization. There's also <a href="https://observablehq.com/@justingosses/a-notebook-using-wellio-js-wellioviz-js-for-quick-looks-of-la"> this </a> demo that uses wellioviz to visualize the well log as people expect it to be visualized in a vertical orientation with shading, etc. 
-
-#### 3. Jupyter Notebook Node.js <a href="https://github.com/JustinGOSSES/wellio.js/blob/master/notebooks/Wellio%20Demo%20in%20Jupyter%20Notebook%20Node.js.ipynb">demo</a>
-Wellio can also be worked with in a jupyter notebook running a node.js kernal.
 
 ## Road Map
 Right now, the main functionality of wellio.js is LAS file -> Wellio-style JSON. 
 
 There is also functionality to:
--  save wellio-style JSON as a .json file.
+- save wellio-style JSON as a .json file.
 - load & convert <a href="https://lasio.readthedocs.io/en/latest/">LASIO</a>-style json into wellio-style JSON.
 
 In the future, we may add functionality to convert <a href="https://jsonwelllogformat.org/">JSON well log format</as>, or what becomes the unfortunately named JSON-style JSON, to wellio-style json and back.
 
 ## Wellio.js & Wellioviz.js
-<i>Wellioviz</i> is a companion to <i>wellio</i>!
+<i>Wellioviz</i> is the visualization companion to <i>wellio</i>!
 
 Where are <i>Wellio</i> is just concerned with the conversion of LAS 2.0 files into JSON, <i>Wellioviz</i> is concerned with making a visualization of the resulting JSON using d3.js v5. This means you can load, convert, and visualize well logs entirely on the web with front-end JavaScript.
 
