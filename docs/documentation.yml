@@ -281,7 +281,7 @@ toc:
       - Run <code class="black">python3 -m http.server</code>
       - You should be able to go to your browser at http://0.0.0.0:8000/ and see the docs. 
 
-      Note, if you want to change the styling of the documentation, you there is a style header towards the top of the `documentation.yml` file in the `docs` folder. 
+      If you want to change the styling of the documentation, there is a style header towards the top of the `documentation.yml` file in the `docs` folder. 
       You can change the page style there. This isn't a documented way to style things in documentation.js, but it works and is way easier than the "official" way to change the theme style.
 
   - name: Tests
