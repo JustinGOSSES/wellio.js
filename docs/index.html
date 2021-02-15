@@ -86,6 +86,16 @@
               
                 
                 <li><a
+                  href='#other-functions-to-be-documented'
+                  class="h5 bold black caps">
+                  other functions to be documented
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
                   href='#functions'
                   class="h5 bold black caps">
                   Functions
@@ -418,6 +428,29 @@ Lasio has the ability to export data loaded from a LAS 2.0 well log file into JS
 <li>Now CD to docs folder. </li>
 <li>Run <code class="black">python3 -m http.server</code></li>
 <li>You should be able to go to your browser at <a href="http://0.0.0.0:8000/">http://0.0.0.0:8000/</a> and see the docs. </li>
+</ul>
+
+  
+</section></div>
+          
+        
+          
+            <div class='keyline-top-not py2'><section class='py2 clearfix'>
+
+  <h2 id='other-functions-to-be-documented' class='mt0'>
+    other functions to be documented
+  </h2>
+
+  
+    <ul>
+<li>CurveNames: Given a well already converted into json, returns the available curve names as an array.
+<code>var curvesNames = wellio.CurveNames(well_json) ; where curvesNames = ['GR','ILD','PHID']</code></li>
+<li>VER_block: Given a well already converted into json, returns verision information block data as a string.
+<code>var VER_block = wellio.VER_block(well_json)</code></li>
+<li>UWI: Given a well already converted into json, returns the well UWI as a string.
+<code>var UWI_well_json = wellio.UWI(well_json) ; where UWI_well_json is '00/01-01-073-05W5/0</code></li>
+<li>getCurve: Given a well already converted into json and the name of a curve as a string, returns an array of the data values for that curve.
+<code>var GR_well_json = wellio.getCurve(well_json,"GR") ; where GR_well_json is an array of the GR data, for example [99,93,76,55,67,66,67,78]</code></li>
 </ul>
 
   

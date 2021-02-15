@@ -246,5 +246,17 @@ toc:
       - Now CD to docs folder. 
       - Run <code class="black">python3 -m http.server</code>
       - You should be able to go to your browser at http://0.0.0.0:8000/ and see the docs. 
-      
+
+
+  - name: other functions to be documented    
+    description: |
+      - CurveNames: Given a well already converted into json, returns the available curve names as an array.
+        `var curvesNames = wellio.CurveNames(well_json) ; where curvesNames = ['GR','ILD','PHID']`
+      - VER_block: Given a well already converted into json, returns verision information block data as a string.
+        `var VER_block = wellio.VER_block(well_json)`
+      - UWI: Given a well already converted into json, returns the well UWI as a string.
+        `var UWI_well_json = wellio.UWI(well_json) ; where UWI_well_json is '00/01-01-073-05W5/0`
+      - getCurve: Given a well already converted into json and the name of a curve as a string, returns an array of the data values for that curve. 
+        `var GR_well_json = wellio.getCurve(well_json,"GR") ; where GR_well_json is an array of the GR data, for example [99,93,76,55,67,66,67,78]`
+
   - name: Functions
