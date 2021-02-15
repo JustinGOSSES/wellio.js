@@ -20,11 +20,21 @@ Further explanation on why create wellio is given in the <a href="https://justin
 ## Documentation
 
 #### Please find the documentation here: https://justingosses.github.io/wellio.js/docs/ 
-
-Docs are a great way to make pull request contributions even if you aren't immmersed in the code base yet.
+Contents include:
+- PURPOSE
+- USAGE
+- HOW TO INSTALL
+- HOW TO USE ONCE INSTALLED
+- WELLIO-STYLE JSON VS OTHERS
+- HOW TO EDIT DOCUMENTATION
+- FUNCTIONS
 
 ## Contributing
-There are a variety of <a href="https://github.com/JustinGOSSES/wellio.js/issues">issues</a> that need worked. Several of which are suitable for those who are new to JavaScript. Please add any suggestions you'd like or bugs you find to the issues.
+There are a variety of <a href="https://github.com/JustinGOSSES/wellio.js/issues">issues</a> that need worked. Several of which are suitable for those who are new to JavaScript. 
+
+Please add any suggestions you'd like or bugs you find to the issues.
+
+Docs are a great way to make pull request contributions even if you aren't immmersed in the code base yet.
 
 ## Demos
 
