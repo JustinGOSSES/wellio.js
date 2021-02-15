@@ -309,19 +309,40 @@ returnThing: function(a_test_string){
 	},
 	
 	//// Given a well already converted into json, returns the available curves
+	/**
+	 * Given a well already converted into wellio-style json in memory, the CurveNames function returns the available curves in that well.
+	 * @param {object} well_json A wellio-style json in memory, typically resulting from the wellio.las2json() function.
+	 * @returns {Array} An array of strings representing the curve names in the well.
+	 */
 	CurveNames: function(well_json){
 		var curveNames = Object.keys(well_json["CURVES"]);
 		return curveNames
 	},
 	//// 
+	/**
+	 * Given a well already converted into wellio-style json in memory, the VER_block function returns the entire version block of the original LAS file as a string.
+	 * @param {object} well_json A wellio-style json in memory, typically resulting from the wellio.las2json() function.
+	 * @returns {string} An array of strings representing the entire version block of the original LAS file as a string.
+	 */
 	VER_block: function(well_json){
 		return well_json["VERSION INFORMATION"]
 	},
 	//// Given a well already converted into json, returns the well UWI
+	/**
+	 * Given a well already converted into wellio-style json in memory, the UWI function attempts to return the UWI field of the original LAS file as a string. Pleaes note that this doesn't exisst in every well log and will therefore fail sometimes!
+	 * @param {object} well_json A wellio-style json in memory, typically resulting from the wellio.las2json() function.
+	 * @returns {string} An a string representing the UWI field of the original LAS file.
+	 */
 	UWI: function(well_json){
 		return well_json["WELL INFORMATION BLOCK"]["UWI"]["DATA"]
 	},
 	//// Given a well already converted into json, returns a given curve name in string format
+	/**
+	 * Given a well already converted into wellio-style json in memory, the wellio.getCurve() function attempts to return the curve data of a given well log. If it doesn't exist, the message "that curve does not exist! see console.log" is outputted to console.log and returned by the function.
+	 * @param {object} well_json A wellio-style json in memory, typically resulting from the wellio.las2json() function.
+	 * @param {string} curve A string representation of a particular curve name.
+	 * @returns {array} An array of integers or floats representing the data for a particular curve in a given well log.
+	 */
 	getCurve(well_json,curve){
 		if (!well_json["CURVES"][curve]){
 			console.log("in getCurve function, that curve does not exist! =",curve)
@@ -337,8 +358,7 @@ returnThing: function(a_test_string){
 	 * Lasio is also used by Welly. 
 	 * This function will read the file and keep it in memory. 
 	 * After running this function, You'll likely want to use the `lasio_obj_2_wellio_obj` function to convert the lasio-style JSON in memory to wellio-style JSON in memory.
-	 * @param {string} : file_to_read - The file to open.
-	 *
+	 * @param {string} file_to_read : file_to_read - The file to open.s
 	 * @returns {string} : The file's contents as a string.
 	 */
 	read_lasio_json_file: function(file_to_read) {
