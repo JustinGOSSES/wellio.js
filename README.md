@@ -23,6 +23,9 @@ Further explanation on why create wellio is given in the <a href="https://justin
 
 Docs are a great way to make pull request contributions even if you aren't immmersed in the code base yet.
 
+## Contributing
+There are a variety of <a href="https://github.com/JustinGOSSES/wellio.js/issues">issues</a> that need worked. Several of which are suitable for those who are new to JavaScript. Please add any suggestions you'd like or bugs you find to the issues.
+
 ## Demos
 
 #### 1. Github pages demo <a href="https://justingosses.github.io/wellio.js/">page</a>: 
@@ -45,8 +48,12 @@ There is also functionality to:
 
 In the future, we may add functionality to convert <a href="https://jsonwelllogformat.org/">JSON well log format</as>, or what becomes the unfortunately named JSON-style JSON, to wellio-style json and back.
 
-## Contributing
-There are a variety of <a href="https://github.com/JustinGOSSES/wellio.js/issues">issues</a> that need worked. Several of which are suitable for those who are new to JavaScript. Please add any suggestions you'd like or bugs you find to the issues.
+## Wellio.js & Wellioviz.js
+<i>Wellioviz</i> is a companion to <i>wellio</i>!
+
+Where are <i>Wellio</i> is just concerned with the conversion of LAS 2.0 files into JSON, <i>Wellioviz</i> is concerned with making a visualization of the resulting JSON using d3.js v5. This means you can load, convert, and visualize well logs entirely on the web with front-end JavaScript.
+
+<a href="https://github.com/JustinGOSSES/wellioviz"><b>Find out more about WELLIOVIZ here</b></a>
 
 ## Where To Get Open-Source Well Logs in .LAS format?
 You can use the file upload button to load into your browsers memory any LAS files from your local computer. I've also included a few well logs in the /assets/ folder of this repo from the electronic data file below. 
@@ -57,12 +64,6 @@ Report for Athabasca Oil Sands Data McMurray/Wabiskaw Oil Sands Deposit <a href=
 
 You can also find them on USGS and Kansas open data sites as is done in <a href="https://observablehq.com/@justingosses/a-notebook-using-wellio-js-wellioviz-js-for-quick-looks-of-la">this Observable notebook</a> that leverages wellio & wellioviz.
 
-## Wellio.js & Wellioviz.js
-<i>Wellioviz</i> is a companion to <i>wellio</i>!
-
-Where are <i>Wellio</i> is just concerned with the conversion of LAS 2.0 files into JSON, <i>Wellioviz</i> is concerned with making a visualization of the resulting JSON using d3.js v5. This means you can load, convert, and visualize well logs entirely on the web with front-end JavaScript.
-
-<a href="https://github.com/JustinGOSSES/wellioviz"><b>Find out more about WELLIOVIZ here</b></a>
 
 ## Example of LAS format and JSON formated well log data
 
