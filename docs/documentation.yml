@@ -31,6 +31,10 @@ toc:
       Wellio's companion library  <a href="https://github.com/JustinGOSSES/wellioviz">wellioviz</a> takes the JSON that results from Wellio and visualizes it by leveraging <a href="https://d3js.org/">D3.js</a> v5. 
       However, you could visualize the same wellio JSON with a wide variety of other visualization tools too, because nearly all of them can consume JSON.
   
+  - name: Link to wellio GitHub repository
+    description: |
+      <a href="https://github.com/JustinGOSSES/wellio.js">https://github.com/JustinGOSSES/wellio.js</a>
+      
   - name: Usage
     description: |
       In the wellio documentation, we have split out <b>"How to Install & Get Ready to Use"</b> and <b>"How to Use Once Installed"</b>, because installation varies depending on whether wellio is being used as front-end JavaScript code on a website, in an Observable JavaScript Notebook, or server-side via a command line or node.js script. 
