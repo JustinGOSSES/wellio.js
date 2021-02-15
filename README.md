@@ -148,7 +148,7 @@ SUFT.C        0                    : SUFT         - SURFACE TEMPERATURE
 
 #### LAS -> JSON
 ```var lasjson = function las2json(onelas)```
-will give you something like this:
+will give you something like this though in the example below all the data is taken out to save space:
 ``` 
 var lasjson = {
 			"VERSION INFORMATION":{
