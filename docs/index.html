@@ -20,6 +20,9 @@
             placeholder='Filter'
             id='filter-input'
             class='col12 block input'
+            spellcheck='false'
+            autocapitalize='off'
+            autocorrect='off'
             type='text' />
           <div id='toc'>
             <ul class='list-reset h5 py1-ul'>
@@ -458,31 +461,31 @@ Lasio has the ability to export data loaded from a LAS 2.0 well log file into JS
 <p>  <code class="black"> let wellio_obj = wellio.lasio_obj_2_wellio_obj(lasio_obj);</code></p>
 <h4>What a Wellio-Style JSON Looks Like:</h4>
 <p>To give you an idea what the wellio-style JSON structure is like, here's a blank well log in the wellio-style JSON format. </p>
-<pre class='hljs'>      "VERSION INFORMATION":{
-        "VERS":{"MNEM":"","UNIT":"","DATA":"","DESCRIPTION OF MNEMONIC 1":"","DESCRIPTION OF MNEMONIC 2":""},
-        "WRAP":{"MNEM":"","UNIT":"","DATA":"","DESCRIPTION OF MNEMONIC 1":"","DESCRIPTION OF MNEMONIC 2":""}
+<pre class='hljs'>      &quot;VERSION INFORMATION&quot;:{
+        &quot;VERS&quot;:{&quot;MNEM&quot;:&quot;&quot;,&quot;UNIT&quot;:&quot;&quot;,&quot;DATA&quot;:&quot;&quot;,&quot;DESCRIPTION OF MNEMONIC 1&quot;:&quot;&quot;,&quot;DESCRIPTION OF MNEMONIC 2&quot;:&quot;&quot;},
+        &quot;WRAP&quot;:{&quot;MNEM&quot;:&quot;&quot;,&quot;UNIT&quot;:&quot;&quot;,&quot;DATA&quot;:&quot;&quot;,&quot;DESCRIPTION OF MNEMONIC 1&quot;:&quot;&quot;,&quot;DESCRIPTION OF MNEMONIC 2&quot;:&quot;&quot;}
       }
       ,
-      "WELL INFORMATION BLOCK":{
-          "GENERATED":"",
-          "MNEM_0":{"MNEM":"","UNIT":"","DATA":"","DESCRIPTION OF MNEMONIC 1":"","DESCRIPTION OF MNEMONIC 2":""},
-          "MNEM_1":{"MNEM":"","UNIT":"","DATA":"","DESCRIPTION OF MNEMONIC 1":"","DESCRIPTION OF MNEMONIC 2":""},
-          "MNEM_2":{"MNEM":"","UNIT":"","DATA":"","DESCRIPTION OF MNEMONIC 1":"","DESCRIPTION OF MNEMONIC 2":""}
+      &quot;WELL INFORMATION BLOCK&quot;:{
+          &quot;GENERATED&quot;:&quot;&quot;,
+          &quot;MNEM_0&quot;:{&quot;MNEM&quot;:&quot;&quot;,&quot;UNIT&quot;:&quot;&quot;,&quot;DATA&quot;:&quot;&quot;,&quot;DESCRIPTION OF MNEMONIC 1&quot;:&quot;&quot;,&quot;DESCRIPTION OF MNEMONIC 2&quot;:&quot;&quot;},
+          &quot;MNEM_1&quot;:{&quot;MNEM&quot;:&quot;&quot;,&quot;UNIT&quot;:&quot;&quot;,&quot;DATA&quot;:&quot;&quot;,&quot;DESCRIPTION OF MNEMONIC 1&quot;:&quot;&quot;,&quot;DESCRIPTION OF MNEMONIC 2&quot;:&quot;&quot;},
+          &quot;MNEM_2&quot;:{&quot;MNEM&quot;:&quot;&quot;,&quot;UNIT&quot;:&quot;&quot;,&quot;DATA&quot;:&quot;&quot;,&quot;DESCRIPTION OF MNEMONIC 1&quot;:&quot;&quot;,&quot;DESCRIPTION OF MNEMONIC 2&quot;:&quot;&quot;}
         }
       ,
-      "CURVE INFORMATION BLOCK":{
-          "MNEM_0":{"MNEM":"","UNIT":"","ERCB CURVE CODE":"","CURVE DESCRIPTION 1":"","CURVE DESCRIPTION 2":""}, 
-          "MNEM_0":{"MNEM":"","UNIT":"","ERCB CURVE CODE":"","CURVE DESCRIPTION 1":"","CURVE DESCRIPTION 2":""},
+      &quot;CURVE INFORMATION BLOCK&quot;:{
+          &quot;MNEM_0&quot;:{&quot;MNEM&quot;:&quot;&quot;,&quot;UNIT&quot;:&quot;&quot;,&quot;ERCB CURVE CODE&quot;:&quot;&quot;,&quot;CURVE DESCRIPTION 1&quot;:&quot;&quot;,&quot;CURVE DESCRIPTION 2&quot;:&quot;&quot;}, 
+          &quot;MNEM_0&quot;:{&quot;MNEM&quot;:&quot;&quot;,&quot;UNIT&quot;:&quot;&quot;,&quot;ERCB CURVE CODE&quot;:&quot;&quot;,&quot;CURVE DESCRIPTION 1&quot;:&quot;&quot;,&quot;CURVE DESCRIPTION 2&quot;:&quot;&quot;},
         }		
       ,
-      "PARAMETER INFORMATION":{
-          "MNEM_0":{"MNEM":"","UNIT":"","DATA":"","DESCRIPTION OF MNEMONIC 1":"","DESCRIPTION OF MNEMONIC 2":""}, 
-          "MNEM_1":{"MNEM":"","UNIT":"","DATA":"","DESCRIPTION OF MNEMONIC 1":"","DESCRIPTION OF MNEMONIC 2":""},
+      &quot;PARAMETER INFORMATION&quot;:{
+          &quot;MNEM_0&quot;:{&quot;MNEM&quot;:&quot;&quot;,&quot;UNIT&quot;:&quot;&quot;,&quot;DATA&quot;:&quot;&quot;,&quot;DESCRIPTION OF MNEMONIC 1&quot;:&quot;&quot;,&quot;DESCRIPTION OF MNEMONIC 2&quot;:&quot;&quot;}, 
+          &quot;MNEM_1&quot;:{&quot;MNEM&quot;:&quot;&quot;,&quot;UNIT&quot;:&quot;&quot;,&quot;DATA&quot;:&quot;&quot;,&quot;DESCRIPTION OF MNEMONIC 1&quot;:&quot;&quot;,&quot;DESCRIPTION OF MNEMONIC 2&quot;:&quot;&quot;},
         }
       ,
-      "CURVES":{
-          "Curve_NAME_ONE" :[1,2,3,4,5,6,7,8,9,10,11],
-          "Curve_NAME_ONE" :[1,2,3,4,5,6,7,8,9,10,11],
+      &quot;CURVES&quot;:{
+          &quot;Curve_NAME_ONE&quot; :[1,2,3,4,5,6,7,8,9,10,11],
+          &quot;Curve_NAME_ONE&quot; :[1,2,3,4,5,6,7,8,9,10,11],
         }
     }</pre>
 
@@ -556,7 +559,8 @@ You can change the page style there. This isn't a documented way to style things
   </div>
   
 
-  <p>A helper function that takes no input arugments and returns a string with some basic information about wellio.</p>
+  <p>A helper function that takes no input arugments and returns a string with some basic
+information about wellio.</p>
 
     <div class='pre p1 fill-light mt0'>help(): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></div>
   
@@ -586,10 +590,15 @@ You can change the page style there. This isn't a documented way to style things
   
 
   
+
+  
     <div class='py1 quiet mt1 prose-big'>Example</div>
     
       
-      <pre class='p1 overflow-auto round fill-light'>wellio.help() &gt;&gt;&gt; Wellio has the following functions: <span class="hljs-string">'help'</span>, <span class="hljs-string">'returnThing'</span>, <span class="hljs-string">'loadLAS'</span>, <span class="hljs-string">'las2json'</span>, <span class="hljs-string">'read_lasio_json_file'</span>, and <span class="hljs-string">'lasio_obj_2_wellio_obj'</span>. /n You<span class="hljs-string">'ll probably want to do well_string = wellio.loadLAS and then well_as_json = las2json(well_string)."</span></pre>
+      <pre class='p1 overflow-auto round fill-light'>wellio.help() &gt;&gt;&gt; Wellio has the following functions: &#x27;help&#x27;,
+&#x27;returnThing&#x27;, &#x27;loadLAS&#x27;, &#x27;las2json&#x27;, &#x27;read_lasio_json_file&#x27;, and &#x27;lasio_obj_2_wellio_obj&#x27;.
+You&#x27;ll probably want to do well_string = wellio.loadLAS and then
+well_as_json = las2json(well_string).&quot;</pre>
     
   
 
@@ -618,9 +627,10 @@ You can change the page style there. This isn't a documented way to style things
   </div>
   
 
-  <p>A helper function that proves wellio,js was installed correctly. It merely returns the argument provided to it. For example, "test" as input would return "test".</p>
+  <p>A helper function that proves wellio,js was installed correctly. It merely returns the
+argument provided to it. For example, "test" as input would return "test".</p>
 
-    <div class='pre p1 fill-light mt0'>returnThing(a_test_string: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></div>
+    <div class='pre p1 fill-light mt0'>returnThing(aTestString: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></div>
   
   
 
@@ -637,7 +647,7 @@ You can change the page style there. This isn't a documented way to style things
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>a_test_string</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+            <span class='code bold'>aTestString</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
 	    Any string
 
           </div>
@@ -653,10 +663,13 @@ You can change the page style there. This isn't a documented way to style things
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
       <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>:
-        Returns the input that was given as an argument. This is just for testing that wellio was installed correctly.
+        Returns the input that was given as an argument. This is just for
+testing that wellio was installed correctly.
 
       
     
+  
+
   
 
   
@@ -665,7 +678,7 @@ You can change the page style there. This isn't a documented way to style things
     <div class='py1 quiet mt1 prose-big'>Example</div>
     
       
-      <pre class='p1 overflow-auto round fill-light'>wellio.returnThing(<span class="hljs-string">"test"</span>) &gt;&gt;&gt; <span class="hljs-string">"test"</span></pre>
+      <pre class='p1 overflow-auto round fill-light'>wellio.returnThing(<span class="hljs-string">&quot;test&quot;</span>) &gt;&gt;&gt; <span class="hljs-string">&quot;test&quot;</span></pre>
     
   
 
@@ -694,9 +707,10 @@ You can change the page style there. This isn't a documented way to style things
   </div>
   
 
-  <p>Loads a LAS 2.0 file from local files. Takes one argument <code>well_log</code> and returns a string representation of the contents of the well log file.</p>
+  <p>Loads a LAS 2.0 file from local files. Takes one argument <code>wellLog</code> and returns
+a string representation of the contents of the well log file.</p>
 
-    <div class='pre p1 fill-light mt0'>loadLAS(well_log: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></div>
+    <div class='pre p1 fill-light mt0'>loadLAS(wellLog: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></div>
   
   
 
@@ -713,8 +727,9 @@ You can change the page style there. This isn't a documented way to style things
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>well_log</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
-	    A string reprepresentatiion of filename of well log to be loaded into memory
+            <span class='code bold'>wellLog</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    A string reprepresentatiion of filename of well log to be
+loaded into memory
 
           </div>
           
@@ -729,10 +744,13 @@ You can change the page style there. This isn't a documented way to style things
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
       <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>:
-        A string representation of the contents of that well log file. It is a single string.
+        A string representation of the contents of that well log file.
+It is a single string.
 
       
     
+  
+
   
 
   
@@ -764,7 +782,8 @@ You can change the page style there. This isn't a documented way to style things
   </div>
   
 
-  <p>las2json function converts a LAS 2.0 file already loaded into memory as a string into a wellio-style JSON object</p>
+  <p>las2json function converts a LAS 2.0 file already loaded into memory as a string
+into a wellio-style JSON object</p>
 
     <div class='pre p1 fill-light mt0'>las2json(onelas: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, print: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></div>
   
@@ -784,7 +803,8 @@ You can change the page style there. This isn't a documented way to style things
         <div class='space-bottom0'>
           <div>
             <span class='code bold'>onelas</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
-	    A string representation of a LAS 2.0 well log file. Typically from the result of the loadLAS function.
+	    A string representation of a LAS 2.0 well log file.
+Typically from the result of the loadLAS function.
 
           </div>
           
@@ -794,7 +814,8 @@ You can change the page style there. This isn't a documented way to style things
           <div>
             <span class='code bold'>print</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a>
             = <code>true</code>)</code>
-	    A true or false boolean. If true, intermediate products are sent to console.log() to help withe debugging.
+	    A true or false boolean. If true, intermediate products
+are sent to console.warn() to help withe debugging.
 
           </div>
           
@@ -809,10 +830,13 @@ You can change the page style there. This isn't a documented way to style things
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
       <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></code>:
-        A JSON object that represents the information that was in the LAS 2.0 well log file but in JSON wellio style format.
+        A JSON object that represents the information that was in the
+LAS 2.0 well log file but in JSON wellio style format.
 
       
     
+  
+
   
 
   
@@ -844,7 +868,8 @@ You can change the page style there. This isn't a documented way to style things
   </div>
   
 
-  <p>Given a well already converted into wellio-style json in memory, the CurveNames function returns the available curves in that well.</p>
+  <p>Given a well already converted into wellio-style json in memory,
+the CurveNames function returns the available curves in that well.</p>
 
     <div class='pre p1 fill-light mt0'>CurveNames(well_json: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a></div>
   
@@ -864,7 +889,8 @@ You can change the page style there. This isn't a documented way to style things
         <div class='space-bottom0'>
           <div>
             <span class='code bold'>well_json</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>)</code>
-	    A wellio-style json in memory, typically resulting from the wellio.las2json() function.
+	    A wellio-style json in memory, typically resulting
+from the wellio.las2json() function.
 
           </div>
           
@@ -896,6 +922,8 @@ You can change the page style there. This isn't a documented way to style things
   
 
   
+
+  
 </section>
 
           
@@ -914,7 +942,8 @@ You can change the page style there. This isn't a documented way to style things
   </div>
   
 
-  <p>Given a well already converted into wellio-style json in memory, the VER_block function returns the entire version block of the original LAS file as a string.</p>
+  <p>Given a well already converted into wellio-style json in memory, the VER_block
+function returns the entire version block of the original LAS file as a string.</p>
 
     <div class='pre p1 fill-light mt0'>VER_block(well_json: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></div>
   
@@ -934,7 +963,8 @@ You can change the page style there. This isn't a documented way to style things
         <div class='space-bottom0'>
           <div>
             <span class='code bold'>well_json</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>)</code>
-	    A wellio-style json in memory, typically resulting from the wellio.las2json() function.
+	    A wellio-style json in memory, typically resulting from
+the wellio.las2json() function.
 
           </div>
           
@@ -949,10 +979,13 @@ You can change the page style there. This isn't a documented way to style things
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
       <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>:
-        An array of strings representing the entire version block of the original LAS file as a string.
+        An array of strings representing the entire version block of the
+original LAS file as a string.
 
       
     
+  
+
   
 
   
@@ -984,7 +1017,9 @@ You can change the page style there. This isn't a documented way to style things
   </div>
   
 
-  <p>Given a well already converted into wellio-style json in memory, the UWI function attempts to return the UWI field of the original LAS file as a string. Pleaes note that this doesn't exisst in every well log and will therefore fail sometimes!</p>
+  <p>Given a well already converted into wellio-style json in memory, the UWI function
+attempts to return the UWI field of the original LAS file as a string. Pleaes note
+that this doesn't exisst in every well log and will therefore fail sometimes!</p>
 
     <div class='pre p1 fill-light mt0'>UWI(well_json: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></div>
   
@@ -1004,7 +1039,8 @@ You can change the page style there. This isn't a documented way to style things
         <div class='space-bottom0'>
           <div>
             <span class='code bold'>well_json</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>)</code>
-	    A wellio-style json in memory, typically resulting from the wellio.las2json() function.
+	    A wellio-style json in memory, typically resulting from
+the wellio.las2json() function.
 
           </div>
           
@@ -1036,6 +1072,8 @@ You can change the page style there. This isn't a documented way to style things
   
 
   
+
+  
 </section>
 
           
@@ -1054,7 +1092,10 @@ You can change the page style there. This isn't a documented way to style things
   </div>
   
 
-  <p>Given a well already converted into wellio-style json in memory, the wellio.getCurve() function attempts to return the curve data of a given well log. If it doesn't exist, the message "that curve does not exist! see console.log" is outputted to console.log and returned by the function.</p>
+  <p>Given a well already converted into wellio-style json in memory, the wellio.getCurve()
+function attempts to return the curve data of a given well log. If it doesn't
+exist, the message "that curve does not exist! see console.warn" is outputted to
+console.warn and returned by the function.</p>
 
     <div class='pre p1 fill-light mt0'>getCurve(well_json: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>, curve: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">array</a></div>
   
@@ -1074,7 +1115,8 @@ You can change the page style there. This isn't a documented way to style things
         <div class='space-bottom0'>
           <div>
             <span class='code bold'>well_json</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>)</code>
-	    A wellio-style json in memory, typically resulting from the wellio.las2json() function.
+	    A wellio-style json in memory, typically resulting from the
+wellio.las2json() function.
 
           </div>
           
@@ -1098,10 +1140,13 @@ You can change the page style there. This isn't a documented way to style things
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
       <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">array</a></code>:
-        An array of integers or floats representing the data for a particular curve in a given well log.
+        An array of integers or floats representing the data for a particular
+curve in a given well log.
 
       
     
+  
+
   
 
   
@@ -1133,10 +1178,12 @@ You can change the page style there. This isn't a documented way to style things
   </div>
   
 
-  <p>File reading utility function for a JSON file that contains what was a LAS 2.0 well log already converted into JSON by the Python package Lasio.
+  <p>File reading utility function for a JSON file that contains what was a LAS 2.0 well
+log already converted into JSON by the Python package Lasio.
 Lasio is also used by Welly.
 This function will read the file and keep it in memory.
-After running this function, You'll likely want to use the <code>lasio_obj_2_wellio_obj</code> function to convert the lasio-style JSON in memory to wellio-style JSON in memory.</p>
+After running this function, You'll likely want to use the <code>lasio_obj_2_wellio_obj</code>
+function to convert the lasio-style JSON in memory to wellio-style JSON in memory.</p>
 
     <div class='pre p1 fill-light mt0'>read_lasio_json_file(file_to_read: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></div>
   
@@ -1188,6 +1235,8 @@ After running this function, You'll likely want to use the <code>lasio_obj_2_wel
   
 
   
+
+  
 </section>
 
           
@@ -1206,8 +1255,10 @@ After running this function, You'll likely want to use the <code>lasio_obj_2_wel
   </div>
   
 
-  <p>The lasio_obj_2_wellio_obj function transforms lasio-style JSON strings into wellio-style JSON data format in memory and returns it.
-If you're working with a JSON file created by lasio, you'll want to load it into memory first using the <code>read_lasio_json_file</code> function.</p>
+  <p>The lasio_obj_2_wellio_obj function transforms lasio-style JSON strings into wellio-style
+JSON data format in memory and returns it.
+If you're working with a JSON file created by lasio, you'll want to load it into memory
+first using the <code>read_lasio_json_file</code> function.</p>
 
     <div class='pre p1 fill-light mt0'>lasio_obj_2_wellio_obj(lasio_obj: any, lasio_json: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></div>
   
@@ -1259,14 +1310,16 @@ If you're working with a JSON file created by lasio, you'll want to load it into
   
 
   
+
+  
     <div class='py1 quiet mt1 prose-big'>Example</div>
     
       
-      <pre class='p1 overflow-auto round fill-light'>This is an example <span class="hljs-keyword">of</span> a full sequence <span class="hljs-keyword">of</span> calls that also uses <span class="hljs-keyword">this</span> <span class="hljs-function"><span class="hljs-keyword">function</span>.
-<span class="hljs-title">let</span> <span class="hljs-title">wellio</span> = <span class="hljs-title">require</span>(<span class="hljs-params"><span class="hljs-string">'wellio'</span></span>)
-<span class="hljs-title">let</span> <span class="hljs-title">lasio_json_str</span> = <span class="hljs-title">wellio</span>.<span class="hljs-title">read_lasio_json_file</span>(<span class="hljs-params"><span class="hljs-string">'lasio.json'</span></span>);
-<span class="hljs-title">let</span> <span class="hljs-title">lasio_obj</span> = <span class="hljs-title">JSON</span>.<span class="hljs-title">parse</span>(<span class="hljs-params">lasio_json_str</span>);
-<span class="hljs-title">let</span> <span class="hljs-title">wellio_obj</span> = <span class="hljs-title">wellio</span>.<span class="hljs-title">lasio_obj_2_wellio_obj</span>(<span class="hljs-params">lasio_obj</span>);</span></pre>
+      <pre class='p1 overflow-auto round fill-light'>This is an example <span class="hljs-keyword">of</span> a full sequence <span class="hljs-keyword">of</span> calls that also uses <span class="hljs-built_in">this</span> <span class="hljs-keyword">function</span>.
+<span class="hljs-keyword">let</span> wellio = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;wellio&#x27;</span>)
+<span class="hljs-keyword">let</span> lasio_json_str = wellio.read_lasio_json_file(<span class="hljs-string">&#x27;lasio.json&#x27;</span>);
+<span class="hljs-keyword">let</span> lasio_obj = <span class="hljs-built_in">JSON</span>.parse(lasio_json_str);
+<span class="hljs-keyword">let</span> wellio_obj = wellio.lasio_obj_2_wellio_obj(lasio_obj);</pre>
     
   
 
