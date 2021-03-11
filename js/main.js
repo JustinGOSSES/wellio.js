@@ -204,6 +204,20 @@ function addSingleCurveButton(div_id,curve_name){
 }
 
 
+function download(filename, text) {
+  var element = document.createElement('a');
+  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+  element.setAttribute('download', filename);
+
+  element.style.display = 'none';
+  document.body.appendChild(element);
+
+  element.click();
+
+  document.body.removeChild(element);
+}
+
+
 //// function that creates a hidden link that is clicked programatically that uses HTML5 to download the file at that link
 //// the two arguments are the UWI string of the global temp_json object, and a stringified version of the entire wellio json object.
 //// It calls the download() function found in wellio.js JavaScript file.
