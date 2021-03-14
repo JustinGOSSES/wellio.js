@@ -190,7 +190,8 @@ loaded into memory
         // splits string (should be a single line from the LAS text) by ":",
         // takes the first item of the resulting array, and then replaces any " "
         // with "".
-        const vers_line_1half = arrayString.split(':')[0].replace(' ', '');
+        const as_array = arrayString.split(':');
+        const vers_line_1half = as_array[0].replace(' ', '');
         // splits the previous string variable by "." into an array of strings.
         const vers_line_1half_array = vers_line_1half.split('.');
         // trimming this so I get "UWI" instead of "UWI    "
@@ -222,12 +223,12 @@ loaded into memory
         ver_info_obj['DATA'] = data;
         ver_info_obj['UNIT'] = unit;
 
-        if (arrayString.split(':')[1].indexOf('-') !== -1) {
-          ver_info_obj['DESCRIPTION OF MNEMONIC 1'] = arrayString.split(':')[1].split('-')[0].trim();
-          ver_info_obj['DESCRIPTION OF MNEMONIC 2'] = arrayString.split(':')[1].split('-')[1].replace('\r', '').trim();
+        if (as_array[1] && as_array[1].indexOf('-') !== -1) {
+          ver_info_obj['DESCRIPTION OF MNEMONIC 1'] = as_array[1].split('-')[0].trim();
+          ver_info_obj['DESCRIPTION OF MNEMONIC 2'] = as_array[1].split('-')[1].replace('\r', '').trim();
         }
-        else {
-          ver_info_obj['DESCRIPTION OF MNEMONIC 1'] = arrayString.split(':')[1].replace('\r', '').trim();
+        else if (as_array[1]) {
+          ver_info_obj['DESCRIPTION OF MNEMONIC 1'] = as_array[1].replace('\r', '').trim();
           ver_info_obj['DESCRIPTION OF MNEMONIC 2'] = '';
         }
         return ver_info_obj;
