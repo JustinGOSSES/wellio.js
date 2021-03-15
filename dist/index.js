@@ -175,11 +175,14 @@ loaded into memory
         }
       }
 
+      // Regular expression for splitting las file into lines
+      const eol_regex = /\r\n|\r|\n/;
+
       // Working with version block first by splitting it by newline and places each
       // item into an array
       // and taking items of array 1 and 2 for vers and wrap
-      const vers_line = vers_str.split('\n')[1];
-      const wrap_line = vers_str.split('\n')[2];
+      const vers_line = vers_str.split(eol_regex)[1];
+      const wrap_line = vers_str.split(eol_regex)[2];
       // As version information, well information, and parameter information blocks
       // contain objects with the same keys, we can process them using a loop.
       // function to process objects for ver_info_obj, well_inf_obj, and param_info_obj
@@ -190,7 +193,8 @@ loaded into memory
         // splits string (should be a single line from the LAS text) by ":",
         // takes the first item of the resulting array, and then replaces any " "
         // with "".
-        const vers_line_1half = arrayString.split(':')[0].replace(' ', '');
+        const as_array = arrayString.split(':');
+        const vers_line_1half = as_array[0].replace(' ', '');
         // splits the previous string variable by "." into an array of strings.
         const vers_line_1half_array = vers_line_1half.split('.');
         // trimming this so I get "UWI" instead of "UWI    "
@@ -222,12 +226,12 @@ loaded into memory
         ver_info_obj['DATA'] = data;
         ver_info_obj['UNIT'] = unit;
 
-        if (arrayString.split(':')[1].indexOf('-') !== -1) {
-          ver_info_obj['DESCRIPTION OF MNEMONIC 1'] = arrayString.split(':')[1].split('-')[0].trim();
-          ver_info_obj['DESCRIPTION OF MNEMONIC 2'] = arrayString.split(':')[1].split('-')[1].replace('\r', '').trim();
+        if (as_array[1] && as_array[1].indexOf('-') !== -1) {
+          ver_info_obj['DESCRIPTION OF MNEMONIC 1'] = as_array[1].split('-')[0].trim();
+          ver_info_obj['DESCRIPTION OF MNEMONIC 2'] = as_array[1].split('-')[1].trim();
         }
-        else {
-          ver_info_obj['DESCRIPTION OF MNEMONIC 1'] = arrayString.split(':')[1].replace('\r', '').trim();
+        else if (as_array[1]) {
+          ver_info_obj['DESCRIPTION OF MNEMONIC 1'] = as_array[1].trim();
           ver_info_obj['DESCRIPTION OF MNEMONIC 2'] = '';
         }
         return ver_info_obj;
@@ -236,7 +240,7 @@ loaded into memory
       lasjson['VERSION INFORMATION']['VERS'] = splitLineofType1(Object.assign({}, ver_info_obj), vers_line);
       // Working with PARAMETER INFORMATION block second by splitting it by newline
       // into an array. This skips the line with the section's title.
-      const param_line_array = param_info_str.split('\n').slice(1,);
+      const param_line_array = param_info_str.split(eol_regex).slice(1,);
       for (let i = 0; i < param_line_array.length; i++) {
         // create one object for parameter line
         // Skip empty elements and comment elements that start with '#'.
@@ -252,7 +256,7 @@ loaded into memory
       // Working with CURVE INFORMATION BLOCK second by splitting it by newline
       // into an array.
       // This skips the line with the section's title.
-      const curve_line_array = curve_info_str.split('\n').slice(1,);
+      const curve_line_array = curve_info_str.split(eol_regex).slice(1,);
       for (let i = 0; i < curve_line_array.length; i++) {
         // create one object for parameter line
         // Skip empty elements and comment elements that start with '#'.
@@ -267,10 +271,10 @@ loaded into memory
       }
       // Working with WELL INFORMATION BLOCK second by splitting it by newline into an
       // array. This skips the line with the section's title.
-      const well_line_array = well_info_str.split('\n').slice(1,);
+      const well_line_array = well_info_str.split(eol_regex).slice(1,);
       for (let i = 0; i < well_line_array.length; i++) {
         if (well_line_array[i].includes('Generated')) {
-          lasjson['WELL INFORMATION BLOCK']['GENERATED'] = well_line_array[i].replace('\r', '').replace('\t', ' ').replace('#', '');
+          lasjson['WELL INFORMATION BLOCK']['GENERATED'] = well_line_array[i].replace('\t', ' ').replace('#', '');
         }
         // create one object for parameter line
         // Skip empty elements and comment elements that start with '#'.
@@ -289,13 +293,13 @@ loaded into memory
       }
       // Work with CURVES section by splitting it by newline into an array,
       // Iterate through the array items populate arrays for each key
-      const curve_str_array = curve_str.split('\n');
+      const curve_str_array = curve_str.split(eol_regex);
 
       // Get the curve column names from the curve names in the curve information block
       //
       // Per LAS_20_Update_Jan2014.pdf section 5.5 specs for ~C(Curve Information)
       // - This section is manditory.
-      // - It desribes the curves and its units in the order they appear in the ~ASCII
+      // - It describes the curves and its units in the order they appear in the ~ASCII
       // log data section of the file.
       // - The channels described in this section must be present in the data set.
       const curve_names_array_holder = [];
