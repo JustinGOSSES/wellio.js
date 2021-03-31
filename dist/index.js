@@ -116,73 +116,260 @@ loaded into memory
       const well_info_obj = {'MNEM': '', 'UNIT': '', 'DATA': '', 'DESCRIPTION OF MNEMONIC 1': '', 'DESCRIPTION OF MNEMONIC 2': ''};
       const curve_info_obj = {'MNEM': '', 'UNIT': '', 'ERCB CURVE CODE': '', 'CURVE DESCRIPTION 1': '', 'CURVE DESCRIPTION 2': ''};
       const param_info_obj = {'MNEM': '', 'UNIT': '', 'DATA': '', 'DESCRIPTION OF MNEMONIC 1': '', 'DESCRIPTION OF MNEMONIC 2': ''};
-      // The las file is read as a txt file. It will first be split into seperate
-      // strings based on "~" character which occurs at the top of each "block"
-
-      let vers_str = '';
-      let well_info_str = '';
-      let curve_info_str = '';
-      let param_info_str = '';
-      let other = '';
-      let curve_str = '';
 
       if (print === true) {
         console.warn('onelas = ', onelas);
       }
 
-      // Split in to las sections that start with a tilde: ~.
-      const split1 = onelas.split(/(~[^~]+)/);
-      if (print === true) {
-        console.warn('split1 = ', split1);
-      }
-
-      // As the 'OTHER' block may or may not be present, we have to split by '~' and
-      // then look for a substring to make sure we have the right block before we put
-      // each into a variable.
-      if (print === true) {
-        console.warn('split1.lengths = ', split1.length);
-        console.warn('split1 = ', split1);
-      }
-      for (let i = 0; i < split1.length; i++) {
-        // Skip blank entries in the split1 array.
-        if (split1[i].length === 0) {
-          // eslint-disable-next-line no-continue
-          continue;
-        }
-        if (split1[i].includes('~V')) {
-          vers_str = split1[i];
-        }
-        else if (split1[i].includes('~W')) {
-          well_info_str = split1[i];
-        }
-        else if (split1[i].includes('~C')) {
-          curve_info_str = split1[i];
-        }
-        else if (split1[i].includes('~P')) {
-          param_info_str = split1[i];
-        }
-        else if (split1[i].includes('~O')) {
-          // note 'other' is never used! This should be fixed in future!
-          // eslint-disable-next-line no-unused-vars
-          other = split1[i];
-        }
-        else if (split1[i].includes('~A')) {
-          curve_str = split1[i];
-        }
-        else {
-          console.warn(`WARNING: In wellio.js the las2json() function: split1[${i}] is not a recognized las section`);
-          console.warn(`elem: [${split1[i]}]`);
-        }
-      }
-
-      // Regular expression for splitting las file into lines
-      const eol_regex = /\r\n|\r|\n/;
+      // The las file is read as a txt file. It will first be split into
+      // seperate section data structures. readSections() is a sub-function
+      // of las2json.
+      let las_data = readSections(onelas);
+      const {header_idx, sections} = las_data;
 
       // Working with version block first by splitting it by newline and places each
       // item into an array
       // and taking items of array 1 and 2 for vers and wrap
-      const vers_line = vers_str.split(eol_regex)[1];
-      const wrap_line = vers_str.split(eol_regex)[2];
+      const vers_line = sections[header_idx.V].rows[0];
+      const wrap_line = sections[header_idx.V].rows[1] === undefined 
+        ? ""
+        : sections[header_idx.V].rows[1];
+
+      lasjson['VERSION INFORMATION']['WRAP'] = splitLineofType1(Object.assign({}, ver_info_obj), wrap_line);
+      lasjson['VERSION INFORMATION']['VERS'] = splitLineofType1(Object.assign({}, ver_info_obj), vers_line);
+
+      // Working with PARAMETER INFORMATION block
+      const param_line_array = sections[header_idx.P].rows;
+      for (let i = 0; i < param_line_array.length; i++) {
+        // create one object for parameter line
+        if (param_line_array[i] !== '') {
+          const param_obj_inst = splitLineofType1(
+            Object.assign({}, param_info_obj), param_line_array[i]
+          );
+          if (param_obj_inst.MNEM) {
+            lasjson['PARAMETER INFORMATION'][param_obj_inst['MNEM']] = param_obj_inst;
+          }
+        }
+      }
+
+      // Working with CURVE INFORMATION BLOCK
+      const curve_line_array = sections[header_idx.C].rows;
+      for (let i = 0; i < curve_line_array.length; i++) {
+        // create one object for parameter line
+        if (curve_line_array[i] !== '') {
+          const curve_obj_inst = splitLineofType1(
+            Object.assign({}, curve_info_obj), curve_line_array[i]
+          );
+          if (curve_obj_inst.MNEM) {
+            lasjson['CURVE INFORMATION BLOCK'][curve_obj_inst['MNEM']] = curve_obj_inst;
+          }
+        }
+      }
+
+      // Working with WELL INFORMATION BLOCK 
+      const well_line_array = sections[header_idx.W].rows;
+      for (let i = 0; i < well_line_array.length; i++) {
+        if (well_line_array[i].includes('Generated')) {
+          lasjson['WELL INFORMATION BLOCK']['GENERATED'] = well_line_array[i].replace('\t', ' ').replace('#', '');
+        }
+        // create one object for parameter line
+        else if (well_line_array[i] !== '') {
+          const well_obj_inst = splitLineofType1(
+            Object.assign({}, well_info_obj), well_line_array[i]
+          );
+          if (well_obj_inst.MNEM) {
+            lasjson['WELL INFORMATION BLOCK'][well_obj_inst['MNEM']] = well_obj_inst;
+          }
+        }
+        else {
+          console.warn(`INFO: in else for well_line: ${i}`);
+          console.warn(`elem: [${well_line_array[i]}]`);
+        }
+      }
+
+      // Work with CURVES section by splitting it by newline into an array,
+      // Iterate through the array items populate arrays for each key
+      const curve_str_array = sections[header_idx.A].rows;
+
+      // Get the curve column names from the curve names in the curve information block
+      //
+      // Per LAS_20_Update_Jan2014.pdf section 5.5 specs for ~C(Curve Information)
+      // - This section is manditory.
+      // - It describes the curves and its units in the order they appear in the ~ASCII
+      // log data section of the file.
+      // - The channels described in this section must be present in the data set.
+      const curve_names_array_holder = [];
+      const curve_info = Object.keys(lasjson['CURVE INFORMATION BLOCK']);
+
+      if (curve_info.length > 0) {
+        for (let k = 0; k < curve_info.length; k++) {
+          const col_name = curve_info[k];
+          curve_names_array_holder.push(col_name);
+          lasjson.CURVES[col_name] = [];
+        }
+      }
+
+      let curve_data_line_array = [];
+
+      for (let j = 0; j < curve_str_array.length; j++) {
+        // Skip empty rows.
+        if (curve_str_array[j].length === 0) {
+          // eslint-disable-next-line no-continue
+          continue;
+        }
+
+        const temp_data_array = curve_str_array[j].split(/\s+/);
+        // Split can leave an empty element at the beginning, remove it.
+        if (temp_data_array[0].length === 0) {
+          temp_data_array.shift();
+        }
+
+        // If data is wrapped continue to accumulate data from rows till
+        // we have a data element for each data column
+        let idx = curve_data_line_array.length;
+        curve_data_line_array.length = idx + temp_data_array.length;
+        for (let i = 0; i < temp_data_array.length; i++, idx++) {
+          curve_data_line_array[idx] = temp_data_array[i];
+        }
+
+        if (
+          lasjson['VERSION INFORMATION'].WRAP.DATA === 'YES'
+          && curve_data_line_array.length < curve_names_array_holder.length
+        ) {
+          // eslint-disable-next-line no-continue
+          continue;
+        }
+
+        let counter_of_curve_names = 0;
+        console.warn('curve_data_line_array.length = ', curve_data_line_array.length);
+        console.warn('curve_data_line_array = ', curve_data_line_array);
+
+        const last_curv_data_line_position = curve_data_line_array.length - 1;
+        console.warn('curve_data_line_array[last_curv_data_line_position] = ', curve_data_line_array[last_curv_data_line_position]);
+
+        console.warn('curve_data_line_array[last_curv_data_line_position] = ', curve_data_line_array[last_curv_data_line_position]);
+        for (let k = 0; k < curve_data_line_array.length; k++) {
+          if (curve_data_line_array[k] !== '') {
+            lasjson['CURVES'][curve_names_array_holder[counter_of_curve_names]].push(curve_data_line_array[k]);
+            counter_of_curve_names += 1;
+          }
+        }
+        // Zero out curve_data_line_array for next set of data
+        curve_data_line_array = [];
+      }
+
+      // ----------------------------------------------------------------------
+      // SUB-FUNCTION: READ SECTIONS for las2json
+      // parse data string into las_data data structures:
+      // ----------------------------------------------------------------------
+      function readSections(data) {
+        const eol_regex = /\r\n|\r|\n/;
+
+        // LAS2 UNIQUE SECTIONS: VERSION, WELL, CURVES, PARAMETERS, OTHER, ASCII
+        const uniq_headers = 'VWCPOA'; 
+
+        // Object to return data in.  This will be loaded with data just be for the
+        // function return.
+        const las_data = {
+          header_idx: {},
+          sections: [],
+        };
+        
+        let header_idx = {};
+        let sections = [];
+
+        // 'Prolog' is a made-up name for any lines before the standard las sections
+        let section = {
+          header: 'Prolog', 
+          rows: [],
+          comments: [],
+        };
+
+        // Incase we ever want to report the duplicate headers...
+        let duplicate_headers = [];
+
+        let section_idx = 0;
+        let section_name = '';
+
+        const arr = data.split(eol_regex);
+        
+        for (let line of arr) {
+          let row = {};
+          line = line.trim();
+
+          // Example : '~VER ....'
+          if (line.startsWith('~')) {
+            // Usually  one of 'VWCPOA', Example 'W' in '~WELL INFORMATION...`
+            section_name = line[1];
+            
+            if (!header_idx.hasOwnProperty(section_name) && uniq_headers.includes(section_name)) {
+              // --------------------------------------------------------------------
+              // If we get to more than one header then save the previous header's
+              // section in the sections array with the same index number as the
+              // previous header's index number in the header array.
+              // Then clear the section array for use with the new section header.
+              // --------------------------------------------------------------------
+              sections.push(section);
+              section = {
+                header: '',
+                rows: [],
+                comments: [],
+              };
+              // get the first letter of the header
+              // Example: V from ~Version
+              section.header = section_name;
+              
+              section_idx += 1
+              header_idx[section_name] = section_idx;
+              // console.log(section.header);
+              // console.log(header_idx);
+            } else if ( uniq_headers.includes(section_name) ) {
+              duplicate_headers.push(line);
+            } else {
+              sections.push(section);
+              section = {
+                header: '',
+                rows: [],
+                comments: [],
+              };
+              section.header = section_name;
+              section_idx += 1
+              header_idx[section_name] = section_idx;
+            }
+          } else if (line.startsWith('#')) {
+            section.comments.push(line);
+          } else if (line !== '') {
+            section.rows.push(line);
+          }
+        };
+        // save the last section's data
+        sections.push(section);
+
+        // Add empty sections for any of the uniq_headers that were not found
+        // in the las-file string
+        for (let idx in uniq_headers) {
+          section_name = uniq_headers[idx];
+          if (! header_idx.hasOwnProperty(section_name)) {
+            section = {
+              header: section_name,
+              rows: [],
+              comments: [],
+            };
+            sections.push(section);
+            header_idx[section_name] = sections.length;
+          }
+        }
+
+        las_data.header_idx = header_idx;
+        las_data.sections = sections
+        return las_data;
+      }
+      // ----------------------------------------------------------------------
+
+      // ----------------------------------------------------------------------
+      // SUB-FUNCTION: Split Line of Type 1 for las2json
+      // ----------------------------------------------------------------------
+
       // As version information, well information, and parameter information blocks
       // contain objects with the same keys, we can process them using a loop.
       // function to process objects for ver_info_obj, well_inf_obj, and param_info_obj
@@ -236,133 +423,9 @@ loaded into memory
         }
         return ver_info_obj;
       }
-      lasjson['VERSION INFORMATION']['WRAP'] = splitLineofType1(Object.assign({}, ver_info_obj), wrap_line);
-      lasjson['VERSION INFORMATION']['VERS'] = splitLineofType1(Object.assign({}, ver_info_obj), vers_line);
-      // Working with PARAMETER INFORMATION block second by splitting it by newline
-      // into an array. This skips the line with the section's title.
-      const param_line_array = param_info_str.split(eol_regex).slice(1,);
-      for (let i = 0; i < param_line_array.length; i++) {
-        // create one object for parameter line
-        // Skip empty elements and comment elements that start with '#'.
-        if (param_line_array[i] !== '' && !param_line_array[i].trim().startsWith('#')) {
-          const param_obj_inst = splitLineofType1(
-            Object.assign({}, param_info_obj), param_line_array[i]
-          );
-          if (param_obj_inst.MNEM) {
-            lasjson['PARAMETER INFORMATION'][param_obj_inst['MNEM']] = param_obj_inst;
-          }
-        }
-      }
-      // Working with CURVE INFORMATION BLOCK second by splitting it by newline
-      // into an array.
-      // This skips the line with the section's title.
-      const curve_line_array = curve_info_str.split(eol_regex).slice(1,);
-      for (let i = 0; i < curve_line_array.length; i++) {
-        // create one object for parameter line
-        // Skip empty elements and comment elements that start with '#'.
-        if (curve_line_array[i] !== '' && !curve_line_array[i].trim().startsWith('#')) {
-          const curve_obj_inst = splitLineofType1(
-            Object.assign({}, curve_info_obj), curve_line_array[i]
-          );
-          if (curve_obj_inst.MNEM) {
-            lasjson['CURVE INFORMATION BLOCK'][curve_obj_inst['MNEM']] = curve_obj_inst;
-          }
-        }
-      }
-      // Working with WELL INFORMATION BLOCK second by splitting it by newline into an
-      // array. This skips the line with the section's title.
-      const well_line_array = well_info_str.split(eol_regex).slice(1,);
-      for (let i = 0; i < well_line_array.length; i++) {
-        if (well_line_array[i].includes('Generated')) {
-          lasjson['WELL INFORMATION BLOCK']['GENERATED'] = well_line_array[i].replace('\t', ' ').replace('#', '');
-        }
-        // create one object for parameter line
-        // Skip empty elements and comment elements that start with '#'.
-        else if (well_line_array[i] !== '' && !well_line_array[i].trim().startsWith('#')) {
-          const well_obj_inst = splitLineofType1(
-            Object.assign({}, well_info_obj), well_line_array[i]
-          );
-          if (well_obj_inst.MNEM) {
-            lasjson['WELL INFORMATION BLOCK'][well_obj_inst['MNEM']] = well_obj_inst;
-          }
-        }
-        else {
-          console.warn(`INFO: in else for well_line: ${i}`);
-          console.warn(`elem: [${well_line_array[i]}]`);
-        }
-      }
-      // Work with CURVES section by splitting it by newline into an array,
-      // Iterate through the array items populate arrays for each key
-      const curve_str_array = curve_str.split(eol_regex);
+      // ----------------------------------------------------------------------
 
-      // Get the curve column names from the curve names in the curve information block
-      //
-      // Per LAS_20_Update_Jan2014.pdf section 5.5 specs for ~C(Curve Information)
-      // - This section is manditory.
-      // - It describes the curves and its units in the order they appear in the ~ASCII
-      // log data section of the file.
-      // - The channels described in this section must be present in the data set.
-      const curve_names_array_holder = [];
-      const curve_info = Object.keys(lasjson['CURVE INFORMATION BLOCK']);
-
-      if (curve_info.length > 0) {
-        for (let k = 0; k < curve_info.length; k++) {
-          const col_name = curve_info[k];
-          curve_names_array_holder.push(col_name);
-          lasjson.CURVES[col_name] = [];
-        }
-      }
-
-      let curve_data_line_array = [];
-
-      // start at position 1 instead of 0 is to avoid the curve names
-      for (let j = 1; j < curve_str_array.length; j++) {
-        // Skip empty rows.
-        if (curve_str_array[j].length === 0) {
-          // eslint-disable-next-line no-continue
-          continue;
-        }
-
-        const temp_data_array = curve_str_array[j].split(/\s+/);
-        // Split can leave an empty element at the beginning, remove it.
-        if (temp_data_array[0].length === 0) {
-          temp_data_array.shift();
-        }
-
-        // If data is wrapped continue to accumulate data from rows till
-        // we have a data element for each data column
-        let idx = curve_data_line_array.length;
-        curve_data_line_array.length = idx + temp_data_array.length;
-        for (let i = 0; i < temp_data_array.length; i++, idx++) {
-          curve_data_line_array[idx] = temp_data_array[i];
-        }
-
-        if (
-          lasjson['VERSION INFORMATION'].WRAP.DATA === 'YES'
-          && curve_data_line_array.length < curve_names_array_holder.length
-        ) {
-          // eslint-disable-next-line no-continue
-          continue;
-        }
-
-        let counter_of_curve_names = 0;
-        console.warn('curve_data_line_array.length = ', curve_data_line_array.length);
-        console.warn('curve_data_line_array = ', curve_data_line_array);
-
-        const last_curv_data_line_position = curve_data_line_array.length - 1;
-        console.warn('curve_data_line_array[last_curv_data_line_position] = ', curve_data_line_array[last_curv_data_line_position]);
-        curve_data_line_array[last_curv_data_line_position] = curve_data_line_array[last_curv_data_line_position].replace('\r', '');
-        console.warn('curve_data_line_array[last_curv_data_line_position] = ', curve_data_line_array[last_curv_data_line_position]);
-        for (let k = 0; k < curve_data_line_array.length; k++) {
-          if (curve_data_line_array[k] !== '') {
-            lasjson['CURVES'][curve_names_array_holder[counter_of_curve_names]].push(curve_data_line_array[k]);
-            counter_of_curve_names += 1;
-          }
-        }
-        // Zero out curve_data_line_array for next set of data
-        curve_data_line_array = [];
-      }
-      console.warn(' test: lasjson', lasjson);
+      // console.warn(' test: lasjson', lasjson);
       return (lasjson);
     },
 
@@ -394,7 +457,7 @@ loaded into memory
     /**
      * Given a well already converted into wellio-style json in memory, the UWI function
      *  attempts to return the UWI field of the original LAS file as a string. Pleaes note
-     * that this doesn't exisst in every well log and will therefore fail sometimes!
+     * that this doesn't exist in every well log and will therefore fail sometimes!
      * @param {object} well_json A wellio-style json in memory, typically resulting from
      *  the wellio.las2json() function.
      * @returns {string} An a string representing the UWI field of the original LAS file.
