@@ -241,17 +241,28 @@ loaded into memory
         }
 
         let counter_of_curve_names = 0;
-        console.warn('curve_data_line_array.length = ', curve_data_line_array.length);
-        console.warn('curve_data_line_array = ', curve_data_line_array);
 
         const last_curv_data_line_position = curve_data_line_array.length - 1;
-        console.warn('curve_data_line_array[last_curv_data_line_position] = ', curve_data_line_array[last_curv_data_line_position]);
 
-        console.warn('curve_data_line_array[last_curv_data_line_position] = ', curve_data_line_array[last_curv_data_line_position]);
-        for (let k = 0; k < curve_data_line_array.length; k++) {
-          if (curve_data_line_array[k] !== '') {
-            lasjson['CURVES'][curve_names_array_holder[counter_of_curve_names]].push(curve_data_line_array[k]);
-            counter_of_curve_names += 1;
+        while (curve_names_array_holder.length < curve_data_line_array.length) {
+          // Data has more columns than the names array.  To fix:
+          // - add addtional generic columns to the previous lasjson['CURVES']
+          //   the row count is in varible 'j'
+          //   popluate the previous rows for the new column with zeros.
+          let col_num = curve_names_array_holder.length + 1
+          let col_name = 'UNKNOWN' + col_num;
+          curve_names_array_holder.push(col_name);
+          lasjson['CURVES'][col_name] = new Array(j).fill('0');
+        }
+
+        // Add row items to CURVES data structure
+        for (let idx in curve_names_array_holder) {
+          if (curve_data_line_array[idx] && curve_data_line_array[idx] !== '') {
+            lasjson['CURVES'][curve_names_array_holder[idx]].push(curve_data_line_array[idx]);
+          }
+          else {
+            // If the item doesn't exist fill its entry with a '0' zero string character
+            lasjson['CURVES'][curve_names_array_holder[idx]].push('0');
           }
         }
         // Zero out curve_data_line_array for next set of data
