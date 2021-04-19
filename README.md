@@ -26,6 +26,9 @@ ObservableHQ is new way to explore and play with JavaScript code. Think Jupyter 
 #### 3. Jupyter Notebook Node.js <a href="https://github.com/JustinGOSSES/wellio.js/blob/master/notebooks/Wellio%20Demo%20in%20Jupyter%20Notebook%20Node.js.ipynb">demo</a>
 Wellio can also be worked with in a jupyter notebook running a node.js kernal.
 
+### Data in the demos
+Data for the demos is mostly wells from an open source dataset of the <a href="https://ags.aer.ca/publication/spe-006">Mannville Group from Alberta Canada</a>. A preprocessed version of this dataset can be found on <a href="https://dataunderground.org/dataset/athabasca-preprocessed">dataunderground</a> along with many other well dataset.
+
 ## Documentation
 
 #### Please find the documentation here: https://justingosses.github.io/wellio.js/docs/ 
