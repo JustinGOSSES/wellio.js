@@ -169,7 +169,7 @@ loaded into memory
         else if (split1[i].includes('~A')) {
           curve_str = split1[i];
         }
-        else {
+        else if (print === true) {
           console.warn(`WARNING: In wellio.js the las2json() function: split1[${i}] is not a recognized las section`);
           console.warn(`elem: [${split1[i]}]`);
         }
@@ -208,7 +208,9 @@ loaded into memory
         }
         // This is an empty ver_info_obj, print a warning and return
         else if (ver_info_obj['MNEM'] === '' && unit_and_data.length === 0) {
-          console.warn('WARNING: Metatdata line has no data: ', vers_line_1half_array);
+          if (print === true) {
+            console.warn('WARNING: Metatdata line has no data: ', vers_line_1half_array);
+          }
           return ver_info_obj;
         }
         else {
@@ -286,7 +288,7 @@ loaded into memory
             lasjson['WELL INFORMATION BLOCK'][well_obj_inst['MNEM']] = well_obj_inst;
           }
         }
-        else {
+        else if (print === true) {
           console.warn(`INFO: in else for well_line: ${i}`);
           console.warn(`elem: [${well_line_array[i]}]`);
         }
@@ -346,13 +348,19 @@ loaded into memory
         }
 
         let counter_of_curve_names = 0;
-        console.warn('curve_data_line_array.length = ', curve_data_line_array.length);
-        console.warn('curve_data_line_array = ', curve_data_line_array);
+        if (print === true) {
+          console.warn('curve_data_line_array.length = ', curve_data_line_array.length);
+          console.warn('curve_data_line_array = ', curve_data_line_array);
+        }
 
         const last_curv_data_line_position = curve_data_line_array.length - 1;
-        console.warn('curve_data_line_array[last_curv_data_line_position] = ', curve_data_line_array[last_curv_data_line_position]);
+        if (print === true) {
+          console.warn('curve_data_line_array[last_curv_data_line_position] = ', curve_data_line_array[last_curv_data_line_position]);
+        }
         curve_data_line_array[last_curv_data_line_position] = curve_data_line_array[last_curv_data_line_position].replace('\r', '');
-        console.warn('curve_data_line_array[last_curv_data_line_position] = ', curve_data_line_array[last_curv_data_line_position]);
+        if (print === true) {
+          console.warn('curve_data_line_array[last_curv_data_line_position] = ', curve_data_line_array[last_curv_data_line_position]);
+        }
         for (let k = 0; k < curve_data_line_array.length; k++) {
           if (curve_data_line_array[k] !== '') {
             lasjson['CURVES'][curve_names_array_holder[counter_of_curve_names]].push(curve_data_line_array[k]);
@@ -362,7 +370,9 @@ loaded into memory
         // Zero out curve_data_line_array for next set of data
         curve_data_line_array = [];
       }
-      console.warn(' test: lasjson', lasjson);
+      if (print === true) {
+        console.warn(' test: lasjson', lasjson);
+      }
       return (lasjson);
     },
 
