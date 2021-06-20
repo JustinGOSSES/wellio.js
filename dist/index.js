@@ -127,13 +127,112 @@ loaded into memory
       let las_data = readSections(onelas);
       const {header_idx, sections} = las_data;
 
+//// CAN DELETE THIS SECTION IF NOTHING BREAKS AFTER MERGE CONFLICTING PULL REQUESTS
+//       // Split in to las sections that start with a tilde: ~.
+//       const split1 = onelas.split(/(~[^~]+)/);
+//       if (print === true) {
+//         console.warn('split1 = ', split1);
+//       }
+
+//       // As the 'OTHER' block may or may not be present, we have to split by '~' and
+//       // then look for a substring to make sure we have the right block before we put
+//       // each into a variable.
+//       if (print === true) {
+//         console.warn('split1.lengths = ', split1.length);
+//         console.warn('split1 = ', split1);
+//       }
+//       for (let i = 0; i < split1.length; i++) {
+//         // Skip blank entries in the split1 array.
+//         if (split1[i].length === 0) {
+//           // eslint-disable-next-line no-continue
+//           continue;
+//         }
+//         if (split1[i].includes('~V')) {
+//           vers_str = split1[i];
+//         }
+//         else if (split1[i].includes('~W')) {
+//           well_info_str = split1[i];
+//         }
+//         else if (split1[i].includes('~C')) {
+//           curve_info_str = split1[i];
+//         }
+//         else if (split1[i].includes('~P')) {
+//           param_info_str = split1[i];
+//         }
+//         else if (split1[i].includes('~O')) {
+//           // note 'other' is never used! This should be fixed in future!
+//           // eslint-disable-next-line no-unused-vars
+//           other = split1[i];
+//         }
+//         else if (split1[i].includes('~A')) {
+//           curve_str = split1[i];
+//         }
+//         else if (print === true) {
+//           console.warn(`WARNING: In wellio.js the las2json() function: split1[${i}] is not a recognized las section`);
+//           console.warn(`elem: [${split1[i]}]`);
+//         }
+//       }
+
+//       // Regular expression for splitting las file into lines
+//       const eol_regex = /\r\n|\r|\n/;
+
       // Working with version block first by splitting it by newline and places each
       // item into an array
       // and taking items of array 1 and 2 for vers and wrap
+      
       const vers_line = sections[header_idx.V].rows[0];
       const wrap_line = sections[header_idx.V].rows[1] === undefined 
         ? ""
         : sections[header_idx.V].rows[1];
+      
+//// MAY DELETE CODE BELOW IF NOTHING BREAKS AFTER MERGE PULL REQUESTS
+//       const vers_line = vers_str.split(eol_regex)[1];
+//       const wrap_line = vers_str.split(eol_regex)[2];
+//       // As version information, well information, and parameter information blocks
+//       // contain objects with the same keys, we can process them using a loop.
+//       // function to process objects for ver_info_obj, well_inf_obj, and param_info_obj
+//       // The splitLineofType1() function takes as argument the prototypical object
+//       // building block and the array of strings for that block
+//       // eslint-disable-next-line no-shadow
+//       function splitLineofType1(ver_info_obj, arrayString) {
+//         // splits string (should be a single line from the LAS text) by ":",
+//         // takes the first item of the resulting array, and then replaces any " "
+//         // with "".
+//         const as_array = arrayString.split(':');
+//         const vers_line_1half = as_array[0].replace(' ', '');
+//         // splits the previous string variable by "." into an array of strings.
+//         const vers_line_1half_array = vers_line_1half.split('.');
+//         // trimming this so I get "UWI" instead of "UWI    "
+//         // eslint-disable-next-line no-param-reassign
+//         ver_info_obj['MNEM'] = vers_line_1half_array[0].trim();
+//         const unit_and_data = vers_line_1half_array.slice(1, vers_line_1half_array.length);
+//         let unit_and_data_str = '                        ';
+//         if (unit_and_data.length > 1) {
+//           // eslint-disable-next-line prefer-template
+//           unit_and_data_str = unit_and_data[0].toString() + '.' + unit_and_data[1].toString();
+//         }
+//         // This is an empty ver_info_obj, print a warning and return
+//         else if (ver_info_obj['MNEM'] === '' && unit_and_data.length === 0) {
+//           if (print === true) {
+//             console.warn('WARNING: Metatdata line has no data: ', vers_line_1half_array);
+//           }
+//           return ver_info_obj;
+//         }
+//         else {
+//           unit_and_data_str = unit_and_data.toString();
+//         }
+
+//         // Sometimes the unit_and_data_str are less that 5 chars
+//         let last_idx = 5;
+//         if ((unit_and_data_str.length - 1) < 5) {
+//           last_idx = unit_and_data_str.length - 1;
+//         }
+//         // eslint-disable-next-line no-sequences
+//         const unit = unit_and_data_str[0, last_idx].trim();
+//         const data = unit_and_data_str.substring(5, unit_and_data_str.length).trim();
+//         ver_info_obj['DATA'] = data;
+//         ver_info_obj['UNIT'] = unit;
+
 
       lasjson['VERSION INFORMATION']['WRAP'] = splitLineofType1(Object.assign({}, ver_info_obj), wrap_line);
       lasjson['VERSION INFORMATION']['VERS'] = splitLineofType1(Object.assign({}, ver_info_obj), vers_line);
@@ -181,7 +280,7 @@ loaded into memory
             lasjson['WELL INFORMATION BLOCK'][well_obj_inst['MNEM']] = well_obj_inst;
           }
         }
-        else {
+        else if (print === true) {
           console.warn(`INFO: in else for well_line: ${i}`);
           console.warn(`elem: [${well_line_array[i]}]`);
         }
@@ -263,12 +362,32 @@ loaded into memory
           else {
             // If the item doesn't exist fill its entry with a '0' zero string character
             lasjson['CURVES'][curve_names_array_holder[idx]].push('0');
+
+// MAY GET RID OF CODE BELOW IF NOTHING BREAKS 
+//         if (print === true) {
+//           console.warn('curve_data_line_array.length = ', curve_data_line_array.length);
+//           console.warn('curve_data_line_array = ', curve_data_line_array);
+//         }
+
+//         const last_curv_data_line_position = curve_data_line_array.length - 1;
+//         if (print === true) {
+//           console.warn('curve_data_line_array[last_curv_data_line_position] = ', curve_data_line_array[last_curv_data_line_position]);
+//         }
+//         curve_data_line_array[last_curv_data_line_position] = curve_data_line_array[last_curv_data_line_position].replace('\r', '');
+//         if (print === true) {
+//           console.warn('curve_data_line_array[last_curv_data_line_position] = ', curve_data_line_array[last_curv_data_line_position]);
+//         }
+//         for (let k = 0; k < curve_data_line_array.length; k++) {
+//           if (curve_data_line_array[k] !== '') {
+//             lasjson['CURVES'][curve_names_array_holder[counter_of_curve_names]].push(curve_data_line_array[k]);
+            counter_of_curve_names += 1;
+
           }
         }
         // Zero out curve_data_line_array for next set of data
         curve_data_line_array = [];
       }
-
+          
       // ----------------------------------------------------------------------
       // SUB-FUNCTION: READ SECTIONS for las2json
       // parse data string into las_data data structures:
@@ -436,7 +555,9 @@ loaded into memory
       }
       // ----------------------------------------------------------------------
 
-      // console.warn(' test: lasjson', lasjson);
+      if (print === true) {
+        console.warn(' test: lasjson', lasjson);
+      }
       return (lasjson);
     },
 
