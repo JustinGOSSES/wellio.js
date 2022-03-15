@@ -54,14 +54,21 @@ loaded into memory
     loadLAS: function (wellLog) {
       const file = wellLog;
       let fs = '';
-
-      if (process !== 'undefined' && process.versions != null && process.versions.node != null) {
+      if (process.env.NODE_ENV === 'development') {
+        // dev code for react development server use that then deploys to client app in production
+        let fs = '';
+        return file.toString();
+      }
+      else if (process !== 'undefined' && process.versions != null && process.versions.node != null) {
         // eslint-disable-next-line global-require
         fs = require('fs');
+        // var contents = fs.readFileSync('test.LAS', 'utf8');
+        const contents = fs.readFileSync(file).toString();
+        return contents;
       }
-      const contents = fs.readFileSync(file).toString();
-      // var contents = fs.readFileSync('test.LAS', 'utf8');
-      return contents;
+      else {
+        return file.toString()
+      }
     },
     /**
      * las2json function converts a LAS 2.0 file already loaded into memory as a string
@@ -630,17 +637,20 @@ loaded into memory
      * @param {string} file_to_read : file_to_read - The file to open.s
      * @returns {string} : The file's contents as a string.
      */
-    read_lasio_json_file: function (file_to_read) {
-      // Configure fs if running from node
-      let fs = '';
-
-      if (process !== 'undefined' && process.versions != null && process.versions.node != null) {
-        fs = require('fs');
-      }
-
-      return fs.readFileSync(file_to_read, 'utf8');
-    },
-
+     read_lasio_json_file: function (file_to_read) {
+        // Configure fs if running from node
+        let fs = '';
+        if (process.env.NODE_ENV === 'development') {
+          // dev code for react development server use that then deploys to client app in production
+          let fs = '';
+          console.log("failed attempting to read file using fs module meant for server side not client side.")
+        }
+        else if (process !== 'undefined' && process.versions != null && process.versions.node != null) {
+          // eslint-disable-next-line global-require
+          fs = require('fs');
+        return fs.readFileSync(file_to_read, 'utf8');
+        }
+      },
     /**
     * The lasio_obj_2_wellio_obj function transforms lasio-style JSON strings into wellio-style
     * JSON data format in memory and returns it.
