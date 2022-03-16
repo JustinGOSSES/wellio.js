@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset='utf-8'>
-  <title>wellio 0.1.11 | Documentation</title>
+  <title>wellio 0.1.13 | Documentation</title>
   <meta name='description' content='Provides functionality to load a LAS 2.0 formatted well log file and convert it to a json file and then return different information about the well log'>
   <meta name='viewport' content='width=device-width,initial-scale=1'>
   <link href='assets/bass.css' rel='stylesheet'>
@@ -15,7 +15,7 @@
       <div id='split-left' class='overflow-auto fs0 height-viewport-100'>
         <div class='py1 px2'>
           <h3 class='mb0 no-anchor'>wellio</h3>
-          <div class='mb1'><code>0.1.11</code></div>
+          <div class='mb1'><code>0.1.13</code></div>
           <input
             placeholder='Filter'
             id='filter-input'
@@ -92,6 +92,16 @@
                   href='#how-to-edit-documentation'
                   class="h5 bold black caps">
                   How to Edit Documentation
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#how-to-make-contributions-to-welliojs'
+                  class="h5 bold black caps">
+                  How to Make Contributions to Wellio.js
                   
                 </a>
                 
@@ -234,30 +244,13 @@
   </h2>
 
   
-    <head>
-  <style>
-  h2{
-    color:black;
-  }
-    code.black{
-      background-color: #295377;
-      
-      overflow: hidden;
-      padding: 0.5rem;
-      color: white;
-      font: 0.8rem Inconsolata, monospace;
-<pre><code>  width:100%;          
-}
-</code></pre>
-  </style>
-</head>
-<h3>Wellio.js is a JavaScript library for converting a LAS 2.0 well log file into a wellio style JSON.</h3>
+    <h3>Wellio.js is a JavaScript library for converting a LAS 2.0 well log file into a wellio style JSON.</h3>
 <h4>Reason for Existing:</h4>
 <p>Why would you want to do this? You can think of both LAS 2.0 and JSON as file formats that hold strings.
-The difference is <a href="https://en.wikipedia.org/wiki/JSON">JSON</a> is a very common data format widely used across a variety of computer languages. It is used extensively on the web to hold data.
-LAS 2.0 is not. LAS 2.0 is specifically for well logs. <a href="https://en.wikipedia.org/wiki/Well_logging">Well logs</a> are measurements along a well bore that meausure changes in subsurface properties.
+The difference is JSON is a very common data format widely used across a variety of computer languages. It is used extensively on the web to hold data.
+LAS 2.0 is not. LAS 2.0 is specifically for well logs. Well logs are measurements along a well bore that meausure changes in subsurface properties.
 By converting LAS 2.0 to JSON, we get data into a format that is much easier to work with on the web.
-Wellio's companion library  <a href="https://github.com/JustinGOSSES/wellioviz">wellioviz</a> takes the JSON that results from Wellio and visualizes it by leveraging <a href="https://d3js.org/">D3.js</a> v5.
+Wellio's companion library  wellioviz takes the JSON that results from Wellio and visualizes it by leveraging D3.js v5.
 However, you could visualize the same wellio JSON with a wide variety of other visualization tools too, because nearly all of them can consume JSON.</p>
 
   
@@ -273,7 +266,7 @@ However, you could visualize the same wellio JSON with a wide variety of other v
 
   
     <p><a href="https://github.com/JustinGOSSES/wellio.js">https://github.com/JustinGOSSES/wellio.js</a></p>
-<p>The <a href="https://github.com/JustinGOSSES/wellio.js/blob/master/README.md">README.md</a> has additional information to the README, including sections:</p>
+<p>The README.md has additional information to the README, including sections:</p>
 <ul>
 <li>Demos</li>
 <li>Contributing</li>
@@ -296,7 +289,7 @@ However, you could visualize the same wellio JSON with a wide variety of other v
   </h2>
 
   
-    <p>In the wellio documentation, we have split out <b>"How to Install &#x26; Get Ready to Use"</b> and <b>"How to Use Once Installed"</b>, because installation varies depending on whether wellio is being used as front-end JavaScript code on a website, in an Observable JavaScript Notebook, or server-side via a command line or node.js script. </p>
+    <p>In the wellio documentation, we have split out "How to Install &#x26; Get Ready to Use" and "How to Use Once Installed", because installation varies depending on whether wellio is being used as front-end JavaScript code on a website, in an Observable JavaScript Notebook, or server-side via a command line or node.js script.</p>
 <p>Once installed and ready to use, however, how to use wellio is identical no matter where used.</p>
 
   
@@ -311,62 +304,62 @@ However, you could visualize the same wellio JSON with a wide variety of other v
   </h2>
 
   
-    <p>Wellio.js is packaged as <a href="https://en.wikipedia.org/wiki/Npm_(software)">npm</a> module as seen <a href="https://www.npmjs.com/package/wellio">here</a>.
-The code that you pull when you install the npm module is found in the <code>dist</code> folder of the <a href="https://github.com/JustinGOSSES/wellio.js">wellio repository</a> on GitHub.</p>
+    <p>Wellio.js is packaged as npm module as seen here.
+The code that you pull when you install the npm module is found in the <code>dist</code> folder of the wellio repository on GitHub.</p>
 <p>It can be run from the back-end or front-end. Frontend being from a webpage running HTML, CSS, and JavaScript. Backend meaning on a server or in your terminal.
 Most people will probably be interested in running it on the frontend, but we'll start by explaining how to run it on the backend or server side as that's a bit easier to explain.</p>
 <h3>Server-side</h3>
 <ol>
-<li>If you haven't already, <a href="https://nodejs.dev/learn/how-to-install-nodejs">install node.js</a> and npm. Node.js is server-side JavaScript. NPM is the package manager for node.js.
-When you install Node.js, you should also get npm as described <a href="https://www.npmjs.com/get-npm">here</a>.</li>
-<li>Navigate in your terminal to where you want to work. </li>
-<li>To install wellio run: </li>
+<li>If you haven't already, install node.js and npm. Node.js is server-side JavaScript. NPM is the package manager for node.js.</li>
 </ol>
-<p><code class="black"> npm install wellio </code></p>
+<p>When you install Node.js, you should also get npm as described here.
+2. Navigate in your terminal to where you want to work.
+3. To install wellio run:</p>
+<p> npm install wellio </p>
 <ol start="4">
 <li>Move a LAS 2.0 well log file into the same directory if not already there.</li>
-<li>Enter node, but typing in the termianl </li>
+<li>Enter node, but typing in the termianl</li>
 </ol>
-<p><code class="black"> node</code></p>
+<p> node</p>
 <ol start="6">
-<li>Once in command line node environment, to start with wellio, you'll have to run </li>
+<li>Once in command line node environment, to start with wellio, you'll have to run</li>
 </ol>
-<p><code class="black"> wellio = require('wellio') </code></p>
+<p> wellio = require('wellio') </p>
 <ol start="7">
-<li>At this point we can now jump to how to use wellio as described in the <b> HOW TO USE ONCE INSTALLED </b> section.</li>
+<li>At this point we can now jump to how to use wellio as described in the  HOW TO USE ONCE INSTALLED  section.</li>
 </ol>
 <h3>Observable Notebooks</h3>
 <p>The process for installing wellio in an Observable notebook is very easy as it is a npm module. It is literally as easy as:</p>
-<p><code class="black">  wellio = require(wellio) </code></p>
-<p>As seen in the example notebook <a href="https://observablehq.com/@justingosses/a-notebook-using-wellio-js-wellioviz-js-for-quick-looks-of-la">here</a>.
+<p>  wellio = require(wellio) </p>
+<p>As seen in the example notebook here.
 Once wellio is imported using require, you can call any wellio function like:</p>
-<p><code class="black">   well_as_wellio_style_json_in_memory = wellio.las2json(las_file_read_in_as_string) </code></p>
+<p>   well_as_wellio_style_json_in_memory = wellio.las2json(las_file_read_in_as_string) </p>
 <h3>Front-end side</h3>
-<p>Due to wellio being a npm module, we'll need to use <a href="">require</a> to pull it into front-end code. Require can be confusing and I've not found their documentation to be super clear.
-That's less a problem of documentation as it is that there's multiple ways for npm modules to work and therefore differences in how require can end up working, which gets confusing. </p>
-<p>I'll try to explain one way to bring in wellio that is used to make the demo page that lives as a github pages page in the main wellio repository. </p>
-<p>The demo page that lets you try out wellio.js is <a href="https://justingosses.github.io/wellio.js/">here</a>.</p>
-<p>The code for that demo page is at the top level of the wellio repository as seen <a href="https://github.com/JustinGOSSES/wellio.js/blob/master/index.html">here</a>. Go have a look. </p>
-<p>If you look at code that makes up the index.html page that builds the demo page, you'll see in the header section that multiple CSS and JS libraries are pulled into index.html. </p>
+<p>Due to wellio being a npm module, we'll need to use require to pull it into front-end code. Require can be confusing and I've not found their documentation to be super clear.
+That's less a problem of documentation as it is that there's multiple ways for npm modules to work and therefore differences in how require can end up working, which gets confusing.</p>
+<p>I'll try to explain one way to bring in wellio that is used to make the demo page that lives as a github pages page in the main wellio repository.</p>
+<p>The demo page that lets you try out wellio.js is here.</p>
+<p>The code for that demo page is at the top level of the wellio repository as seen here. Go have a look.</p>
+<p>If you look at code that makes up the index.html page that builds the demo page, you'll see in the header section that multiple CSS and JS libraries are pulled into index.html.</p>
 <h4>There 3 we care about the most for explaining how to pull wellio into the front-end demo page are:</h4>
-<h5>1. <code class="black"> <code>&#x3C;script src="https://requirejs.org/docs/release/2.3.5/minified/require.js">&#x3C;/script></code> </code></h5>
+<h5>1.  <code>&#x3C;script src="https://requirejs.org/docs/release/2.3.5/minified/require.js">&#x3C;/script></code> </h5>
 <p>This imports the requirejs JavaScript library that we'll use to import the wellio npm module into our code such that we can call it.</p>
-<h5>2. <code class="black"> <code>&#x3C;script src="./dist/index.js">&#x3C;/script></code> </code></h5>
-<p>This pulls in the JavaScript at that location. It is a relative location, meaning relative to the index.html page that calls it and makes up the demo. It is the same code that makes up wellio and is sent to the npm (node package manager). </p>
+<h5>2.  <code>&#x3C;script src="./dist/index.js">&#x3C;/script></code> </h5>
+<p>This pulls in the JavaScript at that location. It is a relative location, meaning relative to the index.html page that calls it and makes up the demo. It is the same code that makes up wellio and is sent to the npm (node package manager).</p>
 <p>If you're not working with the demo page that is in the same folder location as the main wellio code, there's a couple other ways to go. If you're familar with node modules, you probably already know how to work with them and aren't reading this demo.
 If you're confused, you can simply use an absolute url rather than a relative one.
-For example, <a href="https://raw.githubusercontent.com/JustinGOSSES/wellio.js/master/dist/index.js">  <code>&#x3C;script src="https://raw.githubusercontent.com/JustinGOSSES/wellio.js/master/dist/index.js">&#x3C;/script></code> </a> will pull in the code you need from the current master branch of wellio.</p>
-<h5>3. <code class="black"> <code>&#x3C;script src="./js/main.js">&#x3C;/script></code> </code></h5>
-<p>Main.js is the JavaScript file that pulls in wellio and uses it in the demo page. If you look at the <a href="">code</a>, you'll see starting on line 13...</p>
-<p><code class="black"> wellio = require(['./dist/index.js'],function(wellio_obj){console.log("wellio test",wellio) wellio = wellio_obj}) </code></p>
-<p>This is where <code>require</code> pulls in wellio and makes a wellio object to call all the wellio functions as described in the <b> "How to Use Once Installed"</b> section.</p>
+For example,   <code>&#x3C;script src="https://raw.githubusercontent.com/JustinGOSSES/wellio.js/master/dist/index.js">&#x3C;/script></code>  will pull in the code you need from the current master branch of wellio.</p>
+<h5>3.  <code>&#x3C;script src="./js/main.js">&#x3C;/script></code> </h5>
+<p>Main.js is the JavaScript file that pulls in wellio and uses it in the demo page. If you look at the code, you'll see starting on line 13...</p>
+<p> wellio = require(['./dist/index.js'],function(wellio_obj){console.log("wellio test",wellio) wellio = wellio_obj}) </p>
+<p>This is where <code>require</code> pulls in wellio and makes a wellio object to call all the wellio functions as described in the  "How to Use Once Installed" section.</p>
 <h4>Other files that help make the demo page worth mentioning are...</h4>
 <ul>
-<li>CSS files are in the CSS folder. </li>
+<li>CSS files are in the CSS folder.</li>
 <li>Several example well logs are in the ASSETS folder.</li>
-<li><a href="https://github.com/agile-geoscience/g3">G3.js</a> is used to draw a plot of the well log curves. It leverages <a href="https://github.com/d3">d3.js</a> but version 2. There is some functionality that makes it much easier to draw vertical curves in d3.js v5, which led to the creation of wellioviz after an initial effort to develop on G3. </li>
-<li><a href="https://github.com/vkiryukhin/vkBeautify">VKbeautify.js</a> is a script for adding spaces and such to JSON to make them prettier when printed.</li>
-<li><a href="https://github.com/google/code-prettify">run_prettify.js</a> does something similar but is focused on making it print nicely into HTML DOM elements.</li>
+<li>G3.js is used to draw a plot of the well log curves. It leverages d3.js but version 2. There is some functionality that makes it much easier to draw vertical curves in d3.js v5, which led to the creation of wellioviz after an initial effort to develop on G3.</li>
+<li>VKbeautify.js is a script for adding spaces and such to JSON to make them prettier when printed.</li>
+<li>run_prettify.js does something similar but is focused on making it print nicely into HTML DOM elements.</li>
 </ul>
 
   
@@ -382,41 +375,41 @@ For example, <a href="https://raw.githubusercontent.com/JustinGOSSES/wellio.js/m
 
   
     <p>No matter how you use wellio, you'll eventually get to the point where you'll start using it in your code by bringin it in via require, like this:</p>
-<p><code class="black">wellio = require('wellio') </code></p>
+<p>wellio = require('wellio') </p>
 <p>Now we have wellio installed and imported, so it is ready for use. We can load a well log saved as a .las file with:</p>
-<p><code class="black">file_loaded_as_string = wellio.loadLAS("path_to_file")</code></p>
+<p>file_loaded_as_string = wellio.loadLAS("path_to_file")</p>
 <p>We can convert that string into wellio style JSON in memory with:</p>
-<p><code class="black">  wellio_style_json = wellio.las2json(file_loaded_as_string)</code></p>
-<p><b>We can now use the wellio_style_json object that is in memory! Getting to this point is the main reason for wellio.</b></p>
-<p>We can manipulate it with other JavaScript code or use <a href="https://github.com/JustinGOSSES/wellioviz">wellioviz</a> to visualize it.
-The wellioviz <a href="https://github.com/JustinGOSSES/wellioviz">README</a> has several links to various tutorials and demos for how to use wellioviz.</p>
+<p>  wellio_style_json = wellio.las2json(file_loaded_as_string)</p>
+<p>We can now use the wellio_style_json object that is in memory! Getting to this point is the main reason for wellio.</p>
+<p>We can manipulate it with other JavaScript code or use wellioviz to visualize it.
+The wellioviz README has several links to various tutorials and demos for how to use wellioviz.</p>
 <h3>Other Things You Might Want to Do with Wellio</h3>
 <h4>Saving the JSON as a file</h4>
 <p>We can also save it to as a JSON file to our local computer, which follows the commands below.
 You'll have to stringify it first and then write it to a file. In this case, the resulting JSON file is named "UWI_of_Well.json".s</p>
-<p><code class="black"> well_json_string = JSON.stringify(well_json) </code></p>
-<p><code class="black"> fs.writeFile("UWI_of_Well.json", well_json_string, 'utf8', function (err) {console.log("error")}) </code></p>
+<p> well_json_string = JSON.stringify(well_json) </p>
+<p> fs.writeFile("UWI_of_Well.json", well_json_string, 'utf8', function (err) {console.log("error")}) </p>
 <h4>The <code>help</code> and <code>returnThing</code> functions</h4>
 <p>These are mostly in wellio for easy ways to test if it was installed and imported successfully.
-They don't require any inputs to work. They can simply be called. </p>
-<p><code class="black"> wellio.help() </code></p>
-<p><code class="black"> wellio.returnThing("This is a test string that should be returned exactly as shown") </code></p>
+They don't require any inputs to work. They can simply be called.</p>
+<p> wellio.help() </p>
+<p> wellio.returnThing("This is a test string that should be returned exactly as shown") </p>
 <h4>Getting specific pieces of information out of the wellio-style JSON</h4>
 <p>Although getting information out of the wellio-style JSON is as straight forward as navigating a python dict, there are a few helper functions built-in.
 Clicking on each will bring you to the documenation for that function.</p>
 <ul>
-<li><a href="#CurveNames"><code>wellio.CurveNames()</code></a>  will return all the curve names in a wellio-style JSON.</li>
-<li><a href="#VER_block"><code>wellio.VER_block()</code></a>  will return version information that was in the original LAS file now in the wellio-style JSON.</li>
-<li><a href="#UWI"><code>wellio.UWI()</code></a>  wellio.UWI will return the UWI if it exists. If you use this, wrap it in a function that fails as you intend it to.</li>
-<li><a href="#getCurve"><code>wellio.getCurve()</code></a>  will return all the curve data for a given curve name in a wellio-style JSON.</li>
+<li><code>wellio.CurveNames()</code>  will return all the curve names in a wellio-style JSON.</li>
+<li><code>wellio.VER_block()</code>  will return version information that was in the original LAS file now in the wellio-style JSON.</li>
+<li><code>wellio.UWI()</code>  wellio.UWI will return the UWI if it exists. If you use this, wrap it in a function that fails as you intend it to.</li>
+<li><code>wellio.getCurve()</code>  will return all the curve data for a given curve name in a wellio-style JSON.</li>
 </ul>
 <h4>Working with well logs in JSONs other than wellio-style JSON</h4>
 <p>These two functions are for converting Lasio-style JSON to wellio-style JSON. They are defined in the "functions section".
 Clicking on them will take you directly to their documentation.
 Why they exist is explained in the section directly below.</p>
-<p><a href="#read_lasio_json_file"><code>wellio.read_lasio_json_file</code></a> </p>
-<p>and </p>
-<p><a href="#lasio_obj_2_wellio_obj"><code>wellio.lasio_obj_2_wellio_obj</code></a>. </p>
+<p><code>wellio.read_lasio_json_file</code></p>
+<p>and</p>
+<p><code>wellio.lasio_obj_2_wellio_obj</code>.</p>
 
   
 </section></div>
@@ -432,62 +425,35 @@ Why they exist is explained in the section directly below.</p>
   
     <p>As mentioned above in the upper most section, JSON is a format for storing data. It is based on keys and values and can store a huge variety of different types of data and informaion.</p>
 <p>As such, it shouldn't be surprising that there is more than one way to store well log data that was originally in LAS 2.0 file format in JSON format.
-As of writing this, there are 3 that the author knows about. </p>
+As of writing this, there are 3 that the author knows about.</p>
 <ul>
 <li>wellio-style JSON</li>
-<li><a href="https://lasio.readthedocs.io/en/latest/">lasio-style</a> JSON</li>
-<li><a href="https://jsonwelllogformat.org/">json-style</a> JSON</li>
+<li>lasio-style JSON</li>
+<li>json-style JSON</li>
 </ul>
 <h4>JSON-style JSON</h4>
 <p>If you're confused about what's a json-style JSON, that's okay. I'll try to explain.
 Another group, not involved with wellio, made an attempt at a standardized way to store well log data in JSON. They named it "JSON Well Log Format".
-This causes confusion as you start talking about JSON JSON and whether wellio JSON is compliant with JSON JSON. </p>
+This causes confusion as you start talking about JSON JSON and whether wellio JSON is compliant with JSON JSON.</p>
 <p>At the time of writing, there are not any functions to convert between the json-style JSON and wellio-style JSON.
 However, that could be added in the future.</p>
 <h4>Lasio-style JSON</h4>
-<p>To quote from their docs, <i>"lasio is a Python 3 package to read and write Log ASCII Standard (LAS) files,
+<p>To quote from their docs, "lasio is a Python 3 package to read and write Log ASCII Standard (LAS) files,
 used for borehole data such as geophysical, geological, or petrophysical logs. It’s compatible with versions 1.2 and 2.0 of the LAS file specification,
 published by the Canadian Well Logging Society. In principle it is designed to read as many types of LAS files as possible, including ones containing
-s common errors or non-compliant formatting."</i> </p>
+s common errors or non-compliant formatting."</p>
 <p>Lasio is the most common way to read well logs in Python.
-Sometimes it is used directly and other times people use <a href="https://github.com/agile-geoscience/welly">welly</a>,
+Sometimes it is used directly and other times people use welly,
 which wraps Lasio and provides a Pandas-like interface.
-Lasio has the ability to export data loaded from a LAS 2.0 well log file into JSON format and save it as a JSON file. </p>
-<p><b>There are two functions in wellio for converting these lasio-style JSON files into wellio-style JSON.</b></p>
+Lasio has the ability to export data loaded from a LAS 2.0 well log file into JSON format and save it as a JSON file.</p>
+<p>There are two functions in wellio for converting these lasio-style JSON files into wellio-style JSON.</p>
 <p>A sequence of using them to load a lasio-style JSON file and convert it into wellio-style JSON is below:</p>
-<p>  <code class="black"> let wellio = require('wellio') </code></p>
-<p>  <code class="black"> let lasio_json_str = wellio.read_lasio_json_file('lasio.json');</code></p>
-<p>  <code class="black"> let lasio_obj = JSON.parse(lasio_json_str);</code></p>
-<p>  <code class="black"> let wellio_obj = wellio.lasio_obj_2_wellio_obj(lasio_obj);</code></p>
+<p> let wellio = require('wellio') </p>
+<p> let lasio_json_str = wellio.read_lasio_json_file('lasio.json');</p>
+<p> let lasio_obj = JSON.parse(lasio_json_str);</p>
+<p> let wellio_obj = wellio.lasio_obj_2_wellio_obj(lasio_obj);</p>
 <h4>What a Wellio-Style JSON Looks Like:</h4>
-<p>To give you an idea what the wellio-style JSON structure is like, here's a blank well log in the wellio-style JSON format. </p>
-<pre class='hljs'>      &quot;VERSION INFORMATION&quot;:{
-        &quot;VERS&quot;:{&quot;MNEM&quot;:&quot;&quot;,&quot;UNIT&quot;:&quot;&quot;,&quot;DATA&quot;:&quot;&quot;,&quot;DESCRIPTION OF MNEMONIC 1&quot;:&quot;&quot;,&quot;DESCRIPTION OF MNEMONIC 2&quot;:&quot;&quot;},
-        &quot;WRAP&quot;:{&quot;MNEM&quot;:&quot;&quot;,&quot;UNIT&quot;:&quot;&quot;,&quot;DATA&quot;:&quot;&quot;,&quot;DESCRIPTION OF MNEMONIC 1&quot;:&quot;&quot;,&quot;DESCRIPTION OF MNEMONIC 2&quot;:&quot;&quot;}
-      }
-      ,
-      &quot;WELL INFORMATION BLOCK&quot;:{
-          &quot;GENERATED&quot;:&quot;&quot;,
-          &quot;MNEM_0&quot;:{&quot;MNEM&quot;:&quot;&quot;,&quot;UNIT&quot;:&quot;&quot;,&quot;DATA&quot;:&quot;&quot;,&quot;DESCRIPTION OF MNEMONIC 1&quot;:&quot;&quot;,&quot;DESCRIPTION OF MNEMONIC 2&quot;:&quot;&quot;},
-          &quot;MNEM_1&quot;:{&quot;MNEM&quot;:&quot;&quot;,&quot;UNIT&quot;:&quot;&quot;,&quot;DATA&quot;:&quot;&quot;,&quot;DESCRIPTION OF MNEMONIC 1&quot;:&quot;&quot;,&quot;DESCRIPTION OF MNEMONIC 2&quot;:&quot;&quot;},
-          &quot;MNEM_2&quot;:{&quot;MNEM&quot;:&quot;&quot;,&quot;UNIT&quot;:&quot;&quot;,&quot;DATA&quot;:&quot;&quot;,&quot;DESCRIPTION OF MNEMONIC 1&quot;:&quot;&quot;,&quot;DESCRIPTION OF MNEMONIC 2&quot;:&quot;&quot;}
-        }
-      ,
-      &quot;CURVE INFORMATION BLOCK&quot;:{
-          &quot;MNEM_0&quot;:{&quot;MNEM&quot;:&quot;&quot;,&quot;UNIT&quot;:&quot;&quot;,&quot;ERCB CURVE CODE&quot;:&quot;&quot;,&quot;CURVE DESCRIPTION 1&quot;:&quot;&quot;,&quot;CURVE DESCRIPTION 2&quot;:&quot;&quot;}, 
-          &quot;MNEM_0&quot;:{&quot;MNEM&quot;:&quot;&quot;,&quot;UNIT&quot;:&quot;&quot;,&quot;ERCB CURVE CODE&quot;:&quot;&quot;,&quot;CURVE DESCRIPTION 1&quot;:&quot;&quot;,&quot;CURVE DESCRIPTION 2&quot;:&quot;&quot;},
-        }		
-      ,
-      &quot;PARAMETER INFORMATION&quot;:{
-          &quot;MNEM_0&quot;:{&quot;MNEM&quot;:&quot;&quot;,&quot;UNIT&quot;:&quot;&quot;,&quot;DATA&quot;:&quot;&quot;,&quot;DESCRIPTION OF MNEMONIC 1&quot;:&quot;&quot;,&quot;DESCRIPTION OF MNEMONIC 2&quot;:&quot;&quot;}, 
-          &quot;MNEM_1&quot;:{&quot;MNEM&quot;:&quot;&quot;,&quot;UNIT&quot;:&quot;&quot;,&quot;DATA&quot;:&quot;&quot;,&quot;DESCRIPTION OF MNEMONIC 1&quot;:&quot;&quot;,&quot;DESCRIPTION OF MNEMONIC 2&quot;:&quot;&quot;},
-        }
-      ,
-      &quot;CURVES&quot;:{
-          &quot;Curve_NAME_ONE&quot; :[1,2,3,4,5,6,7,8,9,10,11],
-          &quot;Curve_NAME_ONE&quot; :[1,2,3,4,5,6,7,8,9,10,11],
-        }
-    }</pre>
+<p>To give you an idea what the wellio-style JSON structure is like, here's a blank well log in the wellio-style JSON format.</p>
 
   
 </section></div>
@@ -502,16 +468,40 @@ Lasio has the ability to export data loaded from a LAS 2.0 well log file into JS
 
   
     <ul>
-<li>Make changes to documentation in the index.js file. </li>
+<li>Make changes to documentation in the index.js file.</li>
 <li>Alternatively, make change to the documentation.yml file in the docs folder.</li>
-<li>Go to the top level folder. </li>
-<li>Assuming documentation.js is alredy installed, run: <code class="black">documentation build -c docs/documentation.yml dist/* -f html -o docs </code></li>
-<li>Now CD to docs folder. </li>
-<li>Run <code class="black">python3 -m http.server</code></li>
-<li>You should be able to go to your browser at <a href="http://0.0.0.0:8000/">http://0.0.0.0:8000/</a> and see the docs. </li>
+<li>Go to the top level folder.</li>
+<li>If documentation.js is not already installed, check out the instructions  on <a href="http://documentation.js.org/">http://documentation.js.org/</a>.</li>
+<li>run: <code>documentation build -c docs/documentation.yml dist/* -f html -o docs</code> </li>
+<li>run: <code>cp css/style.css docs/assets/</code>. This is an extra step to overwrite the default styling of documentation.js to code elements show up a little more.</li>
+<li>Now CD to docs folder.</li>
+<li>Run python3 -m http.server. Alternatively, you could use any local server tooling.</li>
+<li>You should be able to go to your browser at <a href="http://0.0.0.0:8000/">http://0.0.0.0:8000/</a> and see the docs.</li>
+<li>Go to docs/assets/style.css and under the code element around line 91 add the lines color: rgb(0, 6, 35);background-color: rgb(227, 230, 239);. This will provide some styling to the code lines.</li>
 </ul>
-<p>If you want to change the styling of the documentation, there is a style header towards the top of the <code>documentation.yml</code> file in the <code>docs</code> folder.
-You can change the page style there. This isn't a documented way to style things in documentation.js, but it works and is way easier than the "official" way to change the theme style.</p>
+
+  
+</section></div>
+          
+        
+          
+            <div class='keyline-top-not py2'><section class='py2 clearfix'>
+
+  <h2 id='how-to-make-contributions-to-welliojs' class='mt0'>
+    How to Make Contributions to Wellio.js
+  </h2>
+
+  
+    <ul>
+<li>Clone the repository locally by running in a terminal <code>git clone https://github.com/JustinGOSSES/wellio.js.git</code></li>
+<li>Change into the directory you just cloned by running <code>cd wellio.js</code>.</li>
+<li>Run <code>npm install</code> to install all the node module dependencies. You may want to check what version of node.js you're running first. I know I often end up thinking I'm running latest version but I'm not. NVM or node version manager is good for that.</li>
+<li>Create a new branch for your work <code>git checkout -b YourDevelopmentBranchName</code></li>
+<li>Make changes to the code.</li>
+<li>Use tests described below to run tests after changes.</li>
+<li>If tests all past, then commit those changes by running <code>git add *</code> then <code>git commit -m "message here"</code>.</li>
+<li>Push changes to remote <code>git push origin main</code>, then go to GitHub and start a pull request.</li>
+</ul>
 
   
 </section></div>
@@ -525,7 +515,10 @@ You can change the page style there. This isn't a documented way to style things
   </h2>
 
   
-    <p>There are test functions used for testing wellio used in the <a href="https://github.com/JustinGOSSES/wellio.js/tree/master/dist/test"><code>dist/test/</code></a> folder. </p>
+    <ul>
+<li>There are test functions used for testing wellio used in the <code>dist/test/</code> folder.</li>
+<li>They should all run when you are in the top directory and run <code>npm run test</code>.</li>
+</ul>
 
   
 </section></div>
@@ -540,7 +533,6 @@ You can change the page style there. This isn't a documented way to style things
 
   
     
-
   
 </section></div>
           
@@ -1019,7 +1011,7 @@ original LAS file as a string.
 
   <p>Given a well already converted into wellio-style json in memory, the UWI function
 attempts to return the UWI field of the original LAS file as a string. Pleaes note
-that this doesn't exisst in every well log and will therefore fail sometimes!</p>
+that this doesn't exist in every well log and will therefore fail sometimes!</p>
 
     <div class='pre p1 fill-light mt0'>UWI(well_json: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></div>
   

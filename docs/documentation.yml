@@ -2,24 +2,7 @@ toc:
   
   - name: wellio
     description: |
-      <head>
-        <style>
-        h2{
-          color:black;
-        }
-          code.black{
-            background-color: #295377;
-            
-            overflow: hidden;
-            padding: 0.5rem;
-            color: white;
-            font: 0.8rem Inconsolata, monospace;
 
-        
-            width:100%;          
-          }
-        </style>
-      </head>
 
       ### Wellio.js is a JavaScript library for converting a LAS 2.0 well log file into a wellio style JSON.
 
@@ -276,16 +259,29 @@ toc:
       - Make changes to documentation in the index.js file. 
       - Alternatively, make change to the documentation.yml file in the docs folder.
       - Go to the top level folder. 
-      - Assuming documentation.js is alredy installed, run: <code class="black">documentation build -c docs/documentation.yml dist/* -f html -o docs </code>
+      - If documentation.js is not already installed, check out the instructions <a href="https://github.com/documentationjs/documentation/blob/master/docs/GETTING_STARTED.md"> on http://documentation.js.org/</a>.
+      - run: <code>`documentation build -c docs/documentation.yml dist/* -f html -o docs` </code>
+      - run: <code>`cp css/style.css docs/assets/`</code>. This is an extra step to overwrite the default styling of documentation.js to code elements show up a little more.
       - Now CD to docs folder. 
-      - Run <code class="black">python3 -m http.server</code>
+      - Run <code>python3 -m http.server</code>. Alternatively, you could use any local server tooling.
       - You should be able to go to your browser at http://0.0.0.0:8000/ and see the docs. 
+      - Go to docs/assets/style.css and under the code element around line 91 add the lines <code>color: rgb(0, 6, 35);background-color: rgb(227, 230, 239);</code>. This will provide some styling to the code lines. 
 
-      If you want to change the styling of the documentation, there is a style header towards the top of the `documentation.yml` file in the `docs` folder. 
-      You can change the page style there. This isn't a documented way to style things in documentation.js, but it works and is way easier than the "official" way to change the theme style.
+
+  - name: How to Make Contributions to Wellio.js
+    description: |
+      - Clone the repository locally by running in a terminal <code>`git clone https://github.com/JustinGOSSES/wellio.js.git`</code>
+      - Change into the directory you just cloned by running <code>`cd wellio.js`</code>.
+      - Run <code>`npm install`</code> to install all the node module dependencies. You may want to check what version of node.js you're running first. I know I often end up thinking I'm running latest version but I'm not. NVM or node version manager is good for that. 
+      - Create a new branch for your work <code>`git checkout -b YourDevelopmentBranchName`</code>
+      - Make changes to the code. 
+      - Use tests described below to run tests after changes.
+      - If tests all past, then commit those changes by running <code>`git add *`</code> then <code>`git commit -m "message here"`</code>.
+      - Push changes to remote <code>`git push origin main`</code>, then go to GitHub and start a pull request. 
 
   - name: Tests
     description: |
-      There are test functions used for testing wellio used in the <a href="https://github.com/JustinGOSSES/wellio.js/tree/master/dist/test">`dist/test/`</a> folder. 
+      - There are test functions used for testing wellio used in the <a href="https://github.com/JustinGOSSES/wellio.js/tree/master/dist/test">`dist/test/`</a> folder. 
+      - They should all run when you are in the top directory and run <code>`npm run test`</code>.
 
   - name: Functions
