@@ -41,7 +41,7 @@
   "license": "MIT",
   "devDependencies": {
     "ajv-cli": "^3.0.0",
-    "documentation": "^13.1.1",
+    "documentation": "^14.0.2",
     "eslint": "^7.21.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-config-google": "^0.9.1",
