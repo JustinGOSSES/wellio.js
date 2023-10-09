@@ -40,6 +40,7 @@ Contents include:
 - WELLIO-STYLE JSON VS OTHERS
 - HOW TO EDIT DOCUMENTATION
 - FUNCTIONS
+- TESTS
 
 ## Contributing
 There are a variety of <a href="https://github.com/JustinGOSSES/wellio.js/issues">issues</a> that need worked. Several of which are suitable for those who are new to JavaScript. 
