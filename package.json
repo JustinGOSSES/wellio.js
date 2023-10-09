@@ -40,7 +40,7 @@
   "author": "Justin Gosses",
   "license": "MIT",
   "devDependencies": {
-    "ajv-cli": "^3.0.0",
+    "ajv-cli": "^5.0.0",
     "documentation": "^14.0.2",
     "eslint": "^7.21.0",
     "eslint-config-airbnb-base": "^14.2.1",
